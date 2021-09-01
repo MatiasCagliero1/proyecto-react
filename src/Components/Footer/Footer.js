@@ -25,7 +25,7 @@ function Footer() {
         </section>
 
         <p className="copyrigth">
-            © Copyrigth 2020 Movie Rank S.A.
+            © Copyrigth 2021 Movie Rank S.A.
         </p>
 
     </footer>

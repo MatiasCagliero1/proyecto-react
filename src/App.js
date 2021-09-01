@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Components/Header/Header';
+import Carrusel from './Components/Carrusel/Carrusel';
 import FilaTarjetas from './Components/FilaTarjetas/FilaTarjetas';
 import Footer from './Components/Footer/Footer';
 
@@ -15,12 +16,10 @@ function App() {
  <div className="loadpage"></div>
 
   <Header/>
-
-<FilaTarjetas/>
+  <FilaTarjetas/>
 
   <Footer/>
 </React.Fragment>
-
   );}
 
 export default App;

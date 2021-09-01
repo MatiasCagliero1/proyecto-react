@@ -1,6 +1,7 @@
 import React from 'react';
 import './Header.css';
 
+
 function Header() {
     return (
 <header>
@@ -10,16 +11,21 @@ function Header() {
 
             <img className="imgnav" id="Movie"  src="/img/logo.svg" alt=""/>
 
-            <ul className="links">
-                <li className="link-active"><a href="index.html" className="link">Inicio</a></li>
-                <li><a href="categories.html" className="link">Categorias</a></li>
-            </ul>
+            <ul>
+            <p className='order'>Ordenar ASC/ DESC</p>
 
+            <div className="fasContainer">
+            <i className="fas fa-th"></i>
+            <i className="fas fa-align-justify"></i>
+            </div>
 
             <form action="search.html" method="get" className="icon">
                 <input className="link" type="text" placeholder="Buscar" type="text" name="search" autofocus/>
             </form>
+            </ul>
 
+
+           
         
 
         </nav>
