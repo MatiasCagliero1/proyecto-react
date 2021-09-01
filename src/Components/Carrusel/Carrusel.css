@@ -1,0 +1,20 @@
+
+  /* Img Portada */
+  .fotoscarrusel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .img-carru{
+    object-fit: cover;
+  }
+  
+  .uk-slideshow-items>* {
+  display: flex;
+  justify-content: center;
+  }
+  
+  .Slideshow:focus {
+    border: none;
+  }

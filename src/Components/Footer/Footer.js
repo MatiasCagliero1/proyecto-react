@@ -1,26 +1,26 @@
 import React from 'react';
+import './Footer.css';
 
 function Footer() {
     return (
 
         <footer>
-        
-        <div className="divisor"></div>
-
         <section className="rowalign">
             <p>Milagros Echague</p>
             <p>Matias Cagliero</p>
             <p>Benjamín Echague</p>
         </section>
 
+        <div className="divisor"></div>
+
         <section className="creditos">
             <div>
                 <h3>APIS por TMDB</h3>
-                <img src="Assets/TMDT.png" alt=""/>
+                <img src="/img/TMDT.png" alt=""/>
             </div>
             <div>
                 <h3>Web de Movie Rank</h3>
-                <img src="Assets/Logotipo/Mesa de trabajo 3.svg" alt=""/>
+                <img src="/img/logo.svg" alt=""/>
             </div>
         </section>
 
