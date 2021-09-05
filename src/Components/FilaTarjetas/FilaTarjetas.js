@@ -1,11 +1,21 @@
 import React from 'react';
-//import Tarjeta from '../Tarjeta/Tarjeta'
+import Tarjeta from '../Tarjeta/Tarjeta'
+import './filaTarjetas.css'
 
 function FilaTarjetas() {
     return (
-<React.Fragment>
-
-</React.Fragment>
-);
+        <div className= "container">
+            <Tarjeta/>
+            <Tarjeta/>
+            <Tarjeta/>
+            <Tarjeta/>
+            <Tarjeta/>
+            <Tarjeta/>
+            <Tarjeta/>
+            <Tarjeta/>
+            <Tarjeta/>
+            <Tarjeta/>
+        </div>
+    );
 }
 export default FilaTarjetas;
