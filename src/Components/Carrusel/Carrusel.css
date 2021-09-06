@@ -1,11 +1,17 @@
 
   /* Img Portada */
-  .fotoscarrusel {
+  .fotoscarrusel{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 3em;
   }
-  
+
+  .fotoscarrusel li{
+    max-height: auto;
+    
+  }
+
   .img-carru{
     object-fit: cover;
   }
@@ -18,3 +24,16 @@
   .Slideshow:focus {
     border: none;
   }
+
+  @media only screen and (min-width: 1134px) {
+    
+    /* Img Portada */
+    .fotoscarrusel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 18em !important;
+      height: 5px;
+    }
+    }
+    
