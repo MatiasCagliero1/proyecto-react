@@ -19,7 +19,7 @@ class filaTarjetas extends Component{
         .then(data => {
             console.log(data)
             this.setState({
-                datos: data.data,
+                movies: data.results,
                 isLoaded: true,
             })
         })
@@ -28,7 +28,11 @@ class filaTarjetas extends Component{
     render (){
         return(
             < div className= "container">
-                <Tarjeta/>
+                { 
+                    this.state.isLoaded === false ?
+                    <p>Cargando...</p> :
+                    this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie}/>)
+                }
             </div>
         )};
 }

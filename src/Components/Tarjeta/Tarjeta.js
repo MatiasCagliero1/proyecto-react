@@ -6,8 +6,9 @@ class Tarjeta extends Component{
         super(props)
         this.state = {} 
     }
-    
+
     render(){
+    console.log(this.props)
      return (
         <div className="tarjeta">
             <section className="navigation">
@@ -18,9 +19,9 @@ class Tarjeta extends Component{
                 <i className="far fa-window-close"></i>
             </section>
             <main>
-                <img src="./img/image-default.png" alt=""/>
-                <h3></h3>
-                <p className="description"></p>
+                <img src= 'https://image.tmdb.org/t/p/w500`${this.props.movieData.backdrop_path}`' alt=""/>
+                <h3>{this.props.movieData.title}</h3>
+                <p className="description">{this.props.movieData.overview}</p>
                 <section className="aditional-info">
                     <p></p>
                 </section>
