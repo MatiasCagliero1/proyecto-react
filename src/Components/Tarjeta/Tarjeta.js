@@ -9,8 +9,8 @@ class Tarjeta extends Component{
     }
 
     verMas(){
-
-
+        let description = document.querySelector('.description')
+       // description.style.webkit-line-clamp = none;
     }
 
 
