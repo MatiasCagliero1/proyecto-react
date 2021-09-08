@@ -12,15 +12,15 @@ class Tarjeta extends Component{
   //  console.log(this.props)
      return (
         <div className="tarjeta">
-            <section className="navigation">
-                <div className= "fasContainer">
+            <img src= {`https://image.tmdb.org/t/p/w342${this.props.movieData.backdrop_path}`} alt=""/>
+            <main>
+                <section className="navigation">
+                 <div className= "fasContainer">
                     <i className="fas fa-chevron-left"></i>
                     <i className="fas fa-chevron-right"></i>
-                </div>
-                <i className="far fa-window-close"></i>
-            </section>
-            <main>
-                <img src= 'https://image.tmdb.org/t/p/w500`${this.props.movieData.backdrop_path}`' alt= {'Pelucula ' + this.props.movieData.title}/>
+                 </div>
+                    <i className="far fa-window-close" onClick={ ()=>this.props.eliminar(this.props.movieData.id)}></i>
+                </section>
                 <h3>{this.props.movieData.title}</h3>
                 <p className="description">{this.props.movieData.overview}</p>
                 <section className="aditional-info">

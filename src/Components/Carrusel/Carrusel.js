@@ -3,7 +3,7 @@ import './Carrusel.css';
 
 function Carrusel() {
     return (
-        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true" autoplay-interval="3000" /* uk-slideshow */>
+        <div className="uk-position-relative uk-visible-toggle uk-light" tabIndex="-1" uk-slideshow="autoplay: true" autoplay-interval="3000" /* uk-slideshow */>
 
             <ul className="uk-slideshow-items fotoscarrusel">
             <li><img className="img-carru" src="/img/Franjas/alex_rider.jpg" alt=""/></li>

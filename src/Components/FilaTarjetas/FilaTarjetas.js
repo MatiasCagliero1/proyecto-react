@@ -50,6 +50,7 @@ class filaTarjetas extends Component{
         
         .catch(error => console.log(error))
     }
+<<<<<<< HEAD
 
     render (){
         return(
@@ -73,6 +74,24 @@ class filaTarjetas extends Component{
                 <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
 
             </React.Fragment>
+=======
+    eliminoTarjeta(tarjeta){
+        let moviesRestantes = this.state.movies.filter( movie => movie.id !== tarjeta)
+        
+        this.setState({
+            movies: moviesRestantes
+        })
+    }
+    render (){
+        return(
+            < div className= "container">
+                { 
+                    this.state.isLoaded === false ?
+                    <p>Cargando...</p> :
+                    this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie} eliminar={(id) => this.eliminoTarjeta(id)}/>)
+                }
+            </div>
+>>>>>>> 2d7cfa56c61ef1d23ae2d90a5fa993df626d1fe0
         )};
 }
 
