@@ -22,9 +22,10 @@ class filaTarjetas extends Component{
         .then(response => response.json())
     
         .then(data => {
-            console.log(data)
+         //   console.log(data.results)
             this.setState ({
                 page: data.page + 1,
+                movies:  this.state.movies.concat(data.results),
             }) 
         })
     
@@ -39,8 +40,8 @@ class filaTarjetas extends Component{
         fetch(url)
         .then(response => response.json())
         .then(data => {
-       //  console.log(data)
-         console.log(url)
+         console.log(data)
+      
             this.setState({
                 movies: data.results,
                 isLoaded: true,
@@ -50,7 +51,6 @@ class filaTarjetas extends Component{
         
         .catch(error => console.log(error))
     }
-<<<<<<< HEAD
 
     render (){
         return(
@@ -59,7 +59,6 @@ class filaTarjetas extends Component{
                     { 
                         this.state.isLoaded === false ?
                         <p>Cargando...</p> :
-
     //                      Pre Cargar Página 
     // var loadpage = document.querySelector(".loadpage");
     //  loadpage.innerHTML += `<span class="spin" uk-spinner="ratio: 10"></span><h2 class"loadh2">Cargando Pagina</h2>`
@@ -74,24 +73,6 @@ class filaTarjetas extends Component{
                 <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
 
             </React.Fragment>
-=======
-    eliminoTarjeta(tarjeta){
-        let moviesRestantes = this.state.movies.filter( movie => movie.id !== tarjeta)
-        
-        this.setState({
-            movies: moviesRestantes
-        })
-    }
-    render (){
-        return(
-            < div className= "container">
-                { 
-                    this.state.isLoaded === false ?
-                    <p>Cargando...</p> :
-                    this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie} eliminar={(id) => this.eliminoTarjeta(id)}/>)
-                }
-            </div>
->>>>>>> 2d7cfa56c61ef1d23ae2d90a5fa993df626d1fe0
         )};
 }
 

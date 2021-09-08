@@ -8,6 +8,12 @@ class Tarjeta extends Component{
         this.state = {} 
     }
 
+    verMas(){
+
+
+    }
+
+
     render(){
   //  console.log(this.props)
      return (
@@ -24,9 +30,12 @@ class Tarjeta extends Component{
                 <h3>{this.props.movieData.title}</h3>
                 <p className="description">{this.props.movieData.overview}</p>
                 <section className="aditional-info">
-                    <p></p>
+                    <p>Estreno: {this.props.movieData.release_date}</p>
+                    <p>{this.props.movieData.release_date = false ? 'Película para adultos' : 'Apto para todo publico'}</p>
                 </section>
-                <a href="">Ver más</a>
+                
+                <button className='verMas' onClick={() => this.verMas() }>Ver más</button>
+           
             </main>
         </div>
     );

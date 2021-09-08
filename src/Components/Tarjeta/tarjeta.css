@@ -1,25 +1,52 @@
-.tarjeta{
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-evenly;
+.tarjeta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
-img{
+
+img {
     width: 30%;
 }
-main{
+
+main {
     width: 50%;
     align-items: center;
 }
-.navigation{
+
+.navigation {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-.far{
+
+.far {
     display: flex;
     color: white;
     flex-direction: row-reverse;
 }
 
-h3{
+h3 {
     color: antiquewhite;
+}
+
+.description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.aditional-info p {
+margin: 0.5em 0em;
+}
+
+.verMas{
+    font-size: 1.3em;
+  font-weight: 150;
+  padding: 0.7em;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
 }
