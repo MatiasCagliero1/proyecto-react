@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import './tarjeta.css'
+import './tarjeta.css';
 
 class Tarjeta extends Component{
+
     constructor(props){
         super(props)
         this.state = {} 
     }
 
     render(){
-    console.log(this.props)
+  //  console.log(this.props)
      return (
         <div className="tarjeta">
             <section className="navigation">
@@ -19,7 +20,7 @@ class Tarjeta extends Component{
                 <i className="far fa-window-close"></i>
             </section>
             <main>
-                <img src= 'https://image.tmdb.org/t/p/w500`${this.props.movieData.backdrop_path}`' alt=""/>
+                <img src= 'https://image.tmdb.org/t/p/w500`${this.props.movieData.backdrop_path}`' alt= {'Pelucula ' + this.props.movieData.title}/>
                 <h3>{this.props.movieData.title}</h3>
                 <p className="description">{this.props.movieData.overview}</p>
                 <section className="aditional-info">
