@@ -5,12 +5,39 @@ class Tarjeta extends Component{
 
     constructor(props){
         super(props)
-        this.state = {} 
+        this.state = {
+            text: 'Ver más',
+            viewMore: false,
+            style: 'display: none;',
+        } 
     }
 
     verMas(){
-        let description = document.querySelector('.description')
+            if(this.state.viewMore){
+                //Pasar a false
+                this.setState({
+                    text: 'Ver más',
+                    viewMore: false,
+                    style: 'display: none;',
+                }
+                
+             
+                )
+            } else{
+                //Pasarlo a true
+                this.setState({
+                    text: 'Ver menos',
+                    viewMore:true,
+                    style: 'display: flex;',
+                })
+            }
+
+        
+
+    // console.log(aditionalInfo)
+    //    aditionalInfo.style.display = 'flex';
        // description.style.webkit-line-clamp = none;
+
     }
 
 
@@ -29,12 +56,12 @@ class Tarjeta extends Component{
                 </section>
                 <h3>{this.props.movieData.title}</h3>
                 <p className="description">{this.props.movieData.overview}</p>
-                <section className="aditional-info">
+                <section className="aditionalInfo" style={this.props.style}>
                     <p>Estreno: {this.props.movieData.release_date}</p>
                     <p>{this.props.movieData.release_date = false ? 'Película para adultos' : 'Apto para todo publico'}</p>
                 </section>
                 
-                <button className='verMas' onClick={() => this.verMas() }>Ver más</button>
+                <button className='verMas' onClick={() => this.verMas(this.props.movieData.id) }>{this.state.text}</button>
            
             </main>
         </div>
