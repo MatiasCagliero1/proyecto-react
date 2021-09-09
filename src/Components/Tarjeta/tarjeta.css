@@ -1,4 +1,15 @@
-
+.tarjeta{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-evenly;
+}
+img{
+    width: 30%;
+}
+main{
+    width: 50%;
+    align-items: center;
+}
 .navigation{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -7,5 +18,8 @@
     display: flex;
     color: white;
     flex-direction: row-reverse;
-   
+}
+
+h3{
+    color: antiquewhite;
 }

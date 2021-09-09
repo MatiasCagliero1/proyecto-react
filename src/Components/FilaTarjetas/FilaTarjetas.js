@@ -25,13 +25,20 @@ class filaTarjetas extends Component{
         })
         .catch(error => console.log(error))
     }
+    eliminoTarjeta(tarjeta){
+        let moviesRestantes = this.state.movies.filter( movie => movie.id !== tarjeta)
+        
+        this.setState({
+            movies: moviesRestantes
+        })
+    }
     render (){
         return(
             < div className= "container">
                 { 
                     this.state.isLoaded === false ?
                     <p>Cargando...</p> :
-                    this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie}/>)
+                    this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie} eliminar={(id) => this.eliminoTarjeta(id)}/>)
                 }
             </div>
         )};
