@@ -1,19 +1,21 @@
 //  Importamos todos los recursos necesarios
 import React, {Component} from 'react';
-import './tarjeta.css';
 import Buscador from '../Buscador/Buscador';
+import './tarjeta.css';
+
 class Tarjeta extends Component{
 
     constructor(props){
         super(props)
 
-        //  Definimos los estados (memorias)
         this.state = {
             text: 'Ver más',
             viewMore: false,
             style: 'display: none;',
         } 
     }
+
+    
     filtrarPeliculas(textoBuscador){
         let PeliculasFiltradas = this.state.peliculas.filter(pelicula=> pelicula.name.toLowerCase().includes(textoBuscador.toLowerCase()))
         
