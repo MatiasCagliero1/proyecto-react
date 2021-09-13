@@ -7,7 +7,6 @@ function App() {
   return (
     <React.Fragment>
       <Main/>
-      <div className="centrarDiv"><button>Ver más peliculas</button></div>
       <Footer/>
     </React.Fragment>
   );}

@@ -6,9 +6,8 @@ import '../FilaTarjetas/filaTarjetas.css';
 
 class Main extends Component{
 
-    constructor(){
-        super()
-
+    constructor(props){
+        super(props)
         this.state = {
             orientacion: true,
             datos:[],
