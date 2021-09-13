@@ -1,3 +1,4 @@
+//  Importamos todos los recursos necesarios
 import React, {Component} from 'react';
 import Tarjeta from '../Tarjeta/Tarjeta';
 import './filaTarjetas.css';
@@ -6,6 +7,7 @@ class filaTarjetas extends Component{
 
     constructor(){
         super()
+          //  Definimos los estados (memorias)
             this.state = {
                 datos:[],
                 isLoaded: false,

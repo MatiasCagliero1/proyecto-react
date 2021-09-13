@@ -1,3 +1,4 @@
+//  Importamos todos los recursos necesarios
 import React from 'react';
 import './Carrusel.css';
 

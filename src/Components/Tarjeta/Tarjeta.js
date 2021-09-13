@@ -1,3 +1,4 @@
+//  Importamos todos los recursos necesarios
 import React, {Component} from 'react';
 import './tarjeta.css';
 
@@ -5,6 +6,8 @@ class Tarjeta extends Component{
 
     constructor(props){
         super(props)
+
+        //  Definimos los estados (memorias)
         this.state = {
             text: 'Ver más',
             viewMore: false,
@@ -34,7 +37,9 @@ class Tarjeta extends Component{
 
 /*     Preguntar
         El relase_date se cambia solo
-        El estilo no se cambia */
+        El estilo no se cambia
+        Uk-slider */
+
 
     //    aditionalInfo.style.display = 'flex';
        // description.style.webkit-line-clamp = none;

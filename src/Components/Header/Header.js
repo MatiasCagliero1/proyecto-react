@@ -1,3 +1,4 @@
+//  Importamos todos los recursos necesarios
 import React, { Component } from 'react';
 import './Header.css';
 import Buscador from '../Buscador/Buscador';
@@ -19,7 +20,9 @@ class Header extends Component {
                     <i className="fas fa-th"></i>
                     <i className="fas fa-align-justify"></i>
                     </div>
+
                     <Buscador/>
+                    
                     </ul>
                 </nav>
             </div>
