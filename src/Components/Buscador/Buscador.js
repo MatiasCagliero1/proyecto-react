@@ -17,7 +17,7 @@ class Buscador extends Component {
     controlarCambios(event){
         this.setState({
             filterBy: event.target.value
-        },() => this.props.filtrar(this.state.filterBy));
+        },()=> this.props.filtrarPeliculas(this.state.filterBy))
     }
 
     render(){

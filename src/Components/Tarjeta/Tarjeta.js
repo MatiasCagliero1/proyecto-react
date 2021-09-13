@@ -15,14 +15,6 @@ class Tarjeta extends Component{
         } 
     }
 
-    
-    filtrarPeliculas(textoBuscador){
-        let PeliculasFiltradas = this.state.peliculas.filter(pelicula=> pelicula.name.toLowerCase().includes(textoBuscador.toLowerCase()))
-        
-        this.setState({
-            peliculas: PeliculasFiltradas
-        })
-    }
 
     verMas(){
             if(this.state.viewMore){

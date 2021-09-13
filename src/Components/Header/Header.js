@@ -17,7 +17,7 @@ class Header extends Component {
                     <ul>
                     <p className='order'>Ordenar ASC/ DESC</p>
                     <Orientacion/>
-                    <Buscador/>
+                    <Buscador filtrarPeliculas={(peliculasFiltradas)=> this.props.filtrarPeliculas(peliculasFiltradas)}/>
                     </ul>
                 </nav>
             </div>
