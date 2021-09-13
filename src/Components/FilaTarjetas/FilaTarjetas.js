@@ -22,9 +22,10 @@ class filaTarjetas extends Component{
         .then(response => response.json())
     
         .then(data => {
-            console.log(data)
+         //   console.log(data.results)
             this.setState ({
                 page: data.page + 1,
+                movies:  this.state.movies.concat(data.results),
             }) 
         })
     
@@ -39,8 +40,8 @@ class filaTarjetas extends Component{
         fetch(url)
         .then(response => response.json())
         .then(data => {
-       //  console.log(data)
-         console.log(url)
+         console.log(data)
+      
             this.setState({
                 movies: data.results,
                 isLoaded: true,
