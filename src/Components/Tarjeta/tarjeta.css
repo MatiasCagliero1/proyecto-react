@@ -79,3 +79,12 @@ h3 {
 .APT{
 margin: 0em 0em 1.5em 0em !important;
 }
+
+.aditionalInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.aditionalInfoNone{
+    display: none;
+}
