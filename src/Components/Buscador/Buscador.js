@@ -22,7 +22,7 @@ class Buscador extends Component {
 
     render(){
         return(
-            <form action="" onSubmit= {(eventoSubmit)=> this.evitarDefault (eventoSubmit)}>
+            <form action="" className="icon" onSubmit= {(eventoSubmit)=> this.evitarDefault (eventoSubmit)}>
                 <input type="text" onChange={(parametro)=> this.controlarCambios(parametro)} value={this.state.filterBy} placeholder="Buscar..."/>
             </form>
         );
