@@ -76,6 +76,26 @@ h3 {
     -webkit-box-orient: vertical;
 }
 
+
+.descriptionMore{
+    margin-top: 0em;
+    padding: 0%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: none;
+    -webkit-box-orient: vertical;
+}
+
 .APT{
 margin: 0em 0em 1.5em 0em !important;
+}
+
+.aditionalInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.aditionalInfoNone{
+    display: none;
 }

@@ -11,36 +11,31 @@ class Tarjeta extends Component{
         this.state = {
             text: 'Ver más',
             viewMore: false,
-            style: 'display: none;',
+            style: "aditionalInfoNone",
+            styleDescripcion: "description",
         } 
     }
 
 
     verMas(){
+        console.log(this.state.style)
         if(this.state.viewMore){
             //Pasar a false
             this.setState({
-                text: 'Ver más',
                 viewMore: false,
-                style: 'display: none;',
+                text: 'Ver más',
+                style: "aditionalInfoNone",
+                styleDescripcion: "description",
             })
         } else{
             //Pasarlo a true
             this.setState({
-                text: 'Ver menos',
                 viewMore:true,
-                style: 'display: flex;',
+                text: 'Ver menos',
+                style: "aditionalInfo",
+                styleDescripcion: "descriptionMore",
             })
     }
-
-/*     Preguntar
-        El estilo no se cambia
-        Uk-slider */
-
-
-    //    aditionalInfo.style.display = 'flex';
-       // description.style.webkit-line-clamp = none;
-
     }
 
 
@@ -60,16 +55,16 @@ class Tarjeta extends Component{
                 </section>
                 <h3>{this.props.movieData.title}</h3>
 
-                <p className="description">{this.props.movieData.overview}</p>
+                <p className={this.state.styleDescripcion}>{this.props.movieData.overview}</p>
 
-                <section className="aditionalInfo" style={this.props.style}>
+                <section className={this.state.style}>
 
                     <p>Estreno: {this.props.movieData.release_date}</p>
 
                     <p className="APT">{this.props.movieData.adult == true ? 'Película para adultos' : 'Apto para todo publico'}</p>
                 </section>
                 
-                <button className='verMas' onClick={() => this.verMas(this.props.movieData.id) }>{this.state.text}</button>
+                <button className='verMas' onClick={() => this.verMas()}>{this.state.text}</button>
           </main>
     
         </div>
