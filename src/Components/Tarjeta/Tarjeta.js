@@ -12,10 +12,12 @@ class Tarjeta extends Component{
             text: 'Ver más',
             viewMore: false,
             style: "aditionalInfoNone",
+            styleDescripcion: "description",
         } 
     }
 
     
+    descriptionMore
     filtrarPeliculas(textoBuscador){
         let PeliculasFiltradas = this.state.peliculas.filter(pelicula=> pelicula.name.toLowerCase().includes(textoBuscador.toLowerCase()))
         
@@ -32,6 +34,7 @@ class Tarjeta extends Component{
                 viewMore: false,
                 text: 'Ver más',
                 style: "aditionalInfoNone",
+                styleDescripcion: "description",
             })
         } else{
             //Pasarlo a true
@@ -39,6 +42,7 @@ class Tarjeta extends Component{
                 viewMore:true,
                 text: 'Ver menos',
                 style: "aditionalInfo",
+                styleDescripcion: "descriptionMore",
             })
     }
     }
@@ -60,7 +64,7 @@ class Tarjeta extends Component{
                 </section>
                 <h3>{this.props.movieData.title}</h3>
 
-                <p className="description">{this.props.movieData.overview}</p>
+                <p className={this.state.styleDescripcion}>{this.props.movieData.overview}</p>
 
                 <section className={this.state.style}>
 
