@@ -19,7 +19,7 @@ class Header extends Component {
                     <i className="fas fa-th"></i>
                     <i className="fas fa-align-justify"></i>
                     </div>
-                    <Buscador/>
+                    <Buscador filtrar={(texto)=> this.filtrarPersonajes(texto)}/>
                     </ul>
                 </nav>
             </div>

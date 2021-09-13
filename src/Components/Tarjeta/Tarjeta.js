@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import './tarjeta.css';
-
+import Buscador from '../Buscador/Buscador';
 class Tarjeta extends Component{
 
     constructor(props){
         super(props)
         this.state = {} 
+    }
+    filtrarPeliculas(textoBuscador){
+        let PeliculasFiltradas = this.state.peliculas.filter(pelicula=> pelicula.name.toLowerCase().includes(textoBuscador.toLowerCase()))
+        
+        this.setState({
+            peliculas: PeliculasFiltradas
+        })
     }
 
     render(){
