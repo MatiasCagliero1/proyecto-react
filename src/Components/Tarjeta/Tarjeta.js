@@ -21,8 +21,8 @@ class Tarjeta extends Component{
                     style: 'display: none;',
                 }
                 
-             
                 )
+
             } else{
                 //Pasarlo a true
                 this.setState({
@@ -32,9 +32,10 @@ class Tarjeta extends Component{
                 })
             }
 
-        
+/*     Preguntar
+        El relase_date se cambia solo
+        El estilo no se cambia */
 
-    // console.log(aditionalInfo)
     //    aditionalInfo.style.display = 'flex';
        // description.style.webkit-line-clamp = none;
 
