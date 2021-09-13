@@ -7,7 +7,7 @@ class Buscador extends Component {
         super();
           //  Definimos los estados (memorias)
         this.state = {
-            valor:''
+            filterBy:''
         }
     }
 
@@ -16,14 +16,14 @@ class Buscador extends Component {
     }
     controlarCambios(event){
         this.setState({
-            valor: event.target.value
-        })
+            filterBy: event.target.value
+        },() => this.props.filtrar(this.state.filterBy));
     }
 
     render(){
         return(
-            <form action="" className="icon" onSubmit= {(eventoSubmit)=> this.evitarDefault (eventoSubmit)}>
-                <input type="text" onChange={(parametro)=> this.controlarCambios(parametro)} value={this.state.valor} placeholder="Buscar..."/>
+            <form action="" onSubmit= {(eventoSubmit)=> this.evitarDefault (eventoSubmit)}>
+                <input type="text" onChange={(parametro)=> this.controlarCambios(parametro)} value={this.state.filterBy} placeholder="Buscar..."/>
             </form>
         );
     }

@@ -1,7 +1,7 @@
 //  Importamos todos los recursos necesarios
 import React, {Component} from 'react';
 import './tarjeta.css';
-
+import Buscador from '../Buscador/Buscador';
 class Tarjeta extends Component{
 
     constructor(props){
@@ -13,6 +13,13 @@ class Tarjeta extends Component{
             viewMore: false,
             style: 'display: none;',
         } 
+    }
+    filtrarPeliculas(textoBuscador){
+        let PeliculasFiltradas = this.state.peliculas.filter(pelicula=> pelicula.name.toLowerCase().includes(textoBuscador.toLowerCase()))
+        
+        this.setState({
+            peliculas: PeliculasFiltradas
+        })
     }
 
     verMas(){
