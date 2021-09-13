@@ -1,16 +1,13 @@
 //  Importamos todos los componentes necesarios
 import React from 'react';
-import Header from './Components/Header/Header';
-import Carrusel from './Components/Carrusel/Carrusel';
-import FilaTarjetas from './Components/FilaTarjetas/FilaTarjetas';
+import Main from './Components/Main/Main'
 import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
     <React.Fragment>
-      <Header/>
-      <Carrusel/>
-      <FilaTarjetas/>
+      <Main/>
+      <div className="centrarDiv"><button>Ver más peliculas</button></div>
       <Footer/>
     </React.Fragment>
   );}
