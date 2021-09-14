@@ -7,22 +7,20 @@ import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
+    <React.Fragment>
+      {/* Pre Cargar Página */}
+      {/* var loadpage = document.querySelector(".loadpage");
+      loadpage.innerHTML += `<span class="spin" uk-spinner="ratio: 10"></span><h2 class"loadh2">Cargando Pagina</h2>`
+      var allbody = document.querySelector(".totalbody");
+      allbody.style.display="none"; */}
+      <div className="loadpage"></div>
+      <Header/>
+      <Carrusel/>
+      <FilaTarjetas/>
+        <div className="centrarDiv"><button>Ver más peliculas</button></div>
+      <Footer/>
 
-<React.Fragment>
-    {/* Pre Cargar Página */}
-    {/* var loadpage = document.querySelector(".loadpage");
-     loadpage.innerHTML += `<span class="spin" uk-spinner="ratio: 10"></span><h2 class"loadh2">Cargando Pagina</h2>`
-    var allbody = document.querySelector(".totalbody");
-    allbody.style.display="none"; */}
-    <div className="loadpage"></div>
-
-    <Header/>
-    <Carrusel/>
-    <FilaTarjetas/>
-    <div className="centrarDiv"><button>Ver más peliculas</button></div>
- 
-    <Footer/>
-</React.Fragment>
+    </React.Fragment>
   );}
 
 export default App;

@@ -11,15 +11,38 @@ main{
     align-items: center;
 }
 .navigation{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 .far{
     display: flex;
     color: white;
     flex-direction: row-reverse;
 }
+.fas {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto 0.5em;
+}
 
 h3{
     color: antiquewhite;
+}
+
+.tarjeta2{
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.img2{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.main2{
+    width: 100%;
 }

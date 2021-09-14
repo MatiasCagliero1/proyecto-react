@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
 import Buscador from '../Buscador/Buscador';
+import Orientacion from '../Orientacion/orientacion';
 
 
 class Header extends Component {
@@ -14,11 +15,7 @@ class Header extends Component {
 
                     <ul>
                     <p className='order'>Ordenar ASC/ DESC</p>
-
-                    <div className="fasContainer">
-                    <i className="fas fa-th"></i>
-                    <i className="fas fa-align-justify"></i>
-                    </div>
+                    <Orientacion/>
                     <Buscador/>
                     </ul>
                 </nav>

@@ -43,19 +43,6 @@ align-items: center;
 flex-direction: row;
 }
 
-.fasContainer{
-    display: flex;
-}
-
-.fas {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto 0.5em;
-}
-
-
 .icon input {
     display: none;
     height: 2px;

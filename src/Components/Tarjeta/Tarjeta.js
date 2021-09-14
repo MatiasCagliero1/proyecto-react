@@ -10,9 +10,9 @@ class Tarjeta extends Component{
     render(){
     console.log(this.props)
      return (
-        <div className="tarjeta">
-            <img src= {`https://image.tmdb.org/t/p/w342${this.props.movieData.backdrop_path}`} alt=""/>
-            <main>
+        <div className="tarjeta2">
+            <img className="img2" src= {`https://image.tmdb.org/t/p/w500${this.props.movieData.backdrop_path}`} alt=""/>
+            <main className="main2">
                 <section className="navigation">
                  <div className= "fasContainer">
                     <i className="fas fa-chevron-left"></i>

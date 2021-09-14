@@ -26,11 +26,16 @@ class filaTarjetas extends Component{
         .catch(error => console.log(error))
     }
     eliminoTarjeta(tarjeta){
-        let moviesRestantes = this.state.movies.filter( movie => movie.id !== tarjeta)
+        let confirmar = window.confirm("Desea eliminar la tarjeta?")
+       
+        if (confirmar === true){
+            let moviesRestantes = this.state.movies.filter( movie => movie.id !== tarjeta)
         
-        this.setState({
-            movies: moviesRestantes
-        })
+            this.setState({
+                movies: moviesRestantes
+            })
+        } 
+       
     }
     render (){
         return(
