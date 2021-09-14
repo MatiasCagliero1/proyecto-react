@@ -1,12 +1,14 @@
-.tarjeta{
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-evenly;
+.tarjeta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
-img{
+
+img {
     width: 30%;
 }
-main{
+
+main {
     width: 50%;
     align-items: center;
 }
@@ -15,7 +17,8 @@ main{
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-.far{
+
+.far {
     display: flex;
     color: white;
     flex-direction: row-reverse;
@@ -28,7 +31,7 @@ main{
     margin: auto 0.5em;
 }
 
-h3{
+h3 {
     color: antiquewhite;
 }
 

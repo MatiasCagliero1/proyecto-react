@@ -1,3 +1,4 @@
+//  Importamos todos los recursos necesarios
 import React, { Component } from 'react';
 import './Header.css';
 import Buscador from '../Buscador/Buscador';
@@ -15,8 +16,17 @@ class Header extends Component {
 
                     <ul>
                     <p className='order'>Ordenar ASC/ DESC</p>
+<<<<<<< HEAD
                     <Orientacion/>
                     <Buscador/>
+=======
+
+                    <div className="fasContainer">
+                    <i className="fas fa-th"></i>
+                    <i className="fas fa-align-justify"></i>
+                    </div>
+                    <Buscador filtrar={(texto)=> this.filtrarPersonajes(texto)}/>
+>>>>>>> e874fd00a4ac9d6ed56998cc6d785d536901dc00
                     </ul>
                 </nav>
             </div>

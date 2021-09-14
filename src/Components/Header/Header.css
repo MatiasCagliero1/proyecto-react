@@ -48,6 +48,7 @@ flex-direction: row;
     height: 2px;
     border-radius: 5px;
     padding: 18px;
+    margin-left: 1em;
     color: rgb(237, 237, 237);
     background-color: rgba(0, 0, 0, 0.452);
 }
