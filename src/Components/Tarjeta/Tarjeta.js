@@ -25,24 +25,21 @@ class Tarjeta extends Component{
     }
 
     verMas(){
-            if(this.state.viewMore){
-                //Pasar a false
-                this.setState({
-                    text: 'Ver más',
-                    viewMore: false,
-                    style: 'display: none;',
-                }
-                
-                )
-
-            } else{
-                //Pasarlo a true
-                this.setState({
-                    text: 'Ver menos',
-                    viewMore:true,
-                    style: 'display: flex;',
-                })
-            }
+        if(this.state.viewMore){
+            //Pasar a false
+            this.setState({
+                text: 'Ver más',
+                viewMore: false,
+                style: 'display: none;',
+            })
+        } else{
+            //Pasarlo a true
+            this.setState({
+                text: 'Ver menos',
+                viewMore:true,
+                style: 'display: flex;',
+            })
+    }
 
 /*     Preguntar
         El relase_date se cambia solo
@@ -59,9 +56,9 @@ class Tarjeta extends Component{
     render(){
   //  console.log(this.props)
      return (
-        <div className="tarjeta2">
-            <img className="img2" src= {`https://image.tmdb.org/t/p/w500${this.props.movieData.backdrop_path}`} alt=""/>
-            <main className="main2">
+        <div className= "tarjeta">
+            <img className="img" src= {`https://image.tmdb.org/t/p/w500${this.props.movieData.backdrop_path}`} alt=""/>
+            <main className="main">
                 <section className="navigation">
                  <div className= "fasContainer">
                     <i className="fas fa-chevron-left"></i>

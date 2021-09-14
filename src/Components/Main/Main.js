@@ -5,9 +5,8 @@ import FilaTarjetas from '../FilaTarjetas/FilaTarjetas';
 
 class Main extends Component{
 
-    constructor(){
-        super()
-
+    constructor(props){
+        super(props)
         this.state = {
             orientacion: true,
         } 
@@ -18,12 +17,12 @@ class Main extends Component{
             orientacion: false
         })
     }
-    
+
 
     render(){
         return(
         <React.Fragment>
-            <Header/>
+            <Header orientacion={() => this.vertical()}/>
             <Carrusel/>
             <FilaTarjetas/>
         </React.Fragment>

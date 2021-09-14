@@ -69,13 +69,13 @@ class filaTarjetas extends Component{
     }
     render (){
         return(
-            < div className= "container">
+            < div className= "container2">
                 { 
                     this.state.isLoaded === false ?
                     <p>Cargando...</p> :
                     this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie} eliminar={(id) => this.eliminoTarjeta(id)}/>)
                 }
-                                <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
+                <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
 
             </div>
 

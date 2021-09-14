@@ -4,3 +4,8 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
+.container2{
+    display: flex;
+    flex-direction: column;
+}
