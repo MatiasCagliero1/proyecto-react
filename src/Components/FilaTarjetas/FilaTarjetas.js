@@ -16,6 +16,7 @@ class filaTarjetas extends Component{
     }
 
     addMore (){
+        console.log('nbki')
         let page = this.state.page;
         let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=eace25522629bc36a32ddae28430fdf2&language=en-US&page=${this.state.page}`;
     
@@ -74,6 +75,8 @@ class filaTarjetas extends Component{
                     <p>Cargando...</p> :
                     this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie} eliminar={(id) => this.eliminoTarjeta(id)}/>)
                 }
+                                <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
+
             </div>
 
         )};
