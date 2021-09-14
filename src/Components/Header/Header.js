@@ -5,6 +5,7 @@ import Buscador from '../Buscador/Buscador';
 
 
 
+
 class Header extends Component {
     render(){ 
         return (
@@ -13,17 +14,17 @@ class Header extends Component {
                     <nav className="navbar uk-width-1-1" uk-navbar="dropbar: true">
                         <img className="imgnav" id="Movie"  src="/img/logo.svg" alt=""/>
                         <ul>
-                            <p className='order'>Ordenar ASC/ DESC</p>
-                            <div className="fasContainer">
-                                <i className="fas fa-th"></i>
-                                <i className="fas fa-align-justify"></i>
-                            </div>
-                            <Buscador/>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
-        );
+                    <p className='order'>Ordenar ASC/ DESC</p>
+                    <div className="fasContainer">
+                        <i className="fas fa-th"></i>
+                        <i className="fas fa-align-justify"></i>
+                    </div>
+                    <Buscador filtrarPeliculas={(peliculasFiltradas)=> this.props.filtrarPeliculas(peliculasFiltradas)}/>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    );
     }
 }
 
