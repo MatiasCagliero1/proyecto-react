@@ -1,6 +1,5 @@
 //  Importamos todos los recursos necesarios
 import React, {Component} from 'react';
-import Buscador from '../Buscador/Buscador';
 import './tarjeta.css';
 
 class Tarjeta extends Component{
@@ -47,11 +46,11 @@ class Tarjeta extends Component{
           
             <main className="detalle">
                 <section className="navigation">
-                 <div className= "fasContainer">
+                 <div className= "fasContainer tarjetaBotones">
                     <i className="fas fa-chevron-left"></i>
                     <i className="fas fa-chevron-right"></i>
                  </div>
-                    <i className="far fa-window-close" onClick={ ()=>this.props.eliminar(this.props.movieData.id)}></i>
+                    <i className="far fa-window-close tarjetaBotones" onClick={ ()=>this.props.eliminar(this.props.movieData.id)}></i>
                 </section>
                 <h3>{this.props.movieData.title}</h3>
 
@@ -61,10 +60,12 @@ class Tarjeta extends Component{
 
                     <p>Estreno: {this.props.movieData.release_date}</p>
 
-                    <p className="APT">{this.props.movieData.adult == true ? 'Película para adultos' : 'Apto para todo publico'}</p>
+                    <p className="APT">{this.props.movieData.adult === true ? 'Película para adultos' : 'Apto para todo publico'}</p>
                 </section>
                 
+                <div className="center">
                 <button className='verMas' onClick={() => this.verMas()}>{this.state.text}</button>
+                </div>
           </main>
     
         </div>

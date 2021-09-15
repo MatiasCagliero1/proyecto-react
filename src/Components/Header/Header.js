@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import './Header.css';
 import Buscador from '../Buscador/Buscador';
 
-
-
-
 class Header extends Component {
     render(){ 
         return (

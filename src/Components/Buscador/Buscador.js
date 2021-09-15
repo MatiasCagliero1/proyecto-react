@@ -4,7 +4,9 @@ import '../Header/Header.css';
 
 class Buscador extends Component {
     constructor(){
+        
         super();
+
           //  Definimos los estados (memorias)
         this.state = {
             filterBy:''
