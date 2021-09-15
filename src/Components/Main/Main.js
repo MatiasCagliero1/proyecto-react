@@ -94,6 +94,7 @@ class Main extends Component{
             movies: PeliculasFiltradas
         })
     }
+    
 
     render(){
         return(
@@ -106,10 +107,14 @@ class Main extends Component{
             < div className= {this.state.orientacion === false ? `container` : `container2`}>
                 { 
                     this.state.isLoaded === false ?
-                    <p>Cargando...</p> :
+                    <img src="/img/loader.gif" alt="loader" />:
                     this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie} eliminar={(id) => this.eliminoTarjeta(id)}/>)
                 }
-                <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
+                { 
+                    this.state.isLoaded === false ?
+                    ' ':
+                    <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
+                }
 
          
             </div>
