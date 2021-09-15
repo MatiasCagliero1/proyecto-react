@@ -16,8 +16,8 @@ class Header extends Component {
                         <ul>
                     <p className='order'>Ordenar ASC/ DESC</p>
                     <div className="fasContainer">
-                        <i className="fas fa-th"></i>
-                        <i className="fas fa-align-justify"></i>
+                        <i className="fas fa-th" onClick={() => this.props.orientacion()}></i>
+                        <i className="fas fa-align-justify" onClick={() => this.props.Orientacion()}></i>
                     </div>
                     <Buscador filtrarPeliculas={(peliculasFiltradas)=> this.props.filtrarPeliculas(peliculasFiltradas)}/>
                     </ul>
