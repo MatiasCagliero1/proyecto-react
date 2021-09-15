@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import Header from '../Header/Header';
 import Carrusel from '../Carrusel/Carrusel';
 import Tarjeta from '../Tarjeta/Tarjeta'
-import '../FilaTarjetas/filaTarjetas.css';
+import './main.css';
 
 class Main extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            orientacion: true,
+            orientacion: false,
             datos:[],
             isLoaded: false,
             page: 1,
@@ -77,6 +77,11 @@ class Main extends Component{
             orientacion: false
         })
     }
+    horizontal(){
+        this.setState({
+            orientacion: true
+        })
+    }
     
     filtrarPeliculas(textoBuscador){
         console.log(textoBuscador);
@@ -91,15 +96,15 @@ class Main extends Component{
     render(){
         return(
         <React.Fragment>
-            <Header filtrarPeliculas={(peliculasFiltradas)=> this.filtrarPeliculas(peliculasFiltradas)}/>
+            <Header filtrarPeliculas={(peliculasFiltradas)=> this.filtrarPeliculas(peliculasFiltradas)} orientacion={()=> this.vertical()} Orientacion={()=> this.horizontal()}/>
             <Carrusel/>
-            < div className= "container">
+            < div className= {this.state.orientacion === false ? `container` : `container2`}>
                 { 
                     this.state.isLoaded === false ?
                     <p>Cargando...</p> :
                     this.state.movies.map( (movie, idx) => <Tarjeta key={movie.title + idx} movieData={movie} eliminar={(id) => this.eliminoTarjeta(id)}/>)
                 }
-                                <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
+                <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
 
             </div>
         </React.Fragment>

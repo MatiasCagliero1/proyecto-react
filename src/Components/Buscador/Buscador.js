@@ -14,6 +14,7 @@ class Buscador extends Component {
     evitarDefault(evento){
         evento.preventDefault()
     }
+    
     controlarCambios(event){
         this.setState({
             filterBy: event.target.value
