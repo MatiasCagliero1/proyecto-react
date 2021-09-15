@@ -13,7 +13,8 @@ class Main extends Component{
             datos:[],
             isLoaded: false,
             page: 1,
-            movies:[]
+            movies:[],
+            moviesIniciales:[]
         } 
     }
 
@@ -49,6 +50,7 @@ class Main extends Component{
       
             this.setState({
                 movies: data.results,
+                moviesIniciales: data.results,
                 isLoaded: true,
                 page: data.page + 1,
             })
@@ -79,7 +81,7 @@ class Main extends Component{
     filtrarPeliculas(textoBuscador){
         console.log(textoBuscador);
         console.log('=======================');
-        let PeliculasFiltradas = this.state.movies.filter(pelicula=> pelicula.title.toLowerCase().includes(textoBuscador.toLowerCase()))
+        let PeliculasFiltradas = this.state.moviesIniciales.filter(pelicula=> pelicula.title.toLowerCase().includes(textoBuscador.toLowerCase()))
         
         this.setState({
             movies: PeliculasFiltradas
