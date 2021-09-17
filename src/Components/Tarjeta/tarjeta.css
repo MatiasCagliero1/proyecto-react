@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: flex-start;
     margin-bottom: 1em;
-    background-color: rgb(230, 230, 230);
+    background-color: rgba(97, 95, 95, 0.527);
     padding: 0.3em;
 }
 
@@ -75,7 +75,7 @@ margin: 1em 1em 1em 0em;
 }
 
 h3 {
-    color: black;
+    color: whitesmoke;
     margin: 0.5em 0em;
     display: -webkit-box;
     -webkit-line-clamp:1;
@@ -84,6 +84,7 @@ h3 {
 }
 
 .description{
+    color: black;
     margin-top: 0em;
     padding: 0%;
     overflow: hidden;
@@ -94,6 +95,7 @@ h3 {
 }
 
 .descriptionMore{
+    color: black;
     margin-top: 0em;
     padding: 0%;
     overflow: hidden;
@@ -108,6 +110,7 @@ margin: 0em 0em 1.5em 0em !important;
 }
 
 .aditionalInfo{
+    color: black;
     display: flex;
     flex-direction: column;
 }

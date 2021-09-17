@@ -104,7 +104,7 @@ class Main extends Component{
         
             <Carrusel/>
           
-            < div className= {this.state.orientacion === false ? `container` : `container2`}>
+            <section className= {this.state.orientacion === false ? `container` : `container2`}>
                 { 
                     this.state.isLoaded === false ?
                     <img src="/img/loader.gif" alt="loader" />:
@@ -113,11 +113,9 @@ class Main extends Component{
                 { 
                     this.state.isLoaded === false ?
                     ' ':
-                    <div className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></div>
+                    <article className="centrarDiv"><button onClick= {() => this.addMore ()}>Ver más peliculas</button></article>
                 }
-
-         
-            </div>
+            </section>
             
         </React.Fragment>
         )
