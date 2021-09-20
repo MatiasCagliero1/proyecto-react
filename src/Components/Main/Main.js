@@ -20,27 +20,6 @@ class Main extends Component{
 
     }
 
-    addMore (){
-        //  Agregar más peliculas a la vista
-        
-        let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=eace25522629bc36a32ddae28430fdf2&language=en-US&page=${this.state.page}`;
-    
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-
-            this.setState ({
-                page: data.page + 1,
-                movies:  this.state.movies.concat(data.results),
-            })
-
-        })
-    
-        .catch(e => console.log(e))
-        
-    }
-    
     componentDidMount(){
         //  Cargar peliculas iniciales y precargar segunda tarda de peliculas
         let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=eace25522629bc36a32ddae28430fdf2&language=en-US&page=${this.state.page}`;
@@ -60,6 +39,27 @@ class Main extends Component{
         
         .catch(error => console.log(error))
     }
+
+    addMore (){
+        //  Agregar más peliculas a la vista
+        
+        let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=eace25522629bc36a32ddae28430fdf2&language=en-US&page=${this.state.page}`;
+    
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
+            this.setState ({
+                page: data.page + 1,
+                movies:  this.state.movies.concat(data.results),
+            })
+
+        })
+    
+        .catch(e => console.log(e))
+        
+    }
+
 
     eliminoTarjeta(tarjeta){
         let confirmar = window.confirm("Desea eliminar la tarjeta?")
@@ -86,8 +86,8 @@ class Main extends Component{
     }
     
     filtrarPeliculas(textoBuscador){
-        console.log(textoBuscador);
-        console.log('=======================');
+       // console.log(textoBuscador);
+       // console.log('=======================');
         let PeliculasFiltradas = this.state.moviesIniciales.filter(pelicula => pelicula.title.toLowerCase().includes(textoBuscador.toLowerCase()))
         
         this.setState({
@@ -95,7 +95,6 @@ class Main extends Component{
         })
     }
     
-
     render(){
         return(
         <React.Fragment>
@@ -104,7 +103,7 @@ class Main extends Component{
         
             <Carrusel/>
           
-            <section className= {this.state.orientacion === false ? `container` : `container2`}>
+            <section className={this.state.orientacion === false ? `container` : `container2`}>
                 { 
                     this.state.isLoaded === false ?
                     <img src="/img/loader.gif" alt="loader" />:
