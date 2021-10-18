@@ -9,6 +9,8 @@ function App() {
       <Main/>
       <Footer/>
     </React.Fragment>
+
+    
   );}
 
 export default App;

@@ -19,7 +19,7 @@ class Tarjeta extends Component{
     verMas(){
 
         if(this.state.viewMore){
-            console.log(this.state.viewMore)
+            //console.log(this.state.viewMore)
             //Pasar a false
             this.setState({
                 viewMore: false,
@@ -29,7 +29,7 @@ class Tarjeta extends Component{
             })
         } else{
             //Pasarlo a true
-            console.log(this.state.viewMore)
+           //console.log(this.state.viewMore)
             this.setState({
                 viewMore:true,
                 text: 'Ver menos',

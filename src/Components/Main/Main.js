@@ -42,7 +42,6 @@ class Main extends Component{
 
     addMore (){
         //  Agregar más peliculas a la vista
-        
         let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=eace25522629bc36a32ddae28430fdf2&language=en-US&page=${this.state.page}`;
     
         fetch(url)
