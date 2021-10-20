@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
+//Importar Navegación
 import { NavigationContainer } from '@react-navigation/native';
 import {createDrawerNavigator } from '@react-navigation/drawer'
-
+//Importar Pantallas
 import Home from '../screens/home';
 import Login from '../screens/login';
 import Register from '../screens/register';
+//Importar Firebase
 import { auth } from '../firebase/config';
-
+//Importar Gestos
 const Drawer = createDrawerNavigator();
 
 class Menu extends Component {
@@ -18,6 +20,7 @@ class Menu extends Component {
     }
 
     register(email, pass){
+        console.log(email,pass);
         auth.createUserWithEmailAndPassword(email, pass)
             .then(()=>{
                 console.log('Registrado ok');

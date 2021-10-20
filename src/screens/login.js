@@ -22,11 +22,13 @@ class Login extends Component{
         return(
             <View style={styles.formContainer}>
                 <Text>Login</Text>
+
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
                     placeholder='email'
                     keyboardType='email-address'/>
+
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
@@ -34,9 +36,11 @@ class Login extends Component{
                     keyboardType='email-address'
                     secureTextEntry={true}
                 />
+
                 <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Ingresar</Text>    
                 </TouchableOpacity>
+                
             </View>
         )
     }
