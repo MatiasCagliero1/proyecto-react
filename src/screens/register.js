@@ -20,23 +20,23 @@ class Register extends Component{
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>Register</Text>
+                <Text style={styles.title}>Registrarse</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
-                    placeholder='email'
+                    placeholder='Email'
                     keyboardType='email-address'/>
 
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({userName: text})}
-                    placeholder='user name'
+                    placeholder='Usuario'
                     keyboardType='default'/>
 
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
-                    placeholder='password'
+                    placeholder='Contraseña'
                     keyboardType='email-address'
                     secureTextEntry={true}
                 />
@@ -51,9 +51,21 @@ class Register extends Component{
 
 const styles = StyleSheet.create({
     formContainer:{
-        paddingHorizontal:10,
+       /*  display:'flex',
+        justifyContent: 'center',
+        alignContent:'center',
+        width:'100',
+        height:'100', */
+        paddingHorizontal:300,
         marginTop: 20,
     },
+
+    title:{
+        textAlign: 'center',
+        fontSize: 28,
+        marginBottom:10
+    },
+
     input:{
         height:20,
         paddingVertical:15,
@@ -63,11 +75,12 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical:10,
+        marginBottom:10
     },
     button:{
         backgroundColor:'#28a745',
         paddingHorizontal: 10,
-        paddingVertical: 6,
+        paddingVertical: 10,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,

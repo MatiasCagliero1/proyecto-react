@@ -15,12 +15,13 @@ class Menu extends Component {
     constructor(props){
         super(props);
         this.state = {
-
+error:'',
         }
     }
 
     register(email, pass){
         console.log(email,pass);
+
         auth.createUserWithEmailAndPassword(email, pass)
             .then(()=>{
                 console.log('Registrado ok');
@@ -38,6 +39,20 @@ class Menu extends Component {
             })
             .catch(error => {
                 console.log(error);
+                if(error.code = 'auth/invalid-email' ){
+                    let mensajeError = 'El mail no es valido'
+                 }
+                if(error.code ='f' ){
+                   let mensajeError = 'El mail no está registrado'
+                } 
+                if(error.code = 'auth/wrong-password' ){
+                    let mensajeError = 'El mail no está registrado'
+                 }
+
+                this.setState = {
+                    error: mensajeError,
+                }
+                console.log(this.state.error);
             })
     }
 
