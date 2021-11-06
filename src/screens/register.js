@@ -11,13 +11,6 @@ class Register extends Component{
         }
     }
     
-
-    onSubmit(){
-        console.log(`El email ingresado es: ${this.state.email}`);
-        console.log(`El usuario ingresado es: ${this.state.userName}`);
-        console.log(`La contraseña ingresada es: ${this.state.password}`);
-    }
-
     render(){
         return(
             <View style={styles.formContainer}>

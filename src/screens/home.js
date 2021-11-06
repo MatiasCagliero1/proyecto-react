@@ -3,7 +3,6 @@ import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, Flat
 import { db, auth } from '../firebase/config';
 
 
-
 class Home extends Component{
     constructor(){
         super()
@@ -53,11 +52,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        textDecoration: 'underline',
         textAlign: 'center',
-    },
-    imagen:{
-        height:250,
+        textTransform: 'capitalize',
+        marginTop: 20,
     }
 })
 
