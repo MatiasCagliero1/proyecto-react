@@ -2,14 +2,13 @@ import app from 'firebase/app';
 import firebase from 'firebase';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCzFBOcPxA9JVmB6C4jgVlndmt1mbOPUcI",
-  authDomain: "local-snow-245314.firebaseapp.com",
-  projectId: "local-snow-245314",
-  storageBucket: "local-snow-245314.appspot.com",
-  messagingSenderId: "301217705257",
-  appId: "1:301217705257:web:5e408b16f4dc822f639b38"
+  apiKey: "AIzaSyCz1prlL_IMSnn2dSzfpK0Xm9oje1oIZHo",
+  authDomain: "proyectofinal-reactnative.firebaseapp.com",
+  projectId: "proyectofinal-reactnative",
+  storageBucket: "proyectofinal-reactnative.appspot.com",
+  messagingSenderId: "212767673258",
+  appId: "1:212767673258:web:a88aa248e124f4e84379d3"
 };
-
 
 app.initializeApp(firebaseConfig);
 

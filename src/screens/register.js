@@ -10,6 +10,7 @@ class Register extends Component{
             password:'',
         }
     }
+    
 
     onSubmit(){
         console.log(`El email ingresado es: ${this.state.email}`);
@@ -20,27 +21,24 @@ class Register extends Component{
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text style={styles.title}>Registrarse</Text>
+                <Text>Register</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
-                    placeholder='Email'
+                    placeholder='email'
                     keyboardType='email-address'/>
-
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({userName: text})}
-                    placeholder='Usuario'
+                    placeholder='user name'
                     keyboardType='default'/>
-
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
-                    placeholder='Contraseña'
+                    placeholder='password'
                     keyboardType='email-address'
                     secureTextEntry={true}
                 />
-                
                 <TouchableOpacity style={styles.button} onPress={()=>this.props.register(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
@@ -51,21 +49,9 @@ class Register extends Component{
 
 const styles = StyleSheet.create({
     formContainer:{
-       /*  display:'flex',
-        justifyContent: 'center',
-        alignContent:'center',
-        width:'100',
-        height:'100', */
-        paddingHorizontal:300,
+        paddingHorizontal:10,
         marginTop: 20,
     },
-
-    title:{
-        textAlign: 'center',
-        fontSize: 28,
-        marginBottom:10
-    },
-
     input:{
         height:20,
         paddingVertical:15,
@@ -75,12 +61,11 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical:10,
-        marginBottom:10
     },
     button:{
         backgroundColor:'#28a745',
         paddingHorizontal: 10,
-        paddingVertical: 10,
+        paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
