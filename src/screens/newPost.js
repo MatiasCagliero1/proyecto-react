@@ -1,3 +1,4 @@
+//Importar Componentes de React
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput } from 'react-native';
 

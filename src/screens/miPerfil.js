@@ -1,7 +1,8 @@
+//Importar Componentes de React
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput } from 'react-native';
 
-class Profile extends Component{
+export default class Profile extends Component{
     constructor(){
         super()
         this.state={
@@ -25,11 +26,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        textDecoration: 'underline',
         textAlign: 'center',
-    },
-    imagen:{
-        height:250,
+        textTransform: 'capitalize',
+        marginTop: 20,
     },
     button:{
         backgroundColor:'#28a745',
@@ -39,11 +38,10 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#28a745',
+        marginTop: 50,
     },
     textButton:{
         color: '#fff'
     }
 })
-
-export default Profile;

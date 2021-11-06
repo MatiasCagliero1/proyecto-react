@@ -1,9 +1,12 @@
+//Importar Componentes de React
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput } from 'react-native';
+
+//Importar Firebase
 import { db, auth } from '../firebase/config';
 
 
-class Home extends Component{
+export default class Home extends Component{
     constructor(){
         super()
         this.state={
@@ -57,5 +60,3 @@ const styles = StyleSheet.create({
         marginTop: 20,
     }
 })
-
-export default Home;

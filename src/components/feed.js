@@ -1,13 +1,18 @@
+//Importar Componentes de React
 import React, {Component} from 'react';
+
 //Importar Navegación
 import { NavigationContainer } from '@react-navigation/native';
 import {createDrawerNavigator } from '@react-navigation/drawer'
+
 //Importar Pantallas
 import Home from '../screens/home';
 import Login from '../screens/login';
 import Register from '../screens/register';
+
 //Importar Firebase
 import { auth } from '../firebase/config';
+
 //Importar Gestos
 const Drawer = createDrawerNavigator();
 
@@ -15,7 +20,9 @@ export default class feed extends Component {
     constructor(props){
         super(props);
         this.state = {
-            user:''
+            user:'',
+            likes: 0,
+            myLike:false
         }
     }
 
@@ -28,3 +35,9 @@ export default class feed extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    feed: {
+    
+    }
+})
