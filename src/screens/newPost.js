@@ -1,13 +1,17 @@
+//Importar Componentes de React
 import React, {Component} from "react";
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import { auth, db } from "../firebase/config";
-
+import Camara from "../components/CamaraComp"
+import { Camera } from "expo-camera";
 
 class newPost extends Component{
     constructor(props){
         super(props)
         this.state={
             textoPost:'',
+            showCamera: true,
+            url:'',
         }
     }
 
@@ -33,6 +37,12 @@ class newPost extends Component{
     render(){
         console.log(this.props.login);
         return(
+            
+    <React.Fragment>
+        {
+            this.state.showCamera ?
+            <Camera/>:
+
             <View style={styles.formContainer}>
             <Text>Nuevo Post</Text>
                 <TextInput
@@ -47,6 +57,8 @@ class newPost extends Component{
                     <Text style={styles.textButton}>Postear</Text>    
                 </TouchableOpacity>
             </View>
+             }
+    </React.Fragment>
         )
     }
 }
