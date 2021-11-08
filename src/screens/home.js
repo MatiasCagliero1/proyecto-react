@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput } from 'react-native';
 import { db, auth } from '../firebase/config';
+import Post from '../components/Posteo'
 
 
 
@@ -23,8 +24,7 @@ class Home extends Component{
                         data: doc.data()
                     })
                 })
-                console.log(posteos);
-
+                
                 this.setState({
                     posts: posteos,
                 })
@@ -36,14 +36,7 @@ class Home extends Component{
         return(
             <View>
                 <Text style={styles.title}> Hola Mundo </Text>
-            
-                <FlatList 
-                    data = {this.state.posts}
-                    keyExtractor = { post => post.id}
-                    renderItem= {({item})=><Text>{item.data.textoPost}</Text>}
-                />
-
-            
+                <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
             </View>
         )
     }
