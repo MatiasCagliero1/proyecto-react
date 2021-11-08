@@ -1,0 +1,2 @@
+Linkear el ¿No tenés cuenta? Registrate
+Ejecutar funcion de logout en el Drawer.Screen

@@ -1,3 +1,4 @@
+//Importar Componentes de React
 import React, {Component} from 'react';
 
 //Importar Navegación
@@ -17,21 +18,25 @@ import { auth } from '../firebase/config';
 //Importar Gestos
 const Drawer = createDrawerNavigator();
 
-class Menu extends Component {
+export default class Menu extends Component {
     constructor(props){
         super(props);
         this.state = {
             loggedIn: false,
-            error:'',
+            userData:'',
+            errorMessage:'',
+            errorCode:'',
         }
     }
 
     componentDidMount(){
+
+        // Metodo para recordar usuario
         auth.onAuthStateChanged(
             user => {
                 if (user){
                     this.setState({
-                        loggedin: true,
+                        loggedIn: true,
                         userData: user,
                     })    
                 }
@@ -39,9 +44,11 @@ class Menu extends Component {
         )
     }
 
+
     register(email, pass){
         console.log(email,pass);
 
+        // Metodo para regitrar un nuevo usuario 
         auth.createUserWithEmailAndPassword(email, pass)
         .then(()=>{
             console.log('Registrado ok');
@@ -52,11 +59,13 @@ class Menu extends Component {
     }
 
     login(email, pass){
+
+        // Metodo para iniciar sesión
         auth.signInWithEmailAndPassword(email, pass)
         .then( response => {
-            console.log('Login Ok');
+            console.log('Logueado Correctamente');
             this.setState({
-                loggedin: true,
+                loggedIn: true,
                 userData: response
             })
         })
@@ -82,7 +91,7 @@ class Menu extends Component {
         auth.signOut()
         .then( 
             this.setState({
-                loggedin: false,
+                loggedIn: false,
             })
         )
         .catch(e => console.log(e))
@@ -91,7 +100,7 @@ class Menu extends Component {
     render(){
         return(
             <NavigationContainer>
-            { this.state.loggedin === false ?
+            { this.state.loggedIn === false ?
                 <Drawer.Navigator>
                     <Drawer.Screen name="Login" component={ ()=> <Login login={(email, pass)=>this.login(email, pass) } mensajeError = {this.state.error}/>}/>
                     <Drawer.Screen name="Registro" component={ ()=> <Register register={(email, pass)=>this.register(email, pass)} mensajeError = {this.state.error} />}/>
@@ -100,11 +109,10 @@ class Menu extends Component {
                     <Drawer.Screen name="Home" component={ ()=> <Home />}/>
                     <Drawer.Screen name="Nuevo Post" component={ (drawerProps)=> <NewPost drawerProps={drawerProps}/>}/>
                     <Drawer.Screen name="Mi Perfil" component={ ()=> <Profile userData={this.state.userData} logout={()=>this.logout()} />}/>
+                    {/* <Drawer.Screen name="Cerrar Sesion" onPress={() => this.logout(this.state.userData)}/> */}
                 </Drawer.Navigator>
             }
             </NavigationContainer>
         )
     }
 }
-
-export default Menu;

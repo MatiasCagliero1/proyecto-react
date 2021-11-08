@@ -1,20 +1,16 @@
+//Importar Componentes de React
 import React, {Component} from "react";
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 
-class Login extends Component{
+export default class Login extends Component{
     constructor(props){
         super(props)
         this.state={
             email:'',
             password:'',
-            error:'',
+            errorMessage:'',
+            errorCode:'',
         }
-    }
-
-    
-    onSubmit(){
-        console.log(`El email ingresado es: ${this.state.email}`);
-        console.log(`La contraseña ingresada es: ${this.state.password}`);
     }
 
     render(){
@@ -22,11 +18,13 @@ class Login extends Component{
         return(
             <View style={styles.formContainer}>
                 <Text>Login</Text>
+
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
                     placeholder='email'
                     keyboardType='email-address'/>
+
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
@@ -34,9 +32,15 @@ class Login extends Component{
                     keyboardType='email-address'
                     secureTextEntry={true}
                 />
+
                 <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Ingresar</Text>    
                 </TouchableOpacity>
+
+                <TouchableOpacity /* onPress={()=> } */>
+                    <Text>¿No tenés cuenta? Registrate</Text>    
+                </TouchableOpacity>
+
             </View>
         )
     }
@@ -72,5 +76,3 @@ const styles = StyleSheet.create({
     }
 
 })
-
-export default Login;

@@ -1,7 +1,8 @@
+//Importar Componentes de React
 import React, {Component} from "react";
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 
-class Register extends Component{
+export default class Register extends Component{
     constructor(props){
         super(props)
         this.state={
@@ -11,13 +12,6 @@ class Register extends Component{
         }
     }
     
-
-    onSubmit(){
-        console.log(`El email ingresado es: ${this.state.email}`);
-        console.log(`El usuario ingresado es: ${this.state.userName}`);
-        console.log(`La contraseña ingresada es: ${this.state.password}`);
-    }
-
     render(){
         return(
             <View style={styles.formContainer}>
@@ -77,5 +71,3 @@ const styles = StyleSheet.create({
     }
 
 })
-
-export default Register;
