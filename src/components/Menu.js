@@ -102,7 +102,7 @@ export default class Menu extends Component {
             <NavigationContainer>
             { this.state.loggedIn === false ?
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Login" component={ ()=> <Login login={(email, pass)=>this.login(email, pass) } mensajeError = {this.state.error}/>}/>
+                    <Drawer.Screen name="Iniciar Sesión" component={ ()=> <Login login={(email, pass)=>this.login(email, pass) } mensajeError = {this.state.error}/>}/>
                     <Drawer.Screen name="Registro" component={ ()=> <Register register={(email, pass)=>this.register(email, pass)} mensajeError = {this.state.error} />}/>
                 </Drawer.Navigator>:
                 <Drawer.Navigator>

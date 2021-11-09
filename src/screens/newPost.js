@@ -2,8 +2,8 @@
 import React, {Component} from "react";
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import { auth, db } from "../firebase/config";
-import Camara from "../components/CamaraComp"
-import { Camera } from "expo-camera";
+import Camera from "../components/CamaraComp"
+
 
 class newPost extends Component{
     constructor(props){

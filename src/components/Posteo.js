@@ -1,9 +1,15 @@
+//Importar Componentes de React
+
 import React, {Component} from "react";
-import {Text, View, TouchableOpacity, StyleSheet, Modal, TextInput, FlatList} from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet, Modal, TextInput, FlatList, Image} from 'react-native';
+/* import icons from "https://fonts.googleapis.com/icon?family=Material+Icons";
+ */
+
+//Importar Firebase
 import { auth, db } from "../firebase/config";
 import firebase from "firebase";
 
-class Post extends Component{
+export default class Post extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -62,6 +68,7 @@ class Post extends Component{
             showModal: true,
         })
     }
+
     // Función que cierra el modal
     closeModal(){
         //mostramos el modal
@@ -98,18 +105,24 @@ class Post extends Component{
         console.log(this.props.postData);
         return(
             <View style={styles.postContainer}>
-                <Text>{this.props.postData.data.textoPost}</Text>
-                <Text>{this.props.postData.data.owner}</Text>
+                <Image style={styles.photo}
+                source={{uri:'https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg'}}
+                resizeMode='Contain'
+            />
+                <Text>Poner Usuario: {this.props.postData.data.textoPost}</Text>
+         {/*     <Text>{this.props.postData.data.owner}</Text> */}
                 <Text>Likes: {this.state.likes}</Text> 
+
                {
                    this.state.myLike ?
                     <TouchableOpacity onPress={()=>this.unlike()}>
                         <Text>Quitar like</Text>
                     </TouchableOpacity>   :
                     <TouchableOpacity onPress={()=>this.likear()}>
-                        <Text>Me gusta</Text>
+                        <Text>{/* {icons.favorite} */}Me gusta</Text>
                     </TouchableOpacity>
                }
+
                {/* Botón para activar el modal */}
                <TouchableOpacity onPress={()=>this.showModal()}>
                    <Text>Ver comentarios</Text>
@@ -144,6 +157,7 @@ class Post extends Component{
                                         multiline
                                         value={this.state.comment}
                             />
+
                             <TouchableOpacity onPress={()=>this.publicarComentario()}>
                                 <Text>Comentar</Text>
                             </TouchableOpacity>
@@ -153,8 +167,6 @@ class Post extends Component{
                     <Text></Text>
                }
 
-
-               
             </View>
         )
     }
@@ -163,14 +175,15 @@ class Post extends Component{
 
 const styles = StyleSheet.create({
     postContainer:{
-        borderColor: '#ccc',
-        borderWidth: 1,
-        borderStyle:'solid',
-        paddingHorizontal:10,
         paddingVertical:5,
         marginBottom: 15,
-        marginHorizontal:10,
+        
     },
+    photo:{
+        width:'100%',
+        height:'100%',
+    },
+
     modalContainer:{
      width: '97%',
      borderRadius:4,
@@ -180,14 +193,13 @@ const styles = StyleSheet.create({
     boxShadow:'rgb(204 204 204) 0px 0px 12px 9px',
     backgroundColor:'#fff',
     },
+
     closeButton:{
         backgroundColor:'#dc3545',
         color:'#fff',
         padding:5,
         borderRadius: 4,
+        alignSelf:'flex-end',
         margin:5,
-        alignSelf:'flex-end'
     }
 })
-
-export default Post
