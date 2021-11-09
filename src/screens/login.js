@@ -2,26 +2,34 @@
 import React, {Component} from "react";
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 
+//Importar Pantallas
+import Register from '../screens/register';
 export default class Login extends Component{
     constructor(props){
         super(props)
         this.state={
-            email:'',
-            password:'',
-            errorMessage:'',
-            errorCode:'',
+            email: this.props.textoMail,
+            password:this.props.textoPassword
         }
     }
 
+    componentDidMount(){
+        this.state=({
+            email: this.props.textoMail,
+            password: this.props.textoPassword,
+        })
+    }
+
     render(){
-        console.log(this.props.login);
         return(
             <View style={styles.formContainer}>
                 <Text>Iniciar Sesión</Text>
+                <Text  style={styles.mensajeError}>{this.props.mensajeError}</Text>
 
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text)=>this.setState({email: text})}
+                    onChangeText={(text)=>{this.setState({email: text})}}
+                    value={this.state.email}
                     placeholder='Email'
                     keyboardType='email-address'/>
 
@@ -30,6 +38,7 @@ export default class Login extends Component{
                     onChangeText={(text)=>this.setState({password: text})}
                     placeholder='Password'
                     keyboardType='email-address'
+                    value={this.state.password}
                     secureTextEntry={true}
                 />
 
@@ -37,7 +46,7 @@ export default class Login extends Component{
                     <Text style={styles.textButton}>Ingresar</Text>    
                 </TouchableOpacity>
 
-                <TouchableOpacity /* onPress={()=> } */>
+                <TouchableOpacity onPress={ ()=> <Register/>}>
                     <Text>¿No tenés cuenta? Registrate</Text>    
                 </TouchableOpacity>
 
@@ -75,6 +84,10 @@ const styles = StyleSheet.create({
     },
     textButton:{
         color: '#fff'
+    },
+    mensajeError:{
+        marginTop:3,
+        color:'red',
     }
 
 })
