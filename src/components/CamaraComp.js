@@ -10,8 +10,8 @@ export default class Camera extends Component{
     constructor(props){
         super(props);
         this.state = {
-        permission: false,
-        photo:'',
+            permission: false,
+            photo:'',
         }
         this.camera
     }

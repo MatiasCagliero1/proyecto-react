@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#28a745',
         marginTop:8,
+        marginBottom: 10,
     },
     textButton:{
         color: '#fff'

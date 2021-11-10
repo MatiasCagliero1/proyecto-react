@@ -1,8 +1,10 @@
+//Importar Componentes de React
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import {Camera} from 'expo-camera';
-import {db, storage} from '../firebase/config';
 
+//Importar Firebase
+import {db, storage} from '../firebase/config';
 class MyCamera extends Component {
     constructor(props){
         super(props)
@@ -94,7 +96,7 @@ class MyCamera extends Component {
                                 </View>
                             </React.Fragment> :
                             <React.Fragment>
-                                <MyCamera style={StyleSheet.camaraBody} type = {Camera.Constants.Type.back} ref= { (reference) => this.camera = reference }/> 
+                                <MyCamera style={StyleSheet.camaraBody} type={Camera.Constants.Type.back} ref={ (reference) => this.camera = reference }/> 
                                 <TouchableOpacity style= {StyleSheet.button} onPress = {() => this.takePicture()}> 
                                      <Text> Saca Foto </Text> 
                                 </TouchableOpacity>
