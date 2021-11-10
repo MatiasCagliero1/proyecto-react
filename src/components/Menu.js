@@ -43,13 +43,21 @@ export default class Menu extends Component {
 
     errorDeSesion(error, email, pass){
         console.log(error.code);
-        let mensajeError = 'El mail no está registrado'
-        if(error.code = 'auth/invalid-email' ){
-            mensajeError = 'El formato del mail no es valido'
-        } if(error.code = 'auth/wrong-password' ){
-            mensajeError = 'La contraseña es incorrecta'
-        } if(error.message ='The email address is badly formatted.' ){
-        mensajeError = 'El formato del mail no es valido'
+        let mensajeError = ''
+        switch (error) {
+            case error.code == 'auth/invalid-email':
+                mensajeError = 'El formato del mail no es valido'
+                break;
+            case error.code == 'auth/wrong-password':
+                mensajeError = 'La contraseña es incorrecta'
+                break;
+            case error.code == 'auth/wrong-password':
+                mensajeError = 'La contraseña es incorrecta'
+                break;
+            default:
+             mensajeError = 'Los datos ingresados no son correctos'
+                break;
+        
         }
         this.setState({
             estadoError: mensajeError,
