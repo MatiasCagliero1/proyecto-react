@@ -42,14 +42,14 @@ export default class Menu extends Component {
     }
 
     errorDeSesion(error, email, pass){
-        console.log(error);
-        let mensajeError = ''
+        console.log(error.code);
+        let mensajeError = 'El mail no está registrado'
         if(error.code = 'auth/invalid-email' ){
             mensajeError = 'El formato del mail no es valido'
         } if(error.code = 'auth/wrong-password' ){
             mensajeError = 'La contraseña es incorrecta'
         } if(error.message ='The email address is badly formatted.' ){
-        mensajeError = 'El mail no está registrado'
+        mensajeError = 'El formato del mail no es valido'
         }
         this.setState({
             estadoError: mensajeError,
@@ -101,7 +101,6 @@ export default class Menu extends Component {
                     <Drawer.Screen name="Home" component={() => <Home/>}/>
                     <Drawer.Screen name="Nuevo Post" component={ (drawerProps)=> <NewPost drawerProps={drawerProps}/>}/>
                     <Drawer.Screen name="Mi Perfil" component={()=> <Profile userData={this.state.userData} logout={()=>this.logout()} />}/>
-                    {/* <Drawer.Screen name="Cerrar Sesion" onPress={() => auth.signOut() }/> */}
                 </Drawer.Navigator>
             }
             </NavigationContainer>

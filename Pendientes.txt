@@ -1,3 +1,0 @@
-- Linkear el ¿No tenés cuenta? Registrate
-- Ejecutar funcion de logout en el Drawer.Screen
-- En el login siempre me tira el mismo codigo de error
