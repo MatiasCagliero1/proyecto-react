@@ -39,7 +39,7 @@ export default class Login extends Component{
                     <Text style={styles.textButton}>Ingresar</Text>    
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={ ()=> <Register/>}>
+                <TouchableOpacity onPress={ ()=> this.props.drawerProps.navigation.navigate('Registro')}>
                     <Text>¿No tenés cuenta? Registrate</Text>    
                 </TouchableOpacity>
 

@@ -32,6 +32,10 @@ export default class Register extends Component{
                 <TouchableOpacity style={styles.button} onPress={()=>this.props.register(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
+
+                <TouchableOpacity onPress={ ()=> this.props.drawerProps.navigation.navigate('Iniciar Sesión')}>
+                    <Text>¿Ya tenés cuanta? Inicia Sesión</Text>    
+                </TouchableOpacity>
             </View>
         )
     }
