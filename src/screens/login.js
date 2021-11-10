@@ -9,15 +9,8 @@ export default class Login extends Component{
         super(props)
         this.state={
             email: this.props.textoMail,
-            password:this.props.textoPassword
-        }
-    }
-
-    componentDidMount(){
-        this.state=({
-            email: this.props.textoMail,
             password: this.props.textoPassword,
-        })
+        }
     }
 
     render(){

@@ -41,53 +41,50 @@ export default class Menu extends Component {
         )
     }
 
-    register(email, pass){
-        console.log(email,pass);
-
-        // Metodo para regitrar un nuevo usuario 
-        auth.createUserWithEmailAndPassword(email, pass)
-        .then(()=>{ console.log('Registrado ok');})
-
-        .catch(e=>{console.log(e)})
+    errorDeSesion(error, email, pass){
+        console.log(error);
+        let mensajeError = ''
+        if(error.code = 'auth/invalid-email' ){
+            mensajeError = 'El formato del mail no es valido'
+        } if(error.code = 'auth/wrong-password' ){
+            mensajeError = 'La contraseña es incorrecta'
+        } if(error.message ='The email address is badly formatted.' ){
+        mensajeError = 'El mail no está registrado'
+        }
+        this.setState({
+            estadoError: mensajeError,
+            mailPrevio: email,
+            passwordPrevia: pass,
+        })
     }
 
     login(email, pass){
         // Metodo para iniciar sesión
         auth.signInWithEmailAndPassword(email, pass)
         .then(response => {
-            console.log('Logueado Correctamente');
+            console.log(response);
             this.setState({
                 loggedIn: true,
                 userData: response,
             })
         })
+        
+        .catch(error=>this.errorDeSesion(error,email,pass))
+    }
 
-        .catch(error => {
-            let mensajeError = ''
-            if(error.code = 'auth/invalid-email' ){
-                mensajeError = 'El formato del mail no es valido'
-            } if(error.code ='' ){
-                mensajeError = 'El mail no está registrado'
-            } if(error.code = 'auth/wrong-password' ){
-                mensajeError = 'La contraseña es incorrecta'
-            }
-            this.setState({
-                estadoError: mensajeError,
-                mailPrevio: email,
-                passwordPrevia: pass,
-            })
+    register(email, pass){
+        console.log(email,pass);
 
-            console.log(error);
-        })
+        // Metodo para regitrar un nuevo usuario 
+        auth.createUserWithEmailAndPassword(email, pass)
+        .then(()=>{ console.log('Registrado Correctamente');})
+
+        .catch(error=>this.errorDeSesion(error,email,pass))
     }
 
     logout(){
         auth.signOut()
-        .then( 
-            this.setState({
-                loggedIn: false,
-            })
-        )
+        .then(this.setState({loggedIn: false}))
         .catch(e => console.log(e))
     }
 
