@@ -10,6 +10,7 @@ export default class Login extends Component{
         this.state={
             email: this.props.textoMail,
             password: this.props.textoPassword,
+            loaded: false,
         }
     }
 

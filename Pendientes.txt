@@ -1,8 +1,5 @@
 Linkear el ¿No tenés cuenta? Registrate
-Ejecutar funcion de logout en el Drawer.Screen
-Mensajes de error cuando te registras y en el login
 Que no se espeje cuando sacas la foto
 Activity indicator entre la camara y la parte de escribir el posteo
-Activity indicator entre que carga el login y te redirige a home
 Que aparezca la imagen en el posteo
 Corregir error que ale pase por slack

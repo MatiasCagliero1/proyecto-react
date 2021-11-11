@@ -31,7 +31,7 @@ class MyCamera extends Component {
 
     takePicture(){
         //Metodo para sacar la foto
-        this.camera.takePictureAsync()
+        this.Camera.takePictureAsync()
         .then( photo => {
             this.setState({
                 foto: photo.uri //Ruta internta temporal hacia la carpeta temporal
@@ -82,12 +82,12 @@ class MyCamera extends Component {
         return(
             <React.Fragment>
                 {
-                    this.state.permission ?
+                    this.state.permisos ?
                         this.state.foto ? 
                             <React.Fragment>
                                 <Image style = {styles.preview} source={{uri: this.state.foto}}> </Image>
                                 <View style = {styles.actionArea}> 
-                                    <TouchableOpacity onPress= {()=> this.savePhoto}> 
+                                    <TouchableOpacity onPress= {()=> this.savePhoto()}> 
                                         <Text>Aceptar</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress = {()=> this.clear()}> 
