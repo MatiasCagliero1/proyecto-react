@@ -13,14 +13,14 @@ class Post extends Component{
            comment:''
         }
     }
-   // componentDidMount(){
-//    if(this.props.postData.data.likes){
-  //          this.setState({
-     //           likes:this.props.postData.data.likes.length,
-     //           myLike: this.props.postData.data.likes.includes(auth.currentUser.email),
-     //       })
-     //   }
-    //}
+    componentDidMount(){
+    if(this.props.postData.data.likes){
+            this.setState({
+               likes:this.props.postData.data.likes.length,
+               myLike: this.props.postData.data.likes.includes(auth.currentUser.email),
+           })
+      }
+    }
 
     likear(){
         //Agregar mi email a un array

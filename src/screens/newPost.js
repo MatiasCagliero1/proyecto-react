@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import { auth, db } from "../firebase/config";
+import MyCamera from '../components/Camara'
 
 
 class newPost extends Component{
@@ -8,6 +9,8 @@ class newPost extends Component{
         super(props)
         this.state={
             textoPost:'',
+            showCamera: true,
+            url: '',
         }
     }
 
@@ -17,6 +20,7 @@ class newPost extends Component{
             owner: auth.currentUser.email,
             createdAt: Date.now(),
             textoPost: this.state.textoPost,
+            photo: this.state.url
         })
         .then(()=>{
             console.log('posteado ok.')
@@ -29,24 +33,37 @@ class newPost extends Component{
         .catch( e => console.log(e))
     }
 
+    imageUpload(url){
+        this.setState({
+            showCamera: false,
+            url: url,
+        })
+    }
+
 
     render(){
-        console.log(this.props.login);
+        //console.log(this.props.login);
         return(
-            <View style={styles.formContainer}>
-            <Text>Nuevo Post</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text)=>this.setState({textoPost: text})}
-                    placeholder='Escriba aquí...'
-                    keyboardType='default'
-                    multiline
-                    value={this.state.textoPost}    
-                    />
-                <TouchableOpacity style={styles.button} onPress={()=>this.onSubmit()}>
-                    <Text style={styles.textButton}>Postear</Text>    
-                </TouchableOpacity>
-            </View>
+            <React.Fragment>
+                {
+                    this.state.showCamera ? 
+                    <MyCamera imageUpload= {(url) => this.imageUpload(url)}/> :
+                    <View style={styles.formContainer}>
+                        <Text>Nuevo Post</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(text)=>this.setState({textoPost: text})}
+                            placeholder='Escriba aquí...'
+                            keyboardType='default'
+                            multiline
+                            value={this.state.textoPost}    
+                        />
+                        <TouchableOpacity style={styles.button} onPress={()=>this.onSubmit()}>
+                            <Text style={styles.textButton}>Postear</Text>    
+                        </TouchableOpacity>
+                    </View>
+                }
+            </React.Fragment>
         )
     }
 }
