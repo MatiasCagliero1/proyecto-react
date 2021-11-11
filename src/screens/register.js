@@ -15,21 +15,17 @@ export default class Register extends Component{
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>Register</Text>
+                <Text>Registrarse</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
-                    placeholder='email'
-                    keyboardType='email-address'/>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text)=>this.setState({userName: text})}
-                    placeholder='user name'
-                    keyboardType='default'/>
+                    placeholder='Email'
+                    keyboardType='email-address'/> 
+
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
-                    placeholder='password'
+                    placeholder='Contraseña'
                     keyboardType='email-address'
                     secureTextEntry={true}
                 />
@@ -55,6 +51,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical:10,
+        marginBottom: 5,
     },
     button:{
         backgroundColor:'#28a745',
@@ -64,7 +61,8 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#28a745',
+        marginTop:8,
     },
     textButton:{
         color: '#fff'

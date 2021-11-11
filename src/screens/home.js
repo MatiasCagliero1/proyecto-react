@@ -37,7 +37,7 @@ export default class Home extends Component{
     render(){
         return(
             <View>
-                <Text style={styles.title}> Hola Mundo </Text>
+                <Text style={styles.title}>Últimos Posteos</Text>
                 <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
             </View>
         )
@@ -51,5 +51,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textTransform: 'capitalize',
         marginTop: 20,
+        marginBottom: 10,
     }
 })

@@ -24,13 +24,10 @@ export default class Menu extends Component {
         this.state = {
             loggedIn: false,
             userData:'',
-            errorMessage:'',
-            errorCode:'',
         }
     }
 
     componentDidMount(){
-
         // Metodo para recordar usuario
         auth.onAuthStateChanged(
             user => {
@@ -44,56 +41,58 @@ export default class Menu extends Component {
         )
     }
 
+    errorDeSesion(error, email, pass){
+        console.log(error.code);
+        let mensajeError = ''
+        switch (error) {
+            case error.code == 'auth/invalid-email':
+                mensajeError = 'El formato del mail no es valido'
+                break;
+            case error.code == 'auth/wrong-password':
+                mensajeError = 'La contraseña es incorrecta'
+                break;
+            case error.code == 'auth/wrong-password':
+                mensajeError = 'La contraseña es incorrecta'
+                break;
+            default:
+             mensajeError = 'Los datos ingresados no son correctos'
+                break;
+        
+        }
+        this.setState({
+            estadoError: mensajeError,
+            mailPrevio: email,
+            passwordPrevia: pass,
+        })
+    }
+
+    login(email, pass){
+        // Metodo para iniciar sesión
+        auth.signInWithEmailAndPassword(email, pass)
+        .then(response => {
+            console.log(response);
+            this.setState({
+                loggedIn: true,
+                userData: response,
+            })
+        })
+        
+        .catch(error=>this.errorDeSesion(error,email,pass))
+    }
 
     register(email, pass){
         console.log(email,pass);
 
         // Metodo para regitrar un nuevo usuario 
         auth.createUserWithEmailAndPassword(email, pass)
-        .then(()=>{
-            console.log('Registrado ok');
-        })
-        .catch( error => {
-            console.log(error);
-        })
-    }
+        .then(()=>{ console.log('Registrado Correctamente');})
 
-    login(email, pass){
-
-        // Metodo para iniciar sesión
-        auth.signInWithEmailAndPassword(email, pass)
-        .then( response => {
-            console.log('Logueado Correctamente');
-            this.setState({
-                loggedIn: true,
-                userData: response
-            })
-        })
-        .catch(error => {
-            console.log(error);
-            let mensajeError = ''
-            if(error.code = 'auth/invalid-email' ){
-                mensajeError = 'El mail no es valido'
-            } if(error.code ='f' ){
-                mensajeError = 'El mail no está registrado'
-            } if(error.code = 'auth/wrong-password' ){
-                mensajeError = 'El mail no está registrado'
-            }
-
-            this.setState = {
-                error: mensajeError,
-            }
-            console.log(this.state.error);
-        })
+        .catch(error=>this.errorDeSesion(error,email,pass))
     }
 
     logout(){
         auth.signOut()
-        .then( 
-            this.setState({
-                loggedIn: false,
-            })
-        )
+        .then(this.setState({loggedIn: false}))
         .catch(e => console.log(e))
     }
 
@@ -102,14 +101,14 @@ export default class Menu extends Component {
             <NavigationContainer>
             { this.state.loggedIn === false ?
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Login" component={ ()=> <Login login={(email, pass)=>this.login(email, pass) } mensajeError = {this.state.error}/>}/>
+                    <Drawer.Screen name="Iniciar Sesión" component={ ()=> <Login login={(email,pass)=>this.login(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia} />}/>
                     <Drawer.Screen name="Registro" component={ ()=> <Register register={(email, pass)=>this.register(email, pass)} mensajeError = {this.state.error} />}/>
-                </Drawer.Navigator>:
+                </Drawer.Navigator>
+                :
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Home" component={ ()=> <Home />}/>
+                    <Drawer.Screen name="Home" component={() => <Home/>}/>
                     <Drawer.Screen name="Nuevo Post" component={ (drawerProps)=> <NewPost drawerProps={drawerProps}/>}/>
-                    <Drawer.Screen name="Mi Perfil" component={ ()=> <Profile userData={this.state.userData} logout={()=>this.logout()} />}/>
-                    {/* <Drawer.Screen name="Cerrar Sesion" onPress={() => this.logout(this.state.userData)}/> */}
+                    <Drawer.Screen name="Mi Perfil" component={()=> <Profile userData={this.state.userData} logout={()=>this.logout()} />}/>
                 </Drawer.Navigator>
             }
             </NavigationContainer>
