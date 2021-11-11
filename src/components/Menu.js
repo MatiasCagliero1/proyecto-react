@@ -51,9 +51,6 @@ export default class Menu extends Component {
             case 'auth/wrong-password':
                 mensajeError = 'La contraseña es incorrecta'
                 break;
-            case 'auth/wrong-password':
-                mensajeError = 'La contraseña es incorrecta'
-                break;
             default:
              mensajeError = 'Los datos ingresados no son correctos'
                 break;

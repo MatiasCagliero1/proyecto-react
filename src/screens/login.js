@@ -26,7 +26,8 @@ export default class Login extends Component{
                     placeholder='Email'
                     keyboardType='email-address'/>
 
-                <TextInput
+                <TextInput 
+                    id='contraseña'
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
                     placeholder='Password'
@@ -35,9 +36,16 @@ export default class Login extends Component{
                     secureTextEntry={true}
                 />
 
-                <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)}>
+                {(this.state.email == '' || this.state.password == '') ?
+                    <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)} disabled>
                     <Text style={styles.textButton}>Ingresar</Text>    
                 </TouchableOpacity>
+                :
+                    <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)} >
+                    <Text style={styles.textButton}>Ingresar</Text>    
+                </TouchableOpacity>
+                }
+               
 
                 <TouchableOpacity onPress={ ()=> this.props.drawerProps.navigation.navigate('Registro')}>
                     <Text>¿No tenés cuenta? Registrate</Text>    
