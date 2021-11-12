@@ -42,16 +42,16 @@ export default class Menu extends Component {
     }
 
     errorDeSesion(error, email, pass){
-        console.log(error.code);
+        console.log(error);
         let mensajeError = ''
-        switch (error) {
-            case error.code == 'auth/invalid-email':
+        switch (error.code) {
+            case "auth/invalid-email":
                 mensajeError = 'El formato del mail no es valido'
                 break;
-            case error.code == 'auth/wrong-password':
+            case 'auth/wrong-password':
                 mensajeError = 'La contraseña es incorrecta'
                 break;
-            case error.code == 'auth/wrong-password':
+            case 'auth/wrong-password':
                 mensajeError = 'La contraseña es incorrecta'
                 break;
             default:
@@ -93,7 +93,7 @@ export default class Menu extends Component {
     logout(){
         auth.signOut()
         .then(this.setState({loggedIn: false}))
-        .catch(e => console.log(e))
+        .catch(e=>console.log(e))
     }
 
     render(){
@@ -101,8 +101,8 @@ export default class Menu extends Component {
             <NavigationContainer>
             { this.state.loggedIn === false ?
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Iniciar Sesión" component={ ()=> <Login login={(email,pass)=>this.login(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia} />}/>
-                    <Drawer.Screen name="Registro" component={ ()=> <Register register={(email, pass)=>this.register(email, pass)} mensajeError = {this.state.error} />}/>
+                    <Drawer.Screen name="Iniciar Sesión" component={ (drawerProps)=> <Login drawerProps={drawerProps} login={(email,pass)=>this.login(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia} />}/>
+                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass)=>this.register(email, pass)} mensajeError = {this.state.error} />}/>
                 </Drawer.Navigator>
                 :
                 <Drawer.Navigator>

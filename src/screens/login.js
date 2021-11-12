@@ -40,7 +40,7 @@ export default class Login extends Component{
                     <Text style={styles.textButton}>Ingresar</Text>    
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={ ()=> <Register/>}>
+                <TouchableOpacity onPress={ ()=> this.props.drawerProps.navigation.navigate('Registro')}>
                     <Text>¿No tenés cuenta? Registrate</Text>    
                 </TouchableOpacity>
 
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#28a745',
         marginTop:8,
+        marginBottom: 10,
     },
     textButton:{
         color: '#fff'
