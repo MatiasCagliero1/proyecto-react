@@ -29,7 +29,7 @@ class MyCamera extends Component {
 
     takePicture(){
         //Metodo para sacar la foto
-        this.camera.takePictureAsync()
+        this.Camera.takePictureAsync()
         .then( photo => {
             this.setState({
                 foto: photo.uri //Ruta internta temporal hacia la carpeta temporal
@@ -80,12 +80,12 @@ class MyCamera extends Component {
         return(
             <React.Fragment>
                 {
-                    this.state.permission ?
+                    this.state.permisos ?
                         this.state.foto ? 
                             <React.Fragment>
                                 <Image style = {styles.preview} source={{uri: this.state.foto}}> </Image>
                                 <View style = {styles.actionArea}> 
-                                    <TouchableOpacity onPress= {()=> this.savePhoto}> 
+                                    <TouchableOpacity onPress= {()=> this.savePhoto()}> 
                                         <Text>Aceptar</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress = {()=> this.clear()}> 
@@ -94,8 +94,8 @@ class MyCamera extends Component {
                                 </View>
                             </React.Fragment> :
                             <React.Fragment>
-                                <MyCamera style={StyleSheet.camaraBody} type = {Camera.Constants.Type.back} ref= { (reference) => this.camera = reference }/> 
-                                <TouchableOpacity style= {StyleSheet.button} onPress = {() => this.takePicture()}> 
+                                <Camera style={styles.camaraBody} type = {Camera.Constants.Type.back} ref= { (reference) => this.camera = reference }/> 
+                                <TouchableOpacity style= {styles.button} onPress = {() => this.takePicture()}> 
                                      <Text> Saca Foto </Text> 
                                 </TouchableOpacity>
                              </React.Fragment>  : 

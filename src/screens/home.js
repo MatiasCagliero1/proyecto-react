@@ -12,6 +12,7 @@ export default class Home extends Component{
         super()
         this.state={
            posts:[],
+           loaded: false
         }
     }
 
@@ -29,6 +30,7 @@ export default class Home extends Component{
                 
                 this.setState({
                     posts: posteos,
+                    loaded: true,
                 })
             }
         )
@@ -36,10 +38,16 @@ export default class Home extends Component{
 
     render(){
         return(
-            <View>
-                <Text style={styles.title}>Últimos Posteos</Text>
-                <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
-            </View>
+            <React.Fragment>
+            { 
+                this.state.loaded === false ?
+                <ActivityIndicator> </ActivityIndicator>:
+                <View>
+                    <Text style={styles.title}>Últimos Posteos</Text>
+                    <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
+                </View>
+            }
+            </React.Fragment>
         )
     }
 }
