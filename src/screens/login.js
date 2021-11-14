@@ -37,8 +37,8 @@ export default class Login extends Component{
                     secureTextEntry={true}
                 />
 
-                {(this.state.email == '' || this.state.password == '') ?
-                    <TouchableOpacity style={styles.button} onPress={()=>this.props.login(this.state.email, this.state.password)} disabled>
+                {(this.state.email === '' || this.state.password === '') ?
+                    <TouchableOpacity style={styles.buttonDisabled} onPress={()=>this.props.login(this.state.email, this.state.password)} disabled>
                     <Text style={styles.textButton}>Ingresar</Text>    
                 </TouchableOpacity>
                 :
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     input:{
         height:20,
-        paddingVertical:15,
+        paddingVertical:18,
         paddingHorizontal: 10,
         borderWidth:1,
         borderColor: '#ccc',
@@ -73,18 +73,25 @@ const styles = StyleSheet.create({
         marginVertical:10,
         marginBottom: 5,
     },
-    button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+    buttonDisabled:{
         textAlign: 'center',
+        backgroundColor:'grey',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
         borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745',
         marginTop:8,
         marginBottom: 10,
     },
+    button:{
+        textAlign: 'center',
+        backgroundColor:'#28a745',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderRadius:4, 
+        marginTop:8,
+        marginBottom: 10,
+    },
+
     textButton:{
         color: '#fff'
     },

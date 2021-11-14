@@ -1,4 +1,5 @@
-Linkear el ¿No tenés cuenta? Registrate
+El botón de bloquear no carga de una
+
 Que no se espeje cuando sacas la foto
 Activity indicator entre la camara y la parte de escribir el posteo
 Que aparezca la imagen en el posteo
