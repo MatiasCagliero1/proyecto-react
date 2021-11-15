@@ -148,20 +148,22 @@ export default class Post extends Component{
                         <View style={styles.closeButtonContainer}>
                             <Text style={styles.closeButton} onPress={()=>this.closeModal()}>X</Text>
                         </View>
-
+                        <View>
                         {/* Listar los comentarios ¿Qué componenete usamos? */
                             this.props.postData.data.comments ?
                                 <FlatList 
                                     data={this.props.postData.data.comments}
                                     keyExtractor={post => post.createdAt.toString()}
-                                    renderItem={({item})=>   <View style={styles.row}>
-                                    <Text style={styles.black}> {item.author}: </Text>
-                                    <Text style={styles.capitalize}> {item.commentText}</Text>
-                           </View>
-                                }
-                                /> :
-                                <Text></Text>
+                                    renderItem={({item})=>
+                                    <View style={styles.row}>
+                                        <Text style={styles.black}> {item.author}: </Text>
+                                        <Text style={styles.capitalize}> {item.commentText}</Text>
+                                    </View>
+                                }/> :
+                                    <Text></Text>
                         }
+
+                        
                         {/* Form para nuevo comentario */}
                         <View>
                             <TextInput keyboardType='defualt'
@@ -175,6 +177,7 @@ export default class Post extends Component{
                                 <Text>Comentar</Text>
                             </TouchableOpacity>
                         </View>
+                </View>
 
                     </Modal> :
                     <Text></Text>
@@ -223,6 +226,9 @@ const styles = StyleSheet.create({
     },
 
     modalContainer:{
+    display: 'flex',
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
      width: '97%',
      borderRadius:4,
      padding:10,
@@ -235,8 +241,8 @@ const styles = StyleSheet.create({
     closeButtonContainer:{
         display: 'flex',
        flexDirection: 'row',
-       width: '100%',
-       justifyContent: 'flex-end'
+       justifyContent: 'flex-end',
+        height: '2.5em'
     },
     closeButton:{
         backgroundColor:'#dc3545',
