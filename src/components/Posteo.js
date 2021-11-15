@@ -117,17 +117,23 @@ export default class Post extends Component{
        
 
     render(){
-        console.log(auth.currentUser)
         console.log(this.props.postData);
 
         return(
             <View style={styles.postContainer}>
-             {/* LLAMAR A LA FOTO EN EL POSTEO */}
 
+           {  (this.props.postData.data.photo !== 'null' || this.props.postData.data.photo !== undefined) ?
 
-                <Image style={styles.photo}
-               source={this.props.postData.data.photo}
+            <Image style={styles.photo}
+            source={this.props.postData.data.photo}
+            resizeMode='cover'/>
+            :
+            <Image style={styles.photo}
+                source={{uri:'https://megastorecelulares.com/img/not-found.15ffdca4.png'}}
                 resizeMode='cover'/>
+           }
+
+
                 
                 <View style={styles.rowLikes}>
                     
