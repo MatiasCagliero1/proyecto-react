@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList} from 'react-native';
 import { db, auth } from '../firebase/config';
+import Post from '../components/Posteo'
 
 export default class Profile extends Component{
     constructor(){
@@ -43,6 +44,7 @@ export default class Profile extends Component{
                     <Text style={styles.title}> {auth.currentUser.displayName} </Text>
                     <Text style={styles.subtitle}> {auth.currentUser.email} </Text>
                     <Text style={styles.subtitle}> Ultimo Inicio de Sesion: {auth.currentUser.metadata.lastSignInTime} </Text>
+                    <Text style={styles.subtitle}> Cantidad de posteos: {this.state.posts.length} </Text>
                     <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
                     <TouchableOpacity style={styles.button} onPress={()=>this.props.logout()}>
                         <Text style={styles.textButton}>Cerrar Sesion</Text>    

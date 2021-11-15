@@ -1,15 +1,8 @@
-Que no se espeje cuando sacas la foto
-Que aparezca el flatlist de MiPerfil ==> Mili
-<<<<<<< HEAD
-=======
-Poner el nombre del currentUser en el titulo ==> Mili
-En cada posteo cambiar la parte del mail por en nombre de la persona que hace el posteo ==> Mili
->>>>>>> acc2fcd56b55e6c2ddd068a550396825f972f559
-Agrgar cantidad de posteos a MiPerfil ==> Mili
-Posibilidad de borrar un posteo en MiPerfil ==> Mili
-Buscador ==> Benja
-icono likes
+Alerta de eliminar un posteo
+Buscador 
+icono likes y eliminar posteo
+tema mayusculas en un posteo 
+
 
 DISENO PROPIO 
 Poner el boton de cerrar sesion en rojo
-img contain 
