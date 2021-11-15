@@ -1,9 +1,7 @@
 //Importar Componentes de React
-
 import React, {Component} from "react";
 import {Text, View, TouchableOpacity, StyleSheet, Modal, TextInput, FlatList, Image} from 'react-native';
-/* import icons from "https://fonts.googleapis.com/icon?family=Material+Icons";
- */
+/* import icons from "https://fonts.googleapis.com/icon?family=Material+Icons";*/
 
 //Importar Firebase
 import { auth, db } from "../firebase/config";
@@ -16,9 +14,11 @@ export default class Post extends Component{
            likes:0,
            myLike:false,
            showModal:false,
-           comment:''
+           comment:'',
+           iconoLike: 'LIKE',
         }
     }
+
     componentDidMount(){
     if(this.props.postData.data.likes){
             this.setState({
@@ -26,147 +26,184 @@ export default class Post extends Component{
                myLike: this.props.postData.data.likes.includes(auth.currentUser.email),
            })
       }
+      
+      if (this.state.myLike == false) {
+        this.setState({
+            iconoLike:'LIKE'
+        })
+      }else{
+        this.setState({
+            iconoLike:'QUITAR LIKE'
+        })
+      }
     }
 
-    likear(){
-        //Agregar mi email a un array
-        db.collection('Posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-        })
-        .then(()=>{
-            console.log('likeado...');
-            //Cambiar el estado de likes y de mylike.
-            this.setState({
-                likes:this.props.postData.data.likes.length,
-                myLike:true
+    like(){
+        if(this.state.myLike == false)
+            {
+            //Agregar mi email a un array
+            db.collection('Posts').doc(this.props.postData.id).update({
+                likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
             })
+            .then(()=>{
+                console.log('likeado...');
+
+                //Cambiar el estado de likes y de mylike.
+                this.setState({
+                    likes:this.props.postData.data.likes.length,
+                    myLike:true,
+                    iconoLike: 'QUITAR LIKE'
+                })
         })
         .catch(e=>console.log(e));
-    
-    }
-    
-    unlike(){
-        //Quitar mi email a un array
-        db.collection('Posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-        })
-        .then(()=>{
-            console.log('quitando like...');
-            //Cambiar el estado de likes y de mylike.
-            this.setState({
-                likes:this.props.postData.data.likes.length,
-                myLike:false
+
+       }else{
+                    //Quitar mi email a un array
+                    db.collection('Posts').doc(this.props.postData.id).update({
+                        likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+                    })
+                    .then(()=>{
+                        console.log('quitando like...');
+                        //Cambiar el estado de likes y de mylike.
+                        this.setState({
+                            likes:this.props.postData.data.likes.length,
+                            myLike:false,
+                            iconoLike: 'LIKE'
+                        })
             })
-        })
-        .catch(e=>console.log(e));
-    
+            .catch(e=>console.log(e));
+    }
     }
 
-    showModal(){
-        //mostramos el modal
-        this.setState({
-            showModal: true,
-        })
-    }
-
-    // Función que cierra el modal
-    closeModal(){
-        //mostramos el modal
-        this.setState({
-            showModal: false,
-        })
+    showAndCloseModal(){
+        // Abrir y Cerrar el modal
+        if(this.state.showModal == true){
+            this.setState({
+                showModal: false,
+            })
+        }else{
+            this.setState({
+                showModal: true,
+            })
+        }
     }
 
     publicarComentario(){
-        //Armar el comentario.
+
+        //  Datos del comentario.
         let oneComment = {
             author: auth.currentUser.email,
             createdAt: Date.now(),
             commentText: this.state.comment
         }
-        //Actualizar comentario en la base. Puntualmente en este documento.
-            //Saber cual es el post que queremos actualizar
+        
+        //  Actualizar comentario en la base. Puntualmente en este documento.
+        //  Saber cual es el post que queremos actualizar
+        
         db.collection('Posts').doc(this.props.postData.id).update({
             comments: firebase.firestore.FieldValue.arrayUnion(oneComment)
         })
+
         .then(()=>{
-            //Cambiar un estado para limpiar el form 
+            //  Cambiar un estado para limpiar el form 
             console.log('Comentario guardado');
             this.setState({
-                comment: ''
+                comment: '',
             })
         })
-        .catch( e => console.log(e))
-
+        .catch(e => console.log(e))
         
-    }
+        }
+       
 
     render(){
         console.log(this.props.postData);
+
         return(
             <View style={styles.postContainer}>
-                <Image style={styles.photo}
-                source={{uri:'https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg'}}
-                resizeMode='contain'
-            />
-                <Text>{this.props.postData.data.owner}: {this.props.postData.data.textoPost}</Text>
-         {/*     <Text>{this.props.postData.data.owner}</Text> */}
-                <Text>Likes: {this.state.likes}</Text> 
 
-               {
-                   this.state.myLike ?
-                    <TouchableOpacity onPress={()=>this.unlike()}>
-                        <Text>Quitar like</Text>
-                    </TouchableOpacity>   :
-                    <TouchableOpacity onPress={()=>this.likear()}>
-                        <Text>{/* {icons.favorite} */}Me gusta</Text>
-                    </TouchableOpacity>
-               }
+            <Image style={styles.photo}
+            source={this.props.postData.data.photo}
+            resizeMode='cover'/>
 
-               {/* Botón para activar el modal */}
-               <TouchableOpacity onPress={()=>this.showModal()}>
+
+            <View style={styles.rowLikes}>
+                
+                <View style={styles.row}>
+                    <Text style={styles.black}>Likes: </Text>
+                    <Text style={styles.capitalize}>{this.state.likes}</Text>
+                </View>
+
+            
+                <TouchableOpacity onPress={()=>this.like()}>
+                    <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
+                </TouchableOpacity>
+
+            </View>
+
+            <View style={styles.row}>
+                <Text style={styles.black}>{this.props.postData.data.owner}: </Text>
+                <Text style={styles.capitalize}>{this.props.postData.data.textoPost}</Text>
+            </View>
+
+                {/* ABRIR Y CERRAR MODAL */}
+               <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
                    <Text>Ver comentarios</Text>
                </TouchableOpacity>
 
-               {/* Modal */}
-               {
-                   this.state.showModal ?    
+               
+               {/* MODAL DE COMENTARIOS */}
+
+               {  this.state.showModal ?    
                     <Modal style={styles.modalContainer}
                             animationType='fade'
                             transparent={false}
                             visible = {this.state.showModal}>
-                            {/* Botón para cerrar el modal */}
-                        <TouchableOpacity onPress={()=>this.closeModal()}>
-                            <Text style={styles.closeButton}>X</Text>
-                        </TouchableOpacity>
-                        {/* Listar los comentarios ¿Qué componenete usamos? */}
-                        {
-                            this.props.postData.data.comments ?
-                                <FlatList 
-                                    data={this.props.postData.data.comments}
-                                    keyExtractor={post => post.createdAt.toString()}
-                                    renderItem={({item})=> <Text> {item.author}: {item.commentText}</Text>}
-                                /> :
-                                <Text></Text>
-                        }
+
+                       
+                    <View style={styles.closeButtonContainer}>
+                        <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
+                    </View>
+
+                    <View style={styles.dataComments}>
+
+                    {(this.props.postData.data.comments != undefined)?
+
+                        <FlatList 
+                            data={this.props.postData.data.comments}
+                            keyExtractor={post => post.createdAt.toString()}
+                            renderItem={({item})=>
+
+                            <View style={styles.row}>
+                                <Text style={styles.black}>{item.author}: </Text>
+                                <Text style={styles.capitalize}>{item.commentText}</Text>
+                            </View>}/>
+
+                        :<Text>¡Todavia no ha comnentado nadie!</Text>}
+                      
                         {/* Form para nuevo comentario */}
                         <View>
                             <TextInput keyboardType='defualt'
                                         placeholder='Escribí tu comentario'
                                         onChangeText={(text)=>{this.setState({comment: text})}}
-                                        multiline
+                                        style={styles.comments}
                                         value={this.state.comment}
+                                        maxLength='55'
                             />
 
-                            <TouchableOpacity onPress={()=>this.publicarComentario()}>
-                                <Text>Comentar</Text>
-                            </TouchableOpacity>
+
+                         { (this.state.comment =='')?
+                          <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
+                                <Text style={styles.commentarText}>Comentar</Text>
+                          </TouchableOpacity>
+                          :
+                            <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
+                                <Text style={styles.commentarText}>Comentar</Text>
+                            </TouchableOpacity>}
                         </View>
-
-                    </Modal> :
-                    <Text></Text>
+                  </View>
+                    </Modal> :<Text></Text>
                }
-
             </View>
         )
     }
@@ -177,29 +214,93 @@ const styles = StyleSheet.create({
     postContainer:{
         paddingVertical:5,
         marginBottom: 15,
-        
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '10em',
+        marginVertical: 0
     },
     photo:{
         width:'100%',
         height: 400,
+        marginBottom:5
+    },
+
+    rowLikes:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 5
+     },
+
+    row:{
+       display: 'flex',
+       flexDirection: 'row',
+       marginBottom: 5
+    },
+
+    black:{
+        fontWeight: '600'
+    },
+
+    capitalize:{
+        textTransform: 'capitalize'
     },
 
     modalContainer:{
+    display: 'flex',
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
      width: '97%',
      borderRadius:4,
      padding:10,
      alignSelf: 'center',
      marginVertical: 10,
-    boxShadow:'rgb(204 204 204) 0px 0px 12px 9px',
+    boxShadow:'rgb(204 204 204) 0px 5px 12px 5px',
     backgroundColor:'#fff',
     },
 
+    closeButtonContainer:{
+        display: 'flex',
+       flexDirection: 'row',
+       justifyContent: 'flex-end',
+        height: '2.5em'
+    },
     closeButton:{
         backgroundColor:'#dc3545',
         color:'#fff',
-        padding:5,
+        padding:10,
+        paddingVertical:7,
         borderRadius: 4,
-        alignSelf:'flex-end',
         margin:5,
-    }
+    },
+    comments:{
+        outline: 'none',
+        marginVertical: 10,
+        width:'100%',
+        height:'50%',
+ },
+ dataComments:{
+    width:'70%',
+},
+    commentar:{
+        textAlign: 'center',
+        backgroundColor:'#28a745',
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        borderRadius:4, 
+        marginTop:8,
+        marginBottom: 10,
+ }, disabled:{
+    backgroundColor:'grey',
+    textAlign: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    borderRadius:4, 
+    marginTop:8,
+    marginBottom: 10,
+}
+ 
+ ,commentarText :{
+    color:'white',
+}
 })

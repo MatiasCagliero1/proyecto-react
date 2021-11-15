@@ -8,6 +8,7 @@ export default class Register extends Component{
         this.state={
             email: this.props.textoMail || '',
             password: this.props.textoPassword || '',
+            userName: '',
         }
     }
     
@@ -22,7 +23,11 @@ export default class Register extends Component{
                     value={this.state.email}
                     placeholder='Email'
                     keyboardType='email-address'/> 
-
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text)=>this.setState({userName: text})}
+                    placeholder='user name'
+                    keyboardType='default'/>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
@@ -32,12 +37,12 @@ export default class Register extends Component{
                     secureTextEntry={true}
                 />
 
-                {(this.state.email === '' || this.state.password === '') ?
-                    <TouchableOpacity style={styles.buttonDisabled} onPress={()=>this.props.register(this.state.email, this.state.password)} disabled>
+                {(this.state.email === '' || this.state.password === '' || this.state.userName === '') ?
+                    <TouchableOpacity style={styles.buttonDisabled} onPress={()=>this.props.register(this.state.email, this.state.password, this.state.userName)} disabled>
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
                 :
-                    <TouchableOpacity style={styles.button} onPress={()=>this.props.register(this.state.email, this.state.password)} >
+                    <TouchableOpacity style={styles.button} onPress={()=>this.props.register(this.state.email, this.state.password, this.state.userName)} >
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
                 }

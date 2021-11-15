@@ -1,6 +1,6 @@
 //Importar Componentes de React
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, ImageBackground, ActivityIndicator} from 'react-native';
 import {Camera} from 'expo-camera';
 
 //Importar Firebase
@@ -11,6 +11,7 @@ class MyCamera extends Component {
         this.state = {
             permisos: false,
             foto: '',
+            activity: false
         }
         //Para hacer referencia a esta camara y poder usar los metodos internos
         this.camera 
@@ -25,13 +26,13 @@ class MyCamera extends Component {
         })
         .catch(e => console.log(e))
 
-       // console.log(Camera);
-       // console.log(this.camera);
+       console.log(Camera);
+       console.log(this.camera);
     }
 
     takePicture(){
         //Metodo para sacar la foto
-        this.Camera.takePictureAsync()
+        this.camera.takePictureAsync()
         .then( photo => {
             this.setState({
                 foto: photo.uri //Ruta internta temporal hacia la carpeta temporal
@@ -50,25 +51,30 @@ class MyCamera extends Component {
     }
 
     savePhoto(){
+
+        this.setState({
+            activity: true,
+        })
+
         fetch(this.state.foto)
         .then( res => res.blob())
         .then( image => {
             //Guardo imagen en el storage
             //Darle un nombre a la imagen
-            storage.ref(`photo/ ${Date.now().jpg}`)
+            let ref = storage.ref(`photo/${Date.now()}.jpg`)
             ref.put(image)
                 .then( () => {
                     ref.getDownloadURL()
-                        .then( url => {
-                            //Paso por props la URL unica al formulario de NuevoPosteo
-                            this.props.imageUpload(url)
+                    .then( url => {
+                        //Paso por props la URL unica al formulario de NuevoPosteo
+                        this.props.imageUpload(url)
 
-                            //Actualizo el estado para que se renderice de nuevo la camara
-                            this.setState({
-                                foto: '',
-                            })
+                        //Actualizo el estado para que se renderice de nuevo la camara
+                        this.setState({
+                            foto: '',
                         })
-                        .catch(e => console.log(e))
+                    })
+                    .catch(e => console.log(e))
                 })
                 .catch(e => console.log(e))
             //Subir un archivo al storage
@@ -81,13 +87,15 @@ class MyCamera extends Component {
     render(){
         return(
             <React.Fragment>
+            { this.state.activity ? 
+            <ActivityIndicator> </ActivityIndicator> : ''}
                 {
                     this.state.permisos ?
                         this.state.foto ? 
                             <React.Fragment>
-                                <Image style = {styles.preview} source={{uri: this.state.foto}}> </Image>
+                                <ImageBackground style = {styles.preview} source={{uri: this.state.foto}}> </ImageBackground>
                                 <View style = {styles.actionArea}> 
-                                    <TouchableOpacity onPress= {()=> this.savePhoto()}> 
+                                    <TouchableOpacity onPress= {(url)=> this.savePhoto(url)}> 
                                         <Text>Aceptar</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress = {()=> this.clear()}> 
@@ -96,7 +104,7 @@ class MyCamera extends Component {
                                 </View>
                             </React.Fragment> :
                             <React.Fragment>
-                                <MyCamera style={StyleSheet.camaraBody} type={Camera.Constants.Type.back} ref={ (reference) => this.camera = reference }/> 
+                                <Camera style={StyleSheet.camaraBody} type={Camera.Constants.Type.back} ref ={ (reference) => this.camera = reference }/> 
                                 <TouchableOpacity style= {StyleSheet.button} onPress = {() => this.takePicture()}> 
                                      <Text> Saca Foto </Text> 
                                 </TouchableOpacity>
@@ -120,6 +128,7 @@ const styles = StyleSheet.create({
     },
     preview:{
         flex:7
+    
     },
     actionArea:{
         flex: 2

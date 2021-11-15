@@ -11,7 +11,6 @@ export default class Login extends Component{
             email: this.props.textoMail || '',
             password: this.props.textoPassword || '',
             loaded: false,
-            disableButton: 'disable',
         }
     }
 

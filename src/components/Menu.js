@@ -75,11 +75,16 @@ export default class Menu extends Component {
         .catch(error=>this.errorDeSesion(error,email,pass))
     }
 
-    register(email, pass){
+    register(email, pass, userName){
         // Metodo para regitrar un nuevo usuario 
         auth.createUserWithEmailAndPassword(email, pass)
-        .then(()=>{ console.log('Registrado Correctamente');})
-
+        .then(( response )=>
+        { console.log('Registrado Correctamente');
+            response.user.updateProfile({
+                displayName: userName
+            })
+        
+        })
         .catch(error=>this.errorDeSesion(error,email,pass))
     }
 
@@ -95,7 +100,7 @@ export default class Menu extends Component {
             { this.state.loggedIn === false ?
                 <Drawer.Navigator>
                     <Drawer.Screen name="Iniciar Sesión" component={ (drawerProps)=> <Login drawerProps={drawerProps} login={(email,pass)=>this.login(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia} />}/>
-                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass)=>this.register(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia}  />}/>
+                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass, userName)=>this.register(email, pass, userName)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia}  />}/>
                 </Drawer.Navigator>
                 :
                 <Drawer.Navigator>

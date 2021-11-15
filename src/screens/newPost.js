@@ -4,14 +4,14 @@ import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
 import { auth, db } from "../firebase/config";
 import MyCamera from '../components/Camara'
 
-
-class newPost extends Component{
+export default class newPost extends Component{
     constructor(props){
         super(props)
         this.state={
             textoPost:'',
             showCamera: true,
             url: '',
+            loaded: false
         }
     }
 
@@ -37,6 +37,7 @@ class newPost extends Component{
     imageUpload(url){
         this.setState({
             showCamera: false,
+            loaded: true, 
             url: url,
         })
     }
@@ -48,7 +49,10 @@ class newPost extends Component{
             <React.Fragment>
                 {
                     this.state.showCamera ? 
-                    <MyCamera imageUpload= {(url) => this.imageUpload(url)}/> :
+                    <MyCamera imageUpload= {(url) => this.imageUpload(url)}/> 
+
+                    :
+
                     <View style={styles.formContainer}>
                         <Text>Nuevo Post</Text>
                         <TextInput
@@ -99,5 +103,3 @@ const styles = StyleSheet.create({
     }
 
 })
-
-export default newPost;
