@@ -51,9 +51,6 @@ export default class Menu extends Component {
             case 'auth/wrong-password':
                 mensajeError = 'La contraseña es incorrecta'
                 break;
-            case 'auth/wrong-password':
-                mensajeError = 'La contraseña es incorrecta'
-                break;
             default:
              mensajeError = 'Los datos ingresados no son correctos'
                 break;
@@ -70,19 +67,15 @@ export default class Menu extends Component {
         // Metodo para iniciar sesión
         auth.signInWithEmailAndPassword(email, pass)
         .then(response => {
-            console.log(response);
             this.setState({
                 loggedIn: true,
                 userData: response,
             })
         })
-        
         .catch(error=>this.errorDeSesion(error,email,pass))
     }
 
     register(email, pass){
-        console.log(email,pass);
-
         // Metodo para regitrar un nuevo usuario 
         auth.createUserWithEmailAndPassword(email, pass)
         .then(()=>{ console.log('Registrado Correctamente');})
@@ -102,7 +95,7 @@ export default class Menu extends Component {
             { this.state.loggedIn === false ?
                 <Drawer.Navigator>
                     <Drawer.Screen name="Iniciar Sesión" component={ (drawerProps)=> <Login drawerProps={drawerProps} login={(email,pass)=>this.login(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia} />}/>
-                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass)=>this.register(email, pass)} mensajeError = {this.state.error} />}/>
+                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass)=>this.register(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia}  />}/>
                 </Drawer.Navigator>
                 :
                 <Drawer.Navigator>

@@ -7,12 +7,12 @@ import Buscador from '../components/Buscador'
 //Importar Firebase
 import { db, auth } from '../firebase/config';
 
-
 export default class Home extends Component{
     constructor(){
         super()
         this.state={
             posts:[],
+            loaded: false,
             usuarios:'',
             usuariosFiltrados:'',
         }
@@ -32,7 +32,7 @@ export default class Home extends Component{
                 
                 this.setState({
                     posts: posteos,
-
+                    loaded: true,
                 })
             }
         )
@@ -50,12 +50,17 @@ export default class Home extends Component{
 
     render(){
         return(
-            <View>
-                 <Buscador filtrarUsuarios={(usuariosFiltrados)=> this.props.filtrarUsuarios(usuariosFiltrados)}/>
-                        
-                <Text style={styles.title}>Últimos Posteos</Text>
-                <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
-            </View>
+            <React.Fragment>
+            { 
+                this.state.loaded === false ?
+                <ActivityIndicator> </ActivityIndicator>:
+                <View>
+                    <Buscador filtrarUsuarios={(usuariosFiltrados)=> this.props.filtrarUsuarios(usuariosFiltrados)}/>
+                    <Text style={styles.title}>Últimos Posteos</Text>
+                    <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
+                </View>
+            }
+            </React.Fragment>
         )
     }
 }

@@ -107,9 +107,9 @@ export default class Post extends Component{
             <View style={styles.postContainer}>
                 <Image style={styles.photo}
                 source={{uri:'https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg'}}
-                resizeMode='Contain'
+                resizeMode='contain'
             />
-                <Text>Poner Usuario: {this.props.postData.data.textoPost}</Text>
+                <Text>{this.props.postData.data.owner}: {this.props.postData.data.textoPost}</Text>
          {/*     <Text>{this.props.postData.data.owner}</Text> */}
                 <Text>Likes: {this.state.likes}</Text> 
 
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     },
     photo:{
         width:'100%',
-        height:'100%',
+        height: 400,
     },
 
     modalContainer:{
