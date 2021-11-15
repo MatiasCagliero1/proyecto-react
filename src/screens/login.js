@@ -8,9 +8,10 @@ export default class Login extends Component{
     constructor(props){
         super(props)
         this.state={
-            email: this.props.textoMail,
-            password: this.props.textoPassword,
+            email: this.props.textoMail || '',
+            password: this.props.textoPassword || '',
             loaded: false,
+            disableButton: 'disable',
         }
     }
 

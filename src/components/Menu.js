@@ -73,7 +73,6 @@ export default class Menu extends Component {
                 userData: response,
             })
         })
-        
         .catch(error=>this.errorDeSesion(error,email,pass))
     }
 
