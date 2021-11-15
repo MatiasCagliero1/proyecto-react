@@ -122,72 +122,63 @@ export default class Post extends Component{
         return(
             <View style={styles.postContainer}>
 
-           {  (this.props.postData.data.photo !== 'null' || this.props.postData.data.photo !== undefined) ?
-
             <Image style={styles.photo}
             source={this.props.postData.data.photo}
             resizeMode='cover'/>
-            :
-            <Image style={styles.photo}
-                source={{uri:'https://megastorecelulares.com/img/not-found.15ffdca4.png'}}
-                resizeMode='cover'/>
-           }
 
 
+            <View style={styles.rowLikes}>
                 
-                <View style={styles.rowLikes}>
-                    
-                        <View style={styles.row}>
-                            <Text style={styles.black}>Likes: </Text>
-                            <Text style={styles.capitalize}>{this.state.likes}</Text>
-                        </View>
-
-                   
-                            <TouchableOpacity onPress={()=>this.like()}>
-                                <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
-                            </TouchableOpacity>
-
+                <View style={styles.row}>
+                    <Text style={styles.black}>Likes: </Text>
+                    <Text style={styles.capitalize}>{this.state.likes}</Text>
                 </View>
+
+            
+                <TouchableOpacity onPress={()=>this.like()}>
+                    <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
+                </TouchableOpacity>
+
+            </View>
 
             <View style={styles.row}>
                 <Text style={styles.black}>{this.props.postData.data.owner}: </Text>
                 <Text style={styles.capitalize}>{this.props.postData.data.textoPost}</Text>
             </View>
 
-
-               {/* Botón para activar el modal */}
+                {/* ABRIR Y CERRAR MODAL */}
                <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
                    <Text>Ver comentarios</Text>
                </TouchableOpacity>
 
-               {/* Modal */
-                   this.state.showModal ?    
+               
+               {/* MODAL DE COMENTARIOS */}
+
+               {  this.state.showModal ?    
                     <Modal style={styles.modalContainer}
                             animationType='fade'
                             transparent={false}
                             visible = {this.state.showModal}>
 
-                        {/* Botón para cerrar el modal */}
-                        <View style={styles.closeButtonContainer}>
-                            <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
-                        </View>
+                       
+                    <View style={styles.closeButtonContainer}>
+                        <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
+                    </View>
 
-                        <View style={styles.dataComments}>
+                    <View style={styles.dataComments}>
 
-                        {/* Listar los comentarios ¿Qué componenete usamos? */
-                            this.props.postData.data.comments ?
-                                <FlatList 
-                                    data={this.props.postData.data.comments}
-                                    keyExtractor={post => post.createdAt.toString()}
-                                    renderItem={({item})=>
-                                    (item.commentText !== '')?
-                                    <View style={styles.row}>
-                                        <Text style={styles.black}>{item.author}: </Text>
-                                        <Text style={styles.capitalize}>{item.commentText}</Text>
-                                    </View>
-                                    :  <Text></Text>
-                                }/> :
-                                <Text></Text>
+                        {this.props.postData.data.comments ?
+                        <FlatList 
+                            data={this.props.postData.data.comments}
+                            keyExtractor={post => post.createdAt.toString()}
+                            renderItem={({item})=>
+
+                            (item.commentText !== '')?
+                            <View style={styles.row}>
+                                <Text style={styles.black}>{item.author}: </Text>
+                                <Text style={styles.capitalize}>{item.commentText}</Text>
+                            </View> : <Text></Text>
+                                }/> : <Text></Text>
                         }
 
                         {/* Form para nuevo comentario */}
@@ -204,19 +195,15 @@ export default class Post extends Component{
                          { (this.state.comment =='')?
                           <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
                                 <Text style={styles.commentarText}>Comentar</Text>
-                            </TouchableOpacity>
-                                :
+                          </TouchableOpacity>
+                          :
                             <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
                                 <Text style={styles.commentarText}>Comentar</Text>
                             </TouchableOpacity>}
-
                         </View>
-                </View>
-
-                    </Modal> :
-                    <Text></Text>
+                  </View>
+                    </Modal> :<Text></Text>
                }
-
             </View>
         )
     }
