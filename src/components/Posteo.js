@@ -14,7 +14,7 @@ export default class Post extends Component{
            likes:0,
            myLike:false,
            showModal:false,
-           comment:''
+           comment:'',
         }
     }
 
@@ -148,34 +148,45 @@ export default class Post extends Component{
                         <View style={styles.closeButtonContainer}>
                             <Text style={styles.closeButton} onPress={()=>this.closeModal()}>X</Text>
                         </View>
-                        <View>
+
+                        <View style={styles.dataComments}>
+
                         {/* Listar los comentarios ¿Qué componenete usamos? */
                             this.props.postData.data.comments ?
                                 <FlatList 
                                     data={this.props.postData.data.comments}
                                     keyExtractor={post => post.createdAt.toString()}
                                     renderItem={({item})=>
+                                    (item.commentText !== '')?
                                     <View style={styles.row}>
-                                        <Text style={styles.black}> {item.author}: </Text>
-                                        <Text style={styles.capitalize}> {item.commentText}</Text>
+                                        <Text style={styles.black}>{item.author}: </Text>
+                                        <Text style={styles.capitalize}>{item.commentText}</Text>
                                     </View>
+                                    :  <Text></Text>
                                 }/> :
-                                    <Text></Text>
+                                <Text></Text>
                         }
 
-                        
                         {/* Form para nuevo comentario */}
                         <View>
                             <TextInput keyboardType='defualt'
                                         placeholder='Escribí tu comentario'
                                         onChangeText={(text)=>{this.setState({comment: text})}}
-                                        multiline
+                                        style={styles.comments}
                                         value={this.state.comment}
+                                        maxLength='55'
                             />
 
-                            <TouchableOpacity onPress={()=>this.publicarComentario()}>
-                                <Text>Comentar</Text>
+
+                         { (this.state.comment =='')?
+                          <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
+                                <Text style={styles.commentarText}>Comentar</Text>
                             </TouchableOpacity>
+                                :
+                            <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
+                                <Text style={styles.commentarText}>Comentar</Text>
+                            </TouchableOpacity>}
+
                         </View>
                 </View>
 
@@ -251,5 +262,35 @@ const styles = StyleSheet.create({
         paddingVertical:7,
         borderRadius: 4,
         margin:5,
-    }
+    },
+    comments:{
+        outline: 'none',
+        marginVertical: 10,
+        width:'100%',
+        height:'50%',
+ },
+ dataComments:{
+    width:'70%',
+},
+    commentar:{
+        textAlign: 'center',
+        backgroundColor:'#28a745',
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        borderRadius:4, 
+        marginTop:8,
+        marginBottom: 10,
+ }, disabled:{
+    backgroundColor:'grey',
+    textAlign: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    borderRadius:4, 
+    marginTop:8,
+    marginBottom: 10,
+}
+ 
+ ,commentarText :{
+    color:'white',
+}
 })
