@@ -61,19 +61,18 @@ export default class Post extends Component{
     
     }
 
-    showModal(){
-        // Mostramos el modal
-        this.setState({
-            showModal: true,
-        })
-    }
-
-    // Función para cerrar el modal
-    closeModal(){
-        //mostramos el modal
-        this.setState({
-            showModal: false,
-        })
+    showAndCloseModal(){
+        // Abrir y Cerrar el modal
+        if(this.state.showModal == true){
+            this.setState({
+                showModal: false,
+            })
+        }else{
+            this.setState({
+                showModal: true,
+            })
+        }
+    
     }
 
     publicarComentario(){
@@ -133,7 +132,7 @@ export default class Post extends Component{
 
 
                {/* Botón para activar el modal */}
-               <TouchableOpacity onPress={()=>this.showModal()}>
+               <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
                    <Text>Ver comentarios</Text>
                </TouchableOpacity>
 
@@ -146,7 +145,7 @@ export default class Post extends Component{
 
                         {/* Botón para cerrar el modal */}
                         <View style={styles.closeButtonContainer}>
-                            <Text style={styles.closeButton} onPress={()=>this.closeModal()}>X</Text>
+                            <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
                         </View>
 
                         <View style={styles.dataComments}>
