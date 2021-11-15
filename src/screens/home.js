@@ -13,13 +13,34 @@ export default class Home extends Component{
         this.state={
             posts:[],
             loaded: false,
-            usuarios:'',
-            usuariosFiltrados:'',
+            verTodo: true,
         }
     }
 
     componentDidMount(){
-        //Traer datos de la db
+        this.verTodo()    
+    }
+
+    filtrarPublicaciones(textoBuscador){
+        db.collection('posts').where('owner','==',textoBuscador).onSnapshot(
+            docs => {
+                let posteos = [];
+                docs.forEach( doc => {
+                    posteos.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                })
+
+                this.setState({
+                    posts: posteos,
+                    loaded: false,
+                    verTodo: false,
+                })
+            }
+        )       
+     }
+     verTodo(){
         db.collection('Posts').orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posteos = [];
@@ -38,16 +59,6 @@ export default class Home extends Component{
         )
     }
 
-    filtrarUsuarios(textoBuscador){
-        // console.log(textoBuscador);
-        // console.log('=======================');
-         let UsuariosFiltrados = this.state.posts.filter(post => post.owner==textoBuscador)
-         
-         this.setState({
-             posts : UsuariosFiltrados
-         })
-     }
-
     render(){
         return(
             <React.Fragment>
@@ -55,7 +66,7 @@ export default class Home extends Component{
                 this.state.loaded === false ?
                 <ActivityIndicator> </ActivityIndicator>:
                 <View>
-                    <Buscador filtrarUsuarios={(usuariosFiltrados)=> this.props.filtrarUsuarios(usuariosFiltrados)}/>
+                    <Buscador filtrarPublicaciones={(texto)=> this.filtrarPublicaciones(texto)} verTodo={()=>this.verTodo()}/>
                     <Text style={styles.title}>Últimos Posteos</Text>
                     <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
                 </View>
@@ -64,6 +75,7 @@ export default class Home extends Component{
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     title: {

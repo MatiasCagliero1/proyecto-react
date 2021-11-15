@@ -1,29 +1,41 @@
 import React, {Component} from "react";
 import '../screens/home'
-
+import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 class Buscador extends Component {
         constructor(){
             super();
             this.state = {
-                filterBy:''  
+                search:''  
             }
         }
 
-
-    evitarDefault (evento){
-        evento.preventDefault()
-    }
-    controlarCambios(event){
-        this.setState({
-            filterBy: event.target.value
-        },()=> this.props.filtrarUsuarios(this.state.filterBy))
-    }
     render(){
         return(
-            <form action="" className="icon" onSubmit= {(eventoSubmit)=> this.evitarDefault (eventoSubmit)}>
-                <input type="text" onChange={(parametro)=> this.controlarCambios(parametro)} value={this.state.filterBy} placeholder="Buscar..."/>
-            </form>
+            <React.Fragment>
+            <TextInput
+                style= {styles.input}
+                onChangeText= {(text)=>this.setState({search : text})}
+                placeholder='Buscar...'
+                keyboardType= 'default'
+            /> 
+            <TouchableOpacity onPress={()=>this.props.filtrarPublicaciones(this.state.search)}>
+                <text> Buscar</text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.props.verTodo()}>
+                <text> Menu</text>
+            </TouchableOpacity>
+            </React.Fragment>
         );
     }
 }
 export default Buscador;
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        textTransform: 'capitalize',
+        marginTop: 20,
+        marginBottom: 10,
+    }
+})

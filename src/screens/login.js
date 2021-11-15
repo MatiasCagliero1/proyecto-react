@@ -26,7 +26,8 @@ export default class Login extends Component{
                     onChangeText={(text)=>{this.setState({email: text})}}
                     value={this.state.email}
                     placeholder='Email'
-                    keyboardType='email-address'/>
+                    keyboardType='email-address'
+                />
 
                 <TextInput 
                     id='contraseña'
