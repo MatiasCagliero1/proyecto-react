@@ -1,7 +1,6 @@
 Que no se espeje cuando sacas la foto
 Que aparezca el flatlist de MiPerfil ==> Mili
 Poner el nombre del currentUser en el titulo ==> Mili
-Boton desabilitado de los comentarios si no hay nada escrito ==> Mati
 En cada posteo cambiar la parte del mail por en nombre de la persona que hace el posteo ==> Mili
 Agrgar cantidad de posteos a MiPerfil ==> Mili
 Posibilidad de borrar un posteo en MiPerfil ==> Mili
