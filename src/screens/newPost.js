@@ -12,6 +12,7 @@ class newPost extends Component{
             textoPost:'',
             showCamera: true,
             url: '',
+            loaded: false
         }
     }
 
@@ -37,6 +38,7 @@ class newPost extends Component{
     imageUpload(url){
         this.setState({
             showCamera: false,
+            loaded: true, 
             url: url,
         })
     }
@@ -48,7 +50,10 @@ class newPost extends Component{
             <React.Fragment>
                 {
                     this.state.showCamera ? 
-                    <MyCamera imageUpload= {(url) => this.imageUpload(url)}/> :
+                    <MyCamera imageUpload= {(url) => this.imageUpload(url)}/> 
+
+                    :
+
                     <View style={styles.formContainer}>
                         <Text>Nuevo Post</Text>
                         <TextInput

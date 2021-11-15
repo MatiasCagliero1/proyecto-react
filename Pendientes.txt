@@ -1,9 +1,21 @@
+<<<<<<< HEAD
+=======
 LLAMAR A LA FOTO EN EL POSTEO
 ICONOS LIKES
 Nuevos comentarios no se postean
 Cover en al foto
 
+>>>>>>> e57b5fe84d57db1a6b06069c9d0bbb5d7b77bfb8
 Que no se espeje cuando sacas la foto
-Activity indicator entre la camara y la parte de escribir el posteo
-Que aparezca la imagen en el posteo
-Corregir error que ale pase por slack
+Que aparezca el flatlist de MiPerfil ==> Mili
+Poner el nombre del currentUser en el titulo ==> Mili
+Boton desabilitado de los comentarios si no hay nada escrito ==> Mati
+En cada posteo cambiar la parte del mail por en nombre de la persona que hace el posteo ==> Mili
+Agrgar cantidad de posteos a MiPerfil ==> Mili
+Posibilidad de borrar un posteo en MiPerfil ==> Mili
+Buscador ==> Benja
+Poner cartel no hay comentarios si no hay comentarios en una publicacion ==> Benja
+
+DISENO PROPIO 
+Poner el boton de cerrar sesion en rojo
+

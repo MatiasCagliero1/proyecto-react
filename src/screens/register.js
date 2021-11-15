@@ -22,7 +22,11 @@ export default class Register extends Component{
                     value={this.state.email}
                     placeholder='Email'
                     keyboardType='email-address'/> 
-
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text)=>this.setState({userName: text})}
+                    placeholder='user name'
+                    keyboardType='default'/>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
