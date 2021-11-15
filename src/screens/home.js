@@ -13,7 +13,6 @@ export default class Home extends Component{
         this.state={
             posts:[],
             loaded: false,
-            verTodo: true,
         }
     }
 
@@ -34,8 +33,7 @@ export default class Home extends Component{
 
                 this.setState({
                     posts: posteos,
-                    loaded: false,
-                    verTodo: false,
+                    loaded: true,
                 })
             }
         )       
