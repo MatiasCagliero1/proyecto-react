@@ -6,9 +6,8 @@ export default class Register extends Component{
     constructor(props){
         super(props)
         this.state={
-            email:'',
-            userName:'',
-            password:'',
+            email: this.props.textoMail || '',
+            password: this.props.textoPassword || '',
         }
     }
     
@@ -16,15 +15,18 @@ export default class Register extends Component{
         return(
             <View style={styles.formContainer}>
                 <Text>Registrarse</Text>
+                <Text  style={styles.mensajeError}>{this.props.mensajeError}</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
+                    value={this.state.email}
                     placeholder='Email'
                     keyboardType='email-address'/> 
 
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
+                    value={this.state.password}
                     placeholder='Contraseña'
                     keyboardType='email-address'
                     secureTextEntry={true}
