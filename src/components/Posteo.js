@@ -167,20 +167,20 @@ export default class Post extends Component{
 
                     <View style={styles.dataComments}>
 
-                        {this.props.postData.data.comments ?
+                    {(this.props.postData.data.comments != undefined)?
+
                         <FlatList 
                             data={this.props.postData.data.comments}
                             keyExtractor={post => post.createdAt.toString()}
                             renderItem={({item})=>
 
-                            (item.commentText !== '')?
                             <View style={styles.row}>
                                 <Text style={styles.black}>{item.author}: </Text>
                                 <Text style={styles.capitalize}>{item.commentText}</Text>
-                            </View> : <Text></Text>
-                                }/> : <Text></Text>
-                        }
+                            </View>}/>
 
+                        :<Text>¡Todavia no ha comnentado nadie!</Text>}
+                      
                         {/* Form para nuevo comentario */}
                         <View>
                             <TextInput keyboardType='defualt'

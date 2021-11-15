@@ -4,8 +4,7 @@ import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
 import { auth, db } from "../firebase/config";
 import MyCamera from '../components/Camara'
 
-
-class newPost extends Component{
+export default class newPost extends Component{
     constructor(props){
         super(props)
         this.state={
@@ -104,5 +103,3 @@ const styles = StyleSheet.create({
     }
 
 })
-
-export default newPost;
