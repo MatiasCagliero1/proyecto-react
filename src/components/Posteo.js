@@ -40,40 +40,40 @@ export default class Post extends Component{
 
     like(){
         if(this.state.myLike == false)
-        {
-        //Agregar mi email a un array
-        db.collection('Posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-        })
-        .then(()=>{
-            console.log('likeado...');
-
-            //Cambiar el estado de likes y de mylike.
-            this.setState({
-                likes:this.props.postData.data.likes.length,
-                myLike:true,
-                iconoLike: 'QUITAR LIKE'
+            {
+            //Agregar mi email a un array
+            db.collection('Posts').doc(this.props.postData.id).update({
+                likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
             })
+            .then(()=>{
+                console.log('likeado...');
+
+                //Cambiar el estado de likes y de mylike.
+                this.setState({
+                    likes:this.props.postData.data.likes.length,
+                    myLike:true,
+                    iconoLike: 'QUITAR LIKE'
+                })
         })
         .catch(e=>console.log(e));
-    }else{
-        //Quitar mi email a un array
-        db.collection('Posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-        })
-        .then(()=>{
-            console.log('quitando like...');
-            //Cambiar el estado de likes y de mylike.
-            this.setState({
-                likes:this.props.postData.data.likes.length,
-                myLike:false,
-                iconoLike: 'LIKE'
-            })
-})
-.catch(e=>console.log(e));
-    }
-    }
 
+       }else{
+                    //Quitar mi email a un array
+                    db.collection('Posts').doc(this.props.postData.id).update({
+                        likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+                    })
+                    .then(()=>{
+                        console.log('quitando like...');
+                        //Cambiar el estado de likes y de mylike.
+                        this.setState({
+                            likes:this.props.postData.data.likes.length,
+                            myLike:false,
+                            iconoLike: 'LIKE'
+                        })
+            })
+            .catch(e=>console.log(e));
+    }
+    }
 
     showAndCloseModal(){
         // Abrir y Cerrar el modal
@@ -86,31 +86,35 @@ export default class Post extends Component{
                 showModal: true,
             })
         }
-    
     }
 
     publicarComentario(){
-        //  Armar el comentario.
+
+        //  Datos del comentario.
         let oneComment = {
             author: auth.currentUser.email,
             createdAt: Date.now(),
             commentText: this.state.comment
         }
-
+        
         //  Actualizar comentario en la base. Puntualmente en este documento.
         //  Saber cual es el post que queremos actualizar
+        
         db.collection('Posts').doc(this.props.postData.id).update({
             comments: firebase.firestore.FieldValue.arrayUnion(oneComment)
         })
+
         .then(()=>{
             //  Cambiar un estado para limpiar el form 
             console.log('Comentario guardado');
             this.setState({
-                comment: ''
+                comment: '',
             })
         })
-        .catch( e => console.log(e))
-    }
+        .catch(e => console.log(e))
+        
+        }
+       
 
     render(){
         console.log(auth.currentUser)
