@@ -15,6 +15,7 @@ export default class Post extends Component{
            myLike:false,
            showModal:false,
            comment:'',
+           iconoLike: 'LIKE',
         }
     }
 
@@ -25,26 +26,37 @@ export default class Post extends Component{
                myLike: this.props.postData.data.likes.includes(auth.currentUser.email),
            })
       }
+      
+      if (this.state.myLike == false) {
+        this.setState({
+            iconoLike:'LIKE'
+        })
+      }else{
+        this.setState({
+            iconoLike:'QUITAR LIKE'
+        })
+      }
     }
 
-    likear(){
+    like(){
+        if(this.state.myLike == false)
+        {
         //Agregar mi email a un array
         db.collection('Posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then(()=>{
             console.log('likeado...');
+
             //Cambiar el estado de likes y de mylike.
             this.setState({
                 likes:this.props.postData.data.likes.length,
-                myLike:true
+                myLike:true,
+                iconoLike: 'QUITAR LIKE'
             })
         })
         .catch(e=>console.log(e));
-    
-    }
-    
-    unlike(){
+    }else{
         //Quitar mi email a un array
         db.collection('Posts').doc(this.props.postData.id).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
@@ -54,12 +66,14 @@ export default class Post extends Component{
             //Cambiar el estado de likes y de mylike.
             this.setState({
                 likes:this.props.postData.data.likes.length,
-                myLike:false
+                myLike:false,
+                iconoLike: 'LIKE'
             })
-        })
-        .catch(e=>console.log(e));
-    
+})
+.catch(e=>console.log(e));
     }
+    }
+
 
     showAndCloseModal(){
         // Abrir y Cerrar el modal
@@ -105,23 +119,22 @@ export default class Post extends Component{
             <View style={styles.postContainer}>
              {/* LLAMAR A LA FOTO EN EL POSTEO */}
 
+
                 <Image style={styles.photo}
                 source={{uri:'https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg'}}
                 resizeMode='cover'/>
                 
                 <View style={styles.rowLikes}>
-                {/*     <Text>{this.props.postData.data.owner}</Text> */}
-                        <Text>Likes: {this.state.likes}</Text> 
+                    
+                        <View style={styles.row}>
+                            <Text style={styles.black}>Likes: </Text>
+                            <Text style={styles.capitalize}>{this.state.likes}</Text>
+                        </View>
 
-                    {this.state.myLike ?
-                            <TouchableOpacity onPress={()=>this.unlike()}>
-                                <Text>{/* {icons.favorite} */}Quitar like</Text>
+                   
+                            <TouchableOpacity onPress={()=>this.like()}>
+                                <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
                             </TouchableOpacity>
-                            :
-                            <TouchableOpacity onPress={()=>this.likear()}>
-                                <Text>{/* {icons.favorite} */}Me gusta</Text>
-                            </TouchableOpacity>
-                    }
 
                 </View>
 

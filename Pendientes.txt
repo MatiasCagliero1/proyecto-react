@@ -1,5 +1,7 @@
 LLAMAR A LA FOTO EN EL POSTEO
 ICONOS LIKES
+Nuevos comentarios no se postean
+Cover en al foto
 
 Que no se espeje cuando sacas la foto
 Activity indicator entre la camara y la parte de escribir el posteo
