@@ -154,9 +154,10 @@ export default class Post extends Component{
                                 <FlatList 
                                     data={this.props.postData.data.comments}
                                     keyExtractor={post => post.createdAt.toString()}
-                                    renderItem={({item})=> {
-                                      
-                                    <Text> {item.author}: {item.commentText}</Text>}
+                                    renderItem={({item})=>   <View style={styles.row}>
+                                    <Text style={styles.black}> {item.author}: </Text>
+                                    <Text style={styles.capitalize}> {item.commentText}</Text>
+                           </View>
                                 }
                                 /> :
                                 <Text></Text>
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
      padding:10,
      alignSelf: 'center',
      marginVertical: 10,
-    boxShadow:'rgb(204 204 204) 0px 0px 12px 9px',
+    boxShadow:'rgb(204 204 204) 0px 5px 12px 5px',
     backgroundColor:'#fff',
     },
 
