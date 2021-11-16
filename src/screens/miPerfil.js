@@ -13,21 +13,11 @@ export default class Profile extends Component{
 
     componentDidMount(){
         //Traer datos de la db
-        db.collection('Users')
-            .where('email','==', auth.currentUser.email)
-            .orderBy('createdAt', 'desc')
-            .onSnapshot(
-                docs => {
-                    let posteos = [];
-                    docs.forEach( doc => {
-                        posteos.push({
-                            id: doc.id,
-                            data: doc.data()
-                        })
-                    })
-                
+        db.collection('Posts')
+            .where('owner','==', auth.currentUser.email)
+            .onSnapshot( docs => {
                 this.setState({
-                    posts: posteos,
+                    posts: docs,
                     loaded: true,
                 })
             }
@@ -37,7 +27,9 @@ export default class Profile extends Component{
     render(){
         return(
             <View>
-                <Text style={styles.title}> Mi perfil </Text>
+                <Text style={styles.title}> {auth.currentUser.displayName} </Text>
+                <Text style={styles.subtitle}> {auth.currentUser.email} </Text>
+                <Text style={styles.subtitle}> {auth.currentUser.metadata.lastSignInTime} </Text>
                 <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
                 <TouchableOpacity style={styles.button} onPress={()=>this.props.logout()}>
                     <Text style={styles.textButton}>Cerrar Sesion</Text>    
@@ -55,6 +47,13 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         marginTop: 20,
     },
+    subtitle:{
+        fontSize: 10,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 20,
+    },
+
     button:{
         backgroundColor:'#28a745',
         paddingHorizontal: 10,

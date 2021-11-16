@@ -102,11 +102,12 @@ export default class Post extends Component{
     }
 
     render(){
+        console.log(auth.currentUser)
         console.log(this.props.postData);
         return(
             <View style={styles.postContainer}>
                 <Image style={styles.photo}
-                source={{uri:'https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg'}}
+                source={this.props.postData.data.photo}
                 resizeMode='contain'
             />
                 <Text>{this.props.postData.data.owner}: {this.props.postData.data.textoPost}</Text>
