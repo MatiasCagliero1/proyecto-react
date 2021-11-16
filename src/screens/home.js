@@ -1,7 +1,8 @@
 //Importar Componentes de React
 import React, {Component} from 'react';
-import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput } from 'react-native';
+import {Text, View, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
 import Post from '../components/Posteo'
+import Buscador from '../components/Buscador'
 
 //Importar Firebase
 import { db, auth } from '../firebase/config';
@@ -10,13 +11,34 @@ export default class Home extends Component{
     constructor(){
         super()
         this.state={
-           posts:[],
-           loaded: false
+            posts:[],
+            loaded: false,
         }
     }
 
     componentDidMount(){
-        //Traer datos de la db
+        this.verTodo()    
+    }
+
+    filtrarPublicaciones(textoBuscador){
+        db.collection('posts').where('owner','==',textoBuscador).onSnapshot(
+            docs => {
+                let posteos = [];
+                docs.forEach( doc => {
+                    posteos.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                })
+
+                this.setState({
+                    posts: posteos,
+                    loaded: true,
+                })
+            }
+        )       
+     }
+     verTodo(){
         db.collection('Posts').orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posteos = [];
@@ -42,6 +64,7 @@ export default class Home extends Component{
                 this.state.loaded === false ?
                 <ActivityIndicator> </ActivityIndicator>:
                 <View>
+                    <Buscador filtrarPublicaciones={(texto)=> this.filtrarPublicaciones(texto)} verTodo={()=>this.verTodo()}/>
                     <Text style={styles.title}>Últimos Posteos</Text>
                     <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
                 </View>
@@ -50,6 +73,7 @@ export default class Home extends Component{
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     title: {
