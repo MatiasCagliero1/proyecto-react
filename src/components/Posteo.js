@@ -15,6 +15,7 @@ export default class Post extends Component{
            myLike:false,
            showModal:false,
            comment:'',
+           iconoLike: 'LIKE',
         }
     }
 
@@ -25,40 +26,53 @@ export default class Post extends Component{
                myLike: this.props.postData.data.likes.includes(auth.currentUser.email),
            })
       }
+      
+      if (this.state.myLike == false) {
+        this.setState({
+            iconoLike:'LIKE'
+        })
+      }else{
+        this.setState({
+            iconoLike:'QUITAR LIKE'
+        })
+      }
     }
 
-    likear(){
-        //Agregar mi email a un array
-        db.collection('Posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-        })
-        .then(()=>{
-            console.log('likeado...');
-            //Cambiar el estado de likes y de mylike.
-            this.setState({
-                likes:this.props.postData.data.likes.length,
-                myLike:true
+    like(){
+        if(this.state.myLike == false)
+            {
+            //Agregar mi email a un array
+            db.collection('Posts').doc(this.props.postData.id).update({
+                likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
             })
+            .then(()=>{
+                console.log('likeado...');
+
+                //Cambiar el estado de likes y de mylike.
+                this.setState({
+                    likes:this.props.postData.data.likes.length,
+                    myLike:true,
+                    iconoLike: 'QUITAR LIKE'
+                })
         })
         .catch(e=>console.log(e));
-    
+
+       }else{
+                    //Quitar mi email a un array
+                    db.collection('Posts').doc(this.props.postData.id).update({
+                        likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+                    })
+                    .then(()=>{
+                        console.log('quitando like...');
+                        //Cambiar el estado de likes y de mylike.
+                        this.setState({
+                            likes:this.props.postData.data.likes.length,
+                            myLike:false,
+                            iconoLike: 'LIKE'
+                        })
+            })
+            .catch(e=>console.log(e));
     }
-    
-    unlike(){
-        //Quitar mi email a un array
-        db.collection('Posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-        })
-        .then(()=>{
-            console.log('quitando like...');
-            //Cambiar el estado de likes y de mylike.
-            this.setState({
-                likes:this.props.postData.data.likes.length,
-                myLike:false
-            })
-        })
-        .catch(e=>console.log(e));
-    
     }
 
     showAndCloseModal(){
@@ -72,101 +86,101 @@ export default class Post extends Component{
                 showModal: true,
             })
         }
-    
     }
 
     publicarComentario(){
-        //  Armar el comentario.
+
+        //  Datos del comentario.
         let oneComment = {
             author: auth.currentUser.email,
             createdAt: Date.now(),
             commentText: this.state.comment
         }
-
+        
         //  Actualizar comentario en la base. Puntualmente en este documento.
         //  Saber cual es el post que queremos actualizar
+        
         db.collection('Posts').doc(this.props.postData.id).update({
             comments: firebase.firestore.FieldValue.arrayUnion(oneComment)
         })
+
         .then(()=>{
             //  Cambiar un estado para limpiar el form 
             console.log('Comentario guardado');
             this.setState({
-                comment: ''
+                comment: '',
             })
         })
-        .catch( e => console.log(e))
-    }
+        .catch(e => console.log(e))
+        
+        }
+       
 
     render(){
-        console.log(auth.currentUser)
         console.log(this.props.postData);
 
         return(
             <View style={styles.postContainer}>
-             {/* LLAMAR A LA FOTO EN EL POSTEO */}
 
-                <Image style={styles.photo}
-                source={this.props.postData.data.photo}
-                resizeMode='cover'/>
+            <Image style={styles.photo}
+            source={this.props.postData.data.photo}
+            resizeMode='cover'/>
+
+
+            <View style={styles.rowLikes}>
                 
-                <View style={styles.rowLikes}>
-                {/*     <Text>{this.props.postData.data.owner}</Text> */}
-                        <Text>Likes: {this.state.likes}</Text> 
-
-                    {this.state.myLike ?
-                            <TouchableOpacity onPress={()=>this.unlike()}>
-                                <Text>{/* {icons.favorite} */}Quitar like</Text>
-                            </TouchableOpacity>
-                            :
-                            <TouchableOpacity onPress={()=>this.likear()}>
-                                <Text>{/* {icons.favorite} */}Me gusta</Text>
-                            </TouchableOpacity>
-                    }
-
+                <View style={styles.row}>
+                    <Text style={styles.black}>Likes: </Text>
+                    <Text style={styles.capitalize}>{this.state.likes}</Text>
                 </View>
+
+            
+                <TouchableOpacity onPress={()=>this.like()}>
+                    <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
+                </TouchableOpacity>
+
+            </View>
 
             <View style={styles.row}>
                 <Text style={styles.black}>{this.props.postData.data.owner}: </Text>
                 <Text style={styles.capitalize}>{this.props.postData.data.textoPost}</Text>
             </View>
 
-
-               {/* Botón para activar el modal */}
+                {/* ABRIR Y CERRAR MODAL */}
                <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
                    <Text>Ver comentarios</Text>
                </TouchableOpacity>
 
-               {/* Modal */
-                   this.state.showModal ?    
+               
+               {/* MODAL DE COMENTARIOS */}
+
+               {  this.state.showModal ?    
                     <Modal style={styles.modalContainer}
                             animationType='fade'
                             transparent={false}
                             visible = {this.state.showModal}>
 
-                        {/* Botón para cerrar el modal */}
-                        <View style={styles.closeButtonContainer}>
-                            <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
-                        </View>
+                       
+                    <View style={styles.closeButtonContainer}>
+                        <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
+                    </View>
 
-                        <View style={styles.dataComments}>
+                    <View style={styles.dataComments}>
 
-                        {/* Listar los comentarios ¿Qué componenete usamos? */
-                            this.props.postData.data.comments ?
-                                <FlatList 
-                                    data={this.props.postData.data.comments}
-                                    keyExtractor={post => post.createdAt.toString()}
-                                    renderItem={({item})=>
-                                    (item.commentText !== '')?
-                                    <View style={styles.row}>
-                                        <Text style={styles.black}>{item.author}: </Text>
-                                        <Text style={styles.capitalize}>{item.commentText}</Text>
-                                    </View>
-                                    :  <Text></Text>
-                                }/> :
-                                <Text></Text>
-                        }
+                    {(this.props.postData.data.comments != undefined)?
 
+                        <FlatList 
+                            data={this.props.postData.data.comments}
+                            keyExtractor={post => post.createdAt.toString()}
+                            renderItem={({item})=>
+
+                            <View style={styles.row}>
+                                <Text style={styles.black}>{item.author}: </Text>
+                                <Text style={styles.capitalize}>{item.commentText}</Text>
+                            </View>}/>
+
+                        :<Text>¡Todavia no ha comnentado nadie!</Text>}
+                      
                         {/* Form para nuevo comentario */}
                         <View>
                             <TextInput keyboardType='defualt'
@@ -181,19 +195,15 @@ export default class Post extends Component{
                          { (this.state.comment =='')?
                           <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
                                 <Text style={styles.commentarText}>Comentar</Text>
-                            </TouchableOpacity>
-                                :
+                          </TouchableOpacity>
+                          :
                             <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
                                 <Text style={styles.commentarText}>Comentar</Text>
                             </TouchableOpacity>}
-
                         </View>
-                </View>
-
-                    </Modal> :
-                    <Text></Text>
+                  </View>
+                    </Modal> :<Text></Text>
                }
-
             </View>
         )
     }
