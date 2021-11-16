@@ -107,25 +107,7 @@ export default class Post extends Component{
              {/* LLAMAR A LA FOTO EN EL POSTEO */}
 
                 <Image style={styles.photo}
-<<<<<<< HEAD
                 source={this.props.postData.data.photo}
-                resizeMode='contain'
-            />
-                <Text>{this.props.postData.data.owner}: {this.props.postData.data.textoPost}</Text>
-         {/*     <Text>{this.props.postData.data.owner}</Text> */}
-                <Text>Likes: {this.state.likes}</Text> 
-
-               {
-                   this.state.myLike ?
-                    <TouchableOpacity onPress={()=>this.unlike()}>
-                        <Text>Quitar like</Text>
-                    </TouchableOpacity>   :
-                    <TouchableOpacity onPress={()=>this.likear()}>
-                        <Text>{/* {icons.favorite} */}Me gusta</Text>
-                    </TouchableOpacity>
-               }
-=======
-                source={{uri:'https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg'}}
                 resizeMode='cover'/>
                 
                 <View style={styles.rowLikes}>
@@ -149,7 +131,6 @@ export default class Post extends Component{
                 <Text style={styles.capitalize}>{this.props.postData.data.textoPost}</Text>
             </View>
 
->>>>>>> e57b5fe84d57db1a6b06069c9d0bbb5d7b77bfb8
 
                {/* Botón para activar el modal */}
                <TouchableOpacity onPress={()=>this.showAndCloseModal()}>

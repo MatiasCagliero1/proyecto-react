@@ -1,6 +1,6 @@
 //Importar Componentes de React
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, ImageBackground, ActivityIndicator} from 'react-native';
 import {Camera} from 'expo-camera';
 
 //Importar Firebase
