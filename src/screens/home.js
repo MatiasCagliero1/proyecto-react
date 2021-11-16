@@ -6,7 +6,6 @@ import Post from '../components/Posteo'
 //Importar Firebase
 import { db, auth } from '../firebase/config';
 
-
 export default class Home extends Component{
     constructor(){
         super()

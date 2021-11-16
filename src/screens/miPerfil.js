@@ -55,15 +55,13 @@ const styles = StyleSheet.create({
     },
 
     button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
         textAlign: 'center',
+        backgroundColor:'#28a745',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
         borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745',
-        marginTop: 50,
+        marginTop:8,
+        marginBottom: 10,
     },
     textButton:{
         color: '#fff'

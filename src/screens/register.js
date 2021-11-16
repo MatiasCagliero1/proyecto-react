@@ -6,9 +6,8 @@ export default class Register extends Component{
     constructor(props){
         super(props)
         this.state={
-            email:'',
-            userName:'',
-            password:'',
+            email: this.props.textoMail || '',
+            password: this.props.textoPassword || '',
         }
     }
     
@@ -16,9 +15,11 @@ export default class Register extends Component{
         return(
             <View style={styles.formContainer}>
                 <Text>Registrarse</Text>
+                <Text  style={styles.mensajeError}>{this.props.mensajeError}</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
+                    value={this.state.email}
                     placeholder='Email'
                     keyboardType='email-address'/> 
                 <TextInput
@@ -29,13 +30,21 @@ export default class Register extends Component{
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password: text})}
+                    value={this.state.password}
                     placeholder='Contraseña'
                     keyboardType='email-address'
                     secureTextEntry={true}
                 />
-                <TouchableOpacity style={styles.button} onPress={()=>this.props.register(this.state.email, this.state.password, this.state.userName)}>
+
+                {(this.state.email === '' || this.state.password === '') ?
+                    <TouchableOpacity style={styles.buttonDisabled} onPress={()=>this.props.register(this.state.email, this.state.password)} disabled>
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
+                :
+                    <TouchableOpacity style={styles.button} onPress={()=>this.props.register(this.state.email, this.state.password)} >
+                    <Text style={styles.textButton}>Registrarse</Text>    
+                </TouchableOpacity>
+                }
 
                 <TouchableOpacity onPress={ ()=> this.props.drawerProps.navigation.navigate('Iniciar Sesión')}>
                     <Text>¿Ya tenés cuanta? Inicia Sesión</Text>    
@@ -52,7 +61,7 @@ const styles = StyleSheet.create({
     },
     input:{
         height:20,
-        paddingVertical:15,
+        paddingVertical:18,
         paddingHorizontal: 10,
         borderWidth:1,
         borderColor: '#ccc',
@@ -61,20 +70,31 @@ const styles = StyleSheet.create({
         marginVertical:10,
         marginBottom: 5,
     },
-    button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+    buttonDisabled:{
         textAlign: 'center',
+        backgroundColor:'grey',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
         borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745',
         marginTop:8,
         marginBottom: 10,
     },
+    button:{
+        textAlign: 'center',
+        backgroundColor:'#28a745',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderRadius:4, 
+        marginTop:8,
+        marginBottom: 10,
+    },
+
     textButton:{
         color: '#fff'
+    },
+    mensajeError:{
+        marginTop:3,
+        color:'red',
     }
 
 })
