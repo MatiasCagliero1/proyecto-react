@@ -114,6 +114,18 @@ export default class Post extends Component{
         .catch(e => console.log(e))
         
         }
+    
+    eliminoPosteo(){
+        let thisDoc = db.collection('Posts').doc(this.props.postData.id)
+        
+        let confirm = confirm('Estas seguro que quiere eliminar')
+
+        if(confirm == true){
+        thisDoc.delete()
+        .then( response => console.log(response))
+        .catch(e => console.log(e))} 
+
+    }
        
 
     render(){
@@ -137,78 +149,73 @@ export default class Post extends Component{
                         <Text style={styles.black}>Likes: </Text>
                         <Text style={styles.capitalize}>{this.state.likes}</Text>
                     </View>
-
-                
                     <TouchableOpacity onPress={()=>this.like()}>
                         <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
                     </TouchableOpacity>
-
                 </View>
 
                 <View style={styles.row}>
                     <Text style={styles.black}>{this.props.postData.data.owner}: </Text>
-                    <Text style={styles.capitalize}>{this.props.postData.data.textoPost}</Text>
+                    <Text >{this.props.postData.data.textoPost}</Text>
                 </View>
 
-                    {/* ABRIR Y CERRAR MODAL */}
-                <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
-                    <Text>Ver comentarios</Text>
-                </TouchableOpacity>
+                {/* ABRIR Y CERRAR MODAL */}
+               <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
+                   <Text>Ver comentarios</Text>
+               </TouchableOpacity>
 
-                
-                {/* MODAL DE COMENTARIOS */}
+               {/* MODAL DE COMENTARIOS */}
+               {  this.state.showModal ?    
+                    <Modal style={styles.modalContainer}
+                            animationType='fade'
+                            transparent={false}
+                            visible = {this.state.showModal}>
 
-                {  this.state.showModal ?    
-                        <Modal style={styles.modalContainer}
-                                animationType='fade'
-                                transparent={false}
-                                visible = {this.state.showModal}>
+                       
+                    <View style={styles.closeButtonContainer}>
+                        <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
+                    </View>
 
-                        
-                        <View style={styles.closeButtonContainer}>
-                            <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
+                    <View style={styles.dataComments}>
+
+                    {(this.props.postData.data.comments != undefined)?
+
+                        <FlatList 
+                            data={this.props.postData.data.comments}
+                            keyExtractor={post => post.createdAt.toString()}
+                            renderItem={({item})=>
+
+                            <View style={styles.row}>
+                                <Text style={styles.black}>{item.author}: </Text>
+                                <Text style={styles.capitalize}>{item.commentText}</Text>
+                            </View>}/>
+
+                        :<Text>¡Todavia no ha comnentado nadie!</Text>}
+                      
+                        {/* Form para nuevo comentario */}
+                        <View>
+                            <TextInput keyboardType='defualt'
+                                        placeholder='Escribí tu comentario'
+                                        onChangeText={(text)=>{this.setState({comment: text})}}
+                                        style={styles.comments}
+                                        value={this.state.comment}
+                                        maxLength='55'
+                            />
+
+
+                         { (this.state.comment =='')?
+                          <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
+                                <Text style={styles.commentarText}>Comentar</Text>
+                          </TouchableOpacity>
+                          :
+                            <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
+                                <Text style={styles.commentarText}>Comentar</Text>
+                            </TouchableOpacity>}
                         </View>
-
-                        <View style={styles.dataComments}>
-
-                        {(this.props.postData.data.comments != undefined)?
-
-                            <FlatList 
-                                data={this.props.postData.data.comments}
-                                keyExtractor={post => post.createdAt.toString()}
-                                renderItem={({item})=>
-
-                                <View style={styles.row}>
-                                    <Text style={styles.black}>{item.author}: </Text>
-                                    <Text style={styles.capitalize}>{item.commentText}</Text>
-                                </View>}/>
-
-                            :<Text>¡Todavia no ha comnentado nadie!</Text>}
-                        
-                            {/* Form para nuevo comentario */}
-                            <View>
-                                <TextInput keyboardType='defualt'
-                                            placeholder='Escribí tu comentario'
-                                            onChangeText={(text)=>{this.setState({comment: text})}}
-                                            style={styles.comments}
-                                            value={this.state.comment}
-                                            maxLength='55'
-                                />
-
-
-                            { (this.state.comment =='')?
-                            <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
-                                    <Text style={styles.commentarText}>Comentar</Text>
-                            </TouchableOpacity>
-                            :
-                                <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
-                                    <Text style={styles.commentarText}>Comentar</Text>
-                                </TouchableOpacity>}
-                            </View>
                   </View>
                     </Modal> :<Text></Text>
                }
-            </View>
+            </React.Fragment>
         )
     }
 
@@ -251,24 +258,25 @@ const styles = StyleSheet.create({
     },
 
     modalContainer:{
-    display: 'flex',
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
-     width: '97%',
-     borderRadius:4,
-     padding:10,
-     alignSelf: 'center',
-     marginVertical: 10,
-    boxShadow:'rgb(204 204 204) 0px 5px 12px 5px',
-    backgroundColor:'#fff',
+        display: 'flex',
+        flexDirection: "row-reverse",
+        justifyContent: "space-between",
+        width: '97%',
+        borderRadius:4,
+        padding:10,
+        alignSelf: 'center',
+        marginVertical: 10,
+        boxShadow:'rgb(204 204 204) 0px 5px 12px 5px',
+        backgroundColor:'#fff',
     },
 
     closeButtonContainer:{
         display: 'flex',
-       flexDirection: 'row',
-       justifyContent: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
         height: '2.5em'
     },
+
     closeButton:{
         backgroundColor:'#dc3545',
         color:'#fff',
@@ -282,10 +290,12 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         width:'100%',
         height:'50%',
- },
- dataComments:{
-    width:'70%',
-},
+    },
+ 
+    dataComments:{
+        width:'70%',
+    },
+    
     commentar:{
         textAlign: 'center',
         backgroundColor:'#28a745',
@@ -294,17 +304,19 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         marginTop:8,
         marginBottom: 10,
- }, disabled:{
-    backgroundColor:'grey',
-    textAlign: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 5,
-    borderRadius:4, 
-    marginTop:8,
-    marginBottom: 10,
-}
- 
- ,commentarText :{
-    color:'white',
-}
+    }, 
+
+    disabled:{
+        backgroundColor:'grey',
+        textAlign: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        borderRadius:4, 
+        marginTop:8,
+        marginBottom: 10,
+    },
+    
+    commentarText: {
+        color:'white',
+    }
 })
