@@ -95,18 +95,18 @@ class MyCamera extends Component {
                             <React.Fragment>
                                 <ImageBackground style = {styles.preview} source={{uri: this.state.foto}}> </ImageBackground>
                                 <View style = {styles.actionArea}> 
-                                    <TouchableOpacity onPress= {(url)=> this.savePhoto(url)}> 
-                                        <Text>Aceptar</Text>
+                                    <TouchableOpacity style = {styles.aor} onPress= {(url)=> this.savePhoto(url)}> 
+                                        <Text>Publicar</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress = {()=> this.clear()}> 
-                                        <Text>Rechazar</Text>
+                                    <TouchableOpacity style = {styles.aor} onPress = {()=> this.clear()}> 
+                                        <Text>Intentar denuevo</Text>
                                     </TouchableOpacity>
                                 </View>
                             </React.Fragment> :
                             <React.Fragment>
-                                <Camera style={StyleSheet.camaraBody} type={Camera.Constants.Type.back} ref ={ (reference) => this.camera = reference }/> 
-                                <TouchableOpacity style= {StyleSheet.button} onPress = {() => this.takePicture()}> 
-                                     <Text> Saca Foto </Text> 
+                                <Camera style={styles.camaraBody} type={Camera.Constants.Type.back} ref ={ (reference) => this.camera = reference }/> 
+                                <TouchableOpacity style= {styles.button} onPress = {() => this.takePicture()}> 
+                                     <Text> Capturar imagen </Text> 
                                 </TouchableOpacity>
                              </React.Fragment>  : 
                     <Text> No hay permiso para dar la camara </Text>
@@ -116,15 +116,26 @@ class MyCamera extends Component {
     }
 
 }
-
+export default MyCamera;
 const styles = StyleSheet.create({
         
     camaraBody:{
-        flex: 7
+    marginLeft:100,
+    marginRight:100,
+    marginTop:50,
+    marginBottom:25,
     },
 
-    button: {
-        flex: 1
+    button:{
+        textAlign: 'center',
+        backgroundColor:'#28a745',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderRadius:4, 
+        marginTop:8,
+        marginBottom: 30,
+        marginLeft:120,
+        marginRight:120,
     },
     preview:{
         flex:7
@@ -132,7 +143,16 @@ const styles = StyleSheet.create({
     },
     actionArea:{
         flex: 2
+    },
+    aor:{
+        
+        height:20,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        backgroundColor: '#D3D3D3',
+        flexDirection: "column",
     }
 })
 
-export default MyCamera;

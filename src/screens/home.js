@@ -21,7 +21,7 @@ export default class Home extends Component{
     }
 
     filtrarPublicaciones(textoBuscador){
-        db.collection('posts').where('owner','==',textoBuscador).onSnapshot(
+        db.collection('Posts').where('owner','==',textoBuscador).onSnapshot(
             docs => {
                 let posteos = [];
                 docs.forEach( doc => {
@@ -30,7 +30,7 @@ export default class Home extends Component{
                         data: doc.data()
                     })
                 })
-
+                console.log(posteos);
                 this.setState({
                     posts: posteos,
                     loaded: true,
