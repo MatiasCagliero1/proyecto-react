@@ -59,8 +59,9 @@ export default class Home extends Component{
 
     render(){
         return(
+            <View style={styles.fondo}>
             <React.Fragment>
-            { 
+            {
                 this.state.loaded === false ?
                 <ActivityIndicator> </ActivityIndicator>:
                 <View>
@@ -70,6 +71,7 @@ export default class Home extends Component{
                 </View>
             }
             </React.Fragment>
+            </View>
         )
     }
 }
@@ -83,5 +85,8 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         marginTop: 20,
         marginBottom: 10,
+    },
+    fondo: {
+        backgroundColor:'#000'
     }
 })

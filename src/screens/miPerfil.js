@@ -46,15 +46,14 @@ export default class Profile extends Component{
                     <Text style={styles.subtitle}> {auth.currentUser.email} </Text>
                     <Text style={styles.ultimaConexion}> Ultima conexion: {auth.currentUser.metadata.lastSignInTime} </Text>
                     </View>
-                    <Text> Contas con {this.state.posts.length} posteos publicados </Text>
-                    
-                    <Text> Tus Posteos </Text>
-                    <View style={styles.posteo}>
+                    <Text style={styles.numeroDP}> Usted cuenta con {this.state.posts.length} posteos publicados </Text>
+                    <View >
                     <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
+                    </View>
                     <TouchableOpacity style={styles.button} onPress={()=>this.props.logout()}>
                         <Text style={styles.textButton}>Cerrar Sesion</Text>    
                     </TouchableOpacity>
-                    </View>
+                    
                 </React.Fragment>
             }
             </React.Fragment>
@@ -64,8 +63,7 @@ export default class Profile extends Component{
 
 const styles = StyleSheet.create({
     bloque:{
-        marginLeft:500,
-        marginRight:500,
+        width:'30%',
         borderWidth:1,
         borderColor: '#000',
         borderStyle: 'solid',
@@ -91,11 +89,13 @@ const styles = StyleSheet.create({
         marginBottom:20,
 
     },
-    
-    posteo:{
-        marginLeft:300,
-        marginRight:300,
+    numeroDP:{
+        marginTop: 20,
+        marginBottom: 5,
+
     },
+    
+    
 
     button:{
         textAlign: 'center',
@@ -105,8 +105,14 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         marginTop:8,
         marginBottom: 10,
+        width:800,
+        justifyContent:'center',
     },
     textButton:{
         color: '#fff'
+    },
+    messi:{
+        marginBottom: 100000,
+
     }
 })

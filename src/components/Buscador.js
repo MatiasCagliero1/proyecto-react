@@ -35,11 +35,14 @@ const styles = StyleSheet.create({
     buscador:{
         paddingHorizontal:10,
         marginTop: 20,
-        height:20,
+        height:40,
+        width:'30%',
         borderWidth:1,
+        borderRadius:6,
         borderColor: '#ccc',
         borderStyle: 'solid',
         flexDirection: "column",
+        backgroundColor:'#ffffff'
     },
     
     button:{
