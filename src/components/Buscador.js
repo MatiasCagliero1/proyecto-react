@@ -22,7 +22,7 @@ class Buscador extends Component {
                 <Text> Buscar</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.props.verTodo()}>
-                <Text> Menu</Text>
+                <Text> Home </Text>
             </TouchableOpacity>
             </React.Fragment>
         );
