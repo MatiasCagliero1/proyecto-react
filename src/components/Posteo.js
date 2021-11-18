@@ -129,6 +129,10 @@ export default class Post extends Component{
        
 
     render(){
+<<<<<<< HEAD
+        return(
+            <View style={styles.postContainer}>
+=======
         console.log(this.props.postData);
         console.log(auth.currentUser)
 
@@ -139,16 +143,45 @@ export default class Post extends Component{
                    <Text style={styles.closeButton} > X </Text>
                 </TouchableOpacity> : ''
                 }
+>>>>>>> 4d04e494d718720e9310faa342ce3db0faa3b313
 
                 <Image style={styles.photo}
                 source={this.props.postData.data.photo}
                 resizeMode='cover'/>
 
+<<<<<<< HEAD
+
                 <View style={styles.rowLikes}>
+                    
+=======
+                <View style={styles.rowLikes}>
+>>>>>>> 4d04e494d718720e9310faa342ce3db0faa3b313
                     <View style={styles.row}>
                         <Text style={styles.black}>Likes: </Text>
                         <Text style={styles.capitalize}>{this.state.likes}</Text>
                     </View>
+<<<<<<< HEAD
+
+                
+                    <TouchableOpacity onPress={()=>this.like()}>
+                        <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
+                    </TouchableOpacity>
+
+                </View>
+
+                <View style={styles.row}>
+                    <Text style={styles.black}>{this.props.postData.data.owner}: </Text>
+                    <Text style={styles.capitalize}>{this.props.postData.data.textoPost}</Text>
+                </View>
+
+                    {/* ABRIR Y CERRAR MODAL */}
+                <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
+                    <Text>Ver comentarios</Text>
+                </TouchableOpacity>
+
+                
+                {/* MODAL DE COMENTARIOS */}
+=======
                     <TouchableOpacity onPress={()=>this.like()}>
                         <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
                     </TouchableOpacity>
@@ -170,48 +203,55 @@ export default class Post extends Component{
                             animationType='fade'
                             transparent={false}
                             visible = {this.state.showModal}>
+>>>>>>> 4d04e494d718720e9310faa342ce3db0faa3b313
 
-                       
-                    <View style={styles.closeButtonContainer}>
-                        <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
-                    </View>
+                {  this.state.showModal ?    
+                        <Modal style={styles.modalContainer}
+                                animationType='fade'
+                                transparent={false}
+                                visible = {this.state.showModal}>
 
-                    <View style={styles.dataComments}>
-
-                    {(this.props.postData.data.comments != undefined)?
-
-                        <FlatList 
-                            data={this.props.postData.data.comments}
-                            keyExtractor={post => post.createdAt.toString()}
-                            renderItem={({item})=>
-
-                            <View style={styles.row}>
-                                <Text style={styles.black}>{item.author}: </Text>
-                                <Text style={styles.capitalize}>{item.commentText}</Text>
-                            </View>}/>
-
-                        :<Text>¡Todavia no ha comnentado nadie!</Text>}
-                      
-                        {/* Form para nuevo comentario */}
-                        <View>
-                            <TextInput keyboardType='defualt'
-                                        placeholder='Escribí tu comentario'
-                                        onChangeText={(text)=>{this.setState({comment: text})}}
-                                        style={styles.comments}
-                                        value={this.state.comment}
-                                        maxLength='55'
-                            />
-
-
-                         { (this.state.comment =='')?
-                          <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
-                                <Text style={styles.commentarText}>Comentar</Text>
-                          </TouchableOpacity>
-                          :
-                            <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
-                                <Text style={styles.commentarText}>Comentar</Text>
-                            </TouchableOpacity>}
+                        
+                        <View style={styles.closeButtonContainer}>
+                            <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
                         </View>
+
+                        <View style={styles.dataComments}>
+
+                        {(this.props.postData.data.comments != undefined)?
+
+                            <FlatList 
+                                data={this.props.postData.data.comments}
+                                keyExtractor={post => post.createdAt.toString()}
+                                renderItem={({item})=>
+
+                                <View style={styles.row}>
+                                    <Text style={styles.black}>{item.author}: </Text>
+                                    <Text style={styles.capitalize}>{item.commentText}</Text>
+                                </View>}/>
+
+                            :<Text>¡Todavia no ha comnentado nadie!</Text>}
+                        
+                            {/* Form para nuevo comentario */}
+                            <View>
+                                <TextInput keyboardType='defualt'
+                                            placeholder='Escribí tu comentario'
+                                            onChangeText={(text)=>{this.setState({comment: text})}}
+                                            style={styles.comments}
+                                            value={this.state.comment}
+                                            maxLength='55'
+                                />
+
+
+                            { (this.state.comment =='')?
+                            <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
+                                    <Text style={styles.commentarText}>Comentar</Text>
+                            </TouchableOpacity>
+                            :
+                                <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
+                                    <Text style={styles.commentarText}>Comentar</Text>
+                                </TouchableOpacity>}
+                            </View>
                   </View>
                     </Modal> :<Text></Text>
                }

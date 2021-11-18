@@ -19,10 +19,10 @@ class Buscador extends Component {
                 keyboardType= 'default'
             /> 
             <TouchableOpacity onPress={()=>this.props.filtrarPublicaciones(this.state.search)}>
-                <text> Buscar</text>
+                <Text> Buscar</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.props.verTodo()}>
-                <text> Menu</text>
+                <Text> Menu</Text>
             </TouchableOpacity>
             </React.Fragment>
         );
