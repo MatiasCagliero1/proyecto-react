@@ -7,6 +7,9 @@ import {Text, View, TouchableOpacity, StyleSheet, Modal, TextInput, FlatList, Im
 import { auth, db } from "../firebase/config";
 import firebase from "firebase";
 
+//Importo alertas
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 export default class Post extends Component{
     constructor(props){
         super(props);
@@ -16,6 +19,7 @@ export default class Post extends Component{
            showModal:false,
            comment:'',
            iconoLike: 'LIKE',
+           showAlert: false
         }
     }
 
@@ -39,8 +43,7 @@ export default class Post extends Component{
     }
 
     like(){
-        if(this.state.myLike == false)
-            {
+        if(this.state.myLike == false){
             //Agregar mi email a un array
             db.collection('Posts').doc(this.props.postData.id).update({
                 likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
@@ -56,23 +59,21 @@ export default class Post extends Component{
                 })
         })
         .catch(e=>console.log(e));
-
-       }else{
-                    //Quitar mi email a un array
-                    db.collection('Posts').doc(this.props.postData.id).update({
-                        likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-                    })
-                    .then(()=>{
-                        console.log('quitando like...');
-                        //Cambiar el estado de likes y de mylike.
-                        this.setState({
-                            likes:this.props.postData.data.likes.length,
-                            myLike:false,
-                            iconoLike: 'LIKE'
-                        })
+       }else{ //Quitar mi email a un array
+            db.collection('Posts').doc(this.props.postData.id).update({
+                likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+            })
+            .then(()=>{
+                console.log('quitando like...');
+                //Cambiar el estado de likes y de mylike.
+                this.setState({
+                    likes:this.props.postData.data.likes.length,
+                    myLike:false,
+                    iconoLike: 'LIKE'
+                })
             })
             .catch(e=>console.log(e));
-    }
+        }
     }
 
     showAndCloseModal(){
@@ -115,100 +116,109 @@ export default class Post extends Component{
         
     }
     
+    eliminoPosteo(){
+        let thisDoc = db.collection('Posts').doc(this.props.postData.id)
+        
+        thisDoc.delete()
+        .then( response => console.log(response))
+        .catch(e => console.log(e))
+
+    }
+
+    //Alertas
+    showAlert = () => {
+        this.setState({
+          showAlert: true
+        });
+    };
     
+    hideAlert = () => {
+        this.setState({
+          showAlert: false
+        });
+    };
+       
 
     render(){
         console.log(this.props.postData);
-        console.log(auth.currentUser)
+        console.log(auth.currentUser);
+
+        const {showAlert} = this.state;
 
         return(
             <React.Fragment style={styles.postContainer}>
+                <View style={styles.alertContainer}>
                 { auth.currentUser.email === this.props.postData.data.owner ?
-                <TouchableOpacity style={styles.closeButtonContainer} onPress={()=>this.eliminoPosteo()}>
-                   <Text style={styles.closeButton} > X </Text>
+                <TouchableOpacity style={styles.closeButtonContainer} onPress={()=>this.showAlert()}>
+                   <Text style={styles.alertButton} > X </Text>
                 </TouchableOpacity> : ''
                 }
-
-                <Image style={styles.photo}
-                source={this.props.postData.data.photo}
-                resizeMode='cover'/>
-
-                <View style={styles.rowLikes}>
-                    <View style={styles.row}>
-                        <Text style={styles.black}>Likes: </Text>
-                        <Text style={styles.capitalize}>{this.state.likes}</Text>
-                    </View>
-
-                
-                    <TouchableOpacity onPress={()=>this.like()}>
-                        <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
-                    </TouchableOpacity>
-
+            
+                <AwesomeAlert show={showAlert} showProgress={false} title="Esta seguro desea eliminar su posteo?" closeOnTouchOutside={true}  closeOnHardwareBackPress={false}
+                    showCancelButton={true} showConfirmButton={true} cancelText="No, cancelar" confirmText="Si, elimina" confirmButtonColor="#DD6B55"
+                    onCancelPressed={() => { this.hideAlert();}}
+                    onConfirmPressed={() => {this.eliminoPosteo();}}/>
                 </View>
 
+            <Image style={styles.photo} source={this.props.postData.data.photo} resizeMode='cover'/>
+            
+            <View style={styles.rowLikes}>
                 <View style={styles.row}>
-                    <Text style={styles.black}>{this.props.postData.data.owner}: </Text>
-                    <Text style={styles.capitalize}>{this.props.postData.data.textoPost}</Text>
+                    <Text style={styles.black}>Likes: </Text>
+                    <Text style={styles.capitalize}>{this.state.likes}</Text>
                 </View>
-
-                    {/* ABRIR Y CERRAR MODAL */}
-                <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
-                    <Text>Ver comentarios</Text>
+                <TouchableOpacity onPress={()=>this.like()}>
+                    <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
                 </TouchableOpacity>
+            </View>
 
-                
-                {/* MODAL DE COMENTARIOS */}
+            <View style={styles.row}>
+                <Text style={styles.black}>{this.props.postData.data.owner}: </Text>
+                <Text >{this.props.postData.data.textoPost}</Text>
+            </View>
 
-                {  this.state.showModal ?    
-                        <Modal style={styles.modalContainer}
-                                animationType='fade'
-                                transparent={false}
-                                visible = {this.state.showModal}>
+            {/* ABRIR Y CERRAR MODAL */}
+            <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
+                <Text>Ver comentarios</Text>
+            </TouchableOpacity>
 
-                        
-                        <View style={styles.closeButtonContainer}>
-                            <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
-                        </View>
+            {/* MODAL DE COMENTARIOS */}
+            {  this.state.showModal ? 
 
-                        <View style={styles.dataComments}>
+            <Modal style={styles.modalContainer} animationType='fade'transparent={false} visible = {this.state.showModal}>
+            <View style={styles.closeButtonContainer}>
+                <Text style={styles.closeButton} onPress={()=>this.showAndCloseModal()}>X</Text>
+            </View>
 
-                        {(this.props.postData.data.comments != undefined)?
+            <View style={styles.dataComments}>
+            {(this.props.postData.data.comments != undefined)?
 
-                            <FlatList 
-                                data={this.props.postData.data.comments}
-                                keyExtractor={post => post.createdAt.toString()}
-                                renderItem={({item})=>
+            <FlatList data={this.props.postData.data.comments} keyExtractor={post => post.createdAt.toString()} renderItem={({item})=>
+                <View style={styles.row}>
+                    <Text style={styles.black}>{item.author}: </Text>
+                    <Text style={styles.capitalize}>{item.commentText}</Text>
+                </View>}/>
 
-                                <View style={styles.row}>
-                                    <Text style={styles.black}>{item.author}: </Text>
-                                    <Text style={styles.capitalize}>{item.commentText}</Text>
-                                </View>}/>
+            :<Text>¡Todavia no ha comnentado nadie!</Text>}
+                      
+            {/* Form para nuevo comentario */}
+            <View>
+                <TextInput keyboardType='defualt' placeholder='Escribí tu comentario'onChangeText={(text)=>{this.setState({comment: text})}}
+                style={styles.comments} value={this.state.comment} maxLength='55'/>
 
-                            :<Text>¡Todavia no ha comnentado nadie!</Text>}
-                        
-                            {/* Form para nuevo comentario */}
-                            <View>
-                                <TextInput keyboardType='defualt'
-                                            placeholder='Escribí tu comentario'
-                                            onChangeText={(text)=>{this.setState({comment: text})}}
-                                            style={styles.comments}
-                                            value={this.state.comment}
-                                            maxLength='55'
-                                />
-
-
-                            { (this.state.comment =='')?
-                            <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
-                                    <Text style={styles.commentarText}>Comentar</Text>
-                            </TouchableOpacity>
-                            :
-                                <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
-                                    <Text style={styles.commentarText}>Comentar</Text>
-                                </TouchableOpacity>}
-                            </View>
-                  </View>
-                    </Modal> :<Text></Text>
-               }
+            { (this.state.comment =='')?
+                <TouchableOpacity style={styles.disabled } onPress={()=>this.publicarComentario()} disabled>
+                    <Text style={styles.commentarText}>Comentar</Text>
+                </TouchableOpacity>
+                :
+                <TouchableOpacity style={styles.commentar} onPress={()=>this.publicarComentario()} >
+                    <Text style={styles.commentarText}>Comentar</Text>
+                </TouchableOpacity>}
+            </View>
+            </View>
+            </Modal>
+            :<Text></Text>
+            }
             </React.Fragment>
         )
     }
@@ -224,6 +234,20 @@ const styles = StyleSheet.create({
         margin: '10em',
         marginVertical: 0
     },
+    alertContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+    },
+    alertButton: {
+        margin: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 7,
+        borderRadius: 5,
+        backgroundColor: "#AEDEF4",
+    },
+
     photo:{
         width:'100%',
         height: 400,
@@ -252,24 +276,25 @@ const styles = StyleSheet.create({
     },
 
     modalContainer:{
-    display: 'flex',
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
-     width: '97%',
-     borderRadius:4,
-     padding:10,
-     alignSelf: 'center',
-     marginVertical: 10,
-    boxShadow:'rgb(204 204 204) 0px 5px 12px 5px',
-    backgroundColor:'#fff',
+        display: 'flex',
+        flexDirection: "row-reverse",
+        justifyContent: "space-between",
+        width: '97%',
+        borderRadius:4,
+        padding:10,
+        alignSelf: 'center',
+        marginVertical: 10,
+        boxShadow:'rgb(204 204 204) 0px 5px 12px 5px',
+        backgroundColor:'#fff',
     },
 
     closeButtonContainer:{
         display: 'flex',
-       flexDirection: 'row',
-       justifyContent: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
         height: '2.5em'
     },
+
     closeButton:{
         backgroundColor:'#dc3545',
         color:'#fff',
@@ -283,10 +308,12 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         width:'100%',
         height:'50%',
- },
- dataComments:{
-    width:'70%',
-},
+    },
+ 
+    dataComments:{
+        width:'70%',
+    },
+    
     commentar:{
         textAlign: 'center',
         backgroundColor:'#28a745',
@@ -295,17 +322,19 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         marginTop:8,
         marginBottom: 10,
- }, disabled:{
-    backgroundColor:'grey',
-    textAlign: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 5,
-    borderRadius:4, 
-    marginTop:8,
-    marginBottom: 10,
-}
- 
- ,commentarText :{
-    color:'white',
-}
+    }, 
+
+    disabled:{
+        backgroundColor:'grey',
+        textAlign: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        borderRadius:4, 
+        marginTop:8,
+        marginBottom: 10,
+    },
+    
+    commentarText: {
+        color:'white',
+    }
 })
