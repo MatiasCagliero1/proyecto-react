@@ -41,19 +41,21 @@ export default class Profile extends Component{
                 this.state.loaded === false ?
                 <ActivityIndicator> </ActivityIndicator>:
                 <React.Fragment>
+                    <View style={styles.fondo}>
                     < View style={styles.bloque}>
                     <Text style={styles.title}> {auth.currentUser.displayName} </Text>
                     <Text style={styles.subtitle}> {auth.currentUser.email} </Text>
                     <Text style={styles.ultimaConexion}> Ultima conexion: {auth.currentUser.metadata.lastSignInTime} </Text>
-                    </View>
                     <Text style={styles.numeroDP}> Usted cuenta con {this.state.posts.length} posteos publicados </Text>
+                    </View>
+                    <Text style={styles.TP}> Tus Publicaciones </Text>
                     <View >
                     <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
                     </View>
                     <TouchableOpacity style={styles.button} onPress={()=>this.props.logout()}>
                         <Text style={styles.textButton}>Cerrar Sesion</Text>    
                     </TouchableOpacity>
-                    
+                    </View>
                 </React.Fragment>
             }
             </React.Fragment>
@@ -67,7 +69,9 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor: '#000',
         borderStyle: 'solid',
-        marginLeft:'35%'
+        marginLeft:'35%',
+        marginTop:30,
+        marginBottom: 30,
     },
     title: {
         fontSize: 20,
@@ -87,13 +91,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 10,
-        marginBottom:20,
 
     },
     numeroDP:{
-        marginTop: 20,
-        marginBottom: 5,
-        marginLeft:'17%'
+        fontSize: 12,
+        marginTop:10,
+        marginBottom: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
 
     },
     
@@ -101,21 +106,26 @@ const styles = StyleSheet.create({
 
     button:{
         textAlign: 'center',
-        backgroundColor:'#28a745',
+        backgroundColor:'#1687A7',
         paddingVertical: 12,
         paddingHorizontal: 10,
         borderRadius:4, 
         marginTop:8,
         marginBottom: 10,
-        width:800,
-        justifyContent:'center',
-        marginLeft:'17%'
+        width:'30%',
+        marginLeft:'35%'
     },
     textButton:{
         color: '#fff'
     },
-    messi:{
-        marginBottom: 100000,
-
+    TP:{
+        textAlign:'center',
+        fontSize:20,
+        fontWeight: 'bold',
+        textDecorationLine: 'underline',
+        marginBottom:30,
+    },
+    fondo:{
+        backgroundColor:"#ffffff",
     }
 })

@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     
     commentar:{
         textAlign: 'center',
-        backgroundColor:'#28a745',
+        backgroundColor:'#1687A7',
         paddingVertical: 5,
         paddingHorizontal: 5,
         borderRadius:4, 
