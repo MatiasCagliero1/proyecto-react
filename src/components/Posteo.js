@@ -215,6 +215,7 @@ export default class Post extends Component{
                   </View>
                     </Modal> :<Text></Text>
                }
+               
             </React.Fragment>
         )
     }
