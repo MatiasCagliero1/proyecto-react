@@ -13,18 +13,20 @@ class Buscador extends Component {
     render(){
         return(
             <React.Fragment>
-            <TextInput
-                style= {styles.buscador}
-                onChangeText= {(text)=>this.setState({search : text})}
-                placeholder='Buscar...'
-                keyboardType= 'default'
-            /> 
-            <TouchableOpacity style= {styles.button} onPress={()=>this.props.filtrarPublicaciones(this.state.search)}>        
-                <Text style= {styles.letra}> Buscar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style= {styles.button} onPress={()=>this.props.verTodo()}>
-                <Text style= {styles.letra}> Menu</Text>
-            </TouchableOpacity>
+                <TextInput
+                    style= {styles.buscador}
+                    onChangeText= {(text)=>this.setState({search : text})}
+                    placeholder='Buscar...'
+                    keyboardType= 'default'
+                /> 
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style= {styles.button} onPress={()=>this.props.filtrarPublicaciones(this.state.search)}>        
+                    <Text style= {styles.letra}> Buscar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style= {styles.button} onPress={()=>this.props.verTodo()}>
+                    <Text style= {styles.letra}> Menu</Text>
+                </TouchableOpacity>
+            </View>
             </React.Fragment>
         );
     }
@@ -48,16 +50,20 @@ const styles = StyleSheet.create({
         marginLeft: '10%',
         marginBottom:5,
     },
+    buttonContainer:{
+        display: 'flex',
+        flexDirection:'row',
+        width: '50%',
+    },
     
     button:{
         height:20,
+        width:'50%',
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
         borderRadius: 6,
         backgroundColor: '#EEEEEE',
-        flexDirection: "column",
-        width:'7%',
         height: 20,
         textAlign:'center',
         marginLeft: '10%',

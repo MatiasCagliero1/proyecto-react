@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
         color: '#303841',
         fontWeight: 'bold',
     },
-
     Foto: {
         width: 200,
         height: 200,
