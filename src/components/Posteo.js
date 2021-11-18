@@ -129,10 +129,6 @@ export default class Post extends Component{
        
 
     render(){
-<<<<<<< HEAD
-        return(
-            <View style={styles.postContainer}>
-=======
         console.log(this.props.postData);
         console.log(auth.currentUser)
 
@@ -143,45 +139,16 @@ export default class Post extends Component{
                    <Text style={styles.closeButton} > X </Text>
                 </TouchableOpacity> : ''
                 }
->>>>>>> 4d04e494d718720e9310faa342ce3db0faa3b313
 
                 <Image style={styles.photo}
                 source={this.props.postData.data.photo}
                 resizeMode='cover'/>
 
-<<<<<<< HEAD
-
                 <View style={styles.rowLikes}>
-                    
-=======
-                <View style={styles.rowLikes}>
->>>>>>> 4d04e494d718720e9310faa342ce3db0faa3b313
                     <View style={styles.row}>
                         <Text style={styles.black}>Likes: </Text>
                         <Text style={styles.capitalize}>{this.state.likes}</Text>
                     </View>
-<<<<<<< HEAD
-
-                
-                    <TouchableOpacity onPress={()=>this.like()}>
-                        <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
-                    </TouchableOpacity>
-
-                </View>
-
-                <View style={styles.row}>
-                    <Text style={styles.black}>{this.props.postData.data.owner}: </Text>
-                    <Text style={styles.capitalize}>{this.props.postData.data.textoPost}</Text>
-                </View>
-
-                    {/* ABRIR Y CERRAR MODAL */}
-                <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
-                    <Text>Ver comentarios</Text>
-                </TouchableOpacity>
-
-                
-                {/* MODAL DE COMENTARIOS */}
-=======
                     <TouchableOpacity onPress={()=>this.like()}>
                         <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
                     </TouchableOpacity>
@@ -203,7 +170,6 @@ export default class Post extends Component{
                             animationType='fade'
                             transparent={false}
                             visible = {this.state.showModal}>
->>>>>>> 4d04e494d718720e9310faa342ce3db0faa3b313
 
                 {  this.state.showModal ?    
                         <Modal style={styles.modalContainer}
@@ -255,7 +221,7 @@ export default class Post extends Component{
                   </View>
                     </Modal> :<Text></Text>
                }
-               
+
             </React.Fragment>
         )
     }
