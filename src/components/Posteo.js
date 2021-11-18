@@ -113,8 +113,9 @@ export default class Post extends Component{
         })
         .catch(e => console.log(e))
         
-        }
-       
+    }
+    
+    
 
     render(){
         console.log(this.props.postData);
@@ -208,7 +209,7 @@ export default class Post extends Component{
                   </View>
                     </Modal> :<Text></Text>
                }
-            </View>
+            </React.Fragment>
         )
     }
 
