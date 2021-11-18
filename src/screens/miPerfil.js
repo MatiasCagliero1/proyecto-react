@@ -40,16 +40,22 @@ export default class Profile extends Component{
             { 
                 this.state.loaded === false ?
                 <ActivityIndicator> </ActivityIndicator>:
-                <View>
+                <React.Fragment>
+                    < View style={styles.bloque}>
                     <Text style={styles.title}> {auth.currentUser.displayName} </Text>
                     <Text style={styles.subtitle}> {auth.currentUser.email} </Text>
-                    <Text style={styles.subtitle}> Ultimo Inicio de Sesion: {auth.currentUser.metadata.lastSignInTime} </Text>
-                    <Text style={styles.subtitle}> Cantidad de posteos: {this.state.posts.length} </Text>
+                    <Text style={styles.ultimaConexion}> Ultima conexion: {auth.currentUser.metadata.lastSignInTime} </Text>
+                    </View>
+                    <Text> Contas con {this.state.posts.length} posteos publicados </Text>
+                    
+                    <Text> Tus Posteos </Text>
+                    <View style={styles.posteo}>
                     <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
                     <TouchableOpacity style={styles.button} onPress={()=>this.props.logout()}>
                         <Text style={styles.textButton}>Cerrar Sesion</Text>    
                     </TouchableOpacity>
-                </View>
+                    </View>
+                </React.Fragment>
             }
             </React.Fragment>
         )
@@ -57,18 +63,38 @@ export default class Profile extends Component{
 }
 
 const styles = StyleSheet.create({
+    bloque:{
+        marginLeft:500,
+        marginRight:500,
+        borderWidth:1,
+        borderColor: '#000',
+        borderStyle: 'solid',
+    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
         textTransform: 'capitalize',
-        marginTop: 20,
+        paddingTop:20,
     },
     subtitle:{
+        fontSize: 12,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 10,
+    },
+    ultimaConexion:{
         fontSize: 10,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 10,
+        marginBottom:20,
+
+    },
+    
+    posteo:{
+        marginLeft:300,
+        marginRight:300,
     },
 
     button:{
