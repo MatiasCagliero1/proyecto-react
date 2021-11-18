@@ -239,10 +239,11 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
-        backgroundColor:'#BC8CF2',
+        backgroundColor:'#D3E0EA',
         justifyContent: 'center',
         marginBottom:10,
         borderRadius:6,
+        marginLeft: '17%',
     },
     alertContainer: {
         flex: 1,

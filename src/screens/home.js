@@ -87,6 +87,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     fondo: {
-        backgroundColor:'#000'
+        backgroundColor:'#ffffff'
     }
 })

@@ -20,10 +20,10 @@ class Buscador extends Component {
                 keyboardType= 'default'
             /> 
             <TouchableOpacity style= {styles.button} onPress={()=>this.props.filtrarPublicaciones(this.state.search)}>        
-                <Text> Buscar</Text>
+                <Text style= {styles.letra}> Buscar</Text>
             </TouchableOpacity>
             <TouchableOpacity style= {styles.button} onPress={()=>this.props.verTodo()}>
-                <Text> Menu</Text>
+                <Text style= {styles.letra}> Menu</Text>
             </TouchableOpacity>
             </React.Fragment>
         );
@@ -35,14 +35,18 @@ const styles = StyleSheet.create({
     buscador:{
         paddingHorizontal:10,
         marginTop: 20,
-        height:40,
-        width:'30%',
+        height:30,
+        width:'80%',
         borderWidth:1,
         borderRadius:6,
         borderColor: '#ccc',
         borderStyle: 'solid',
         flexDirection: "column",
-        backgroundColor:'#ffffff'
+        backgroundColor:'#ffffff',
+        textAlign:'center',
+        fontSize:20,
+        marginLeft: '10%',
+        marginBottom:5,
     },
     
     button:{
@@ -51,9 +55,18 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         borderStyle: 'solid',
         borderRadius: 6,
-        backgroundColor: '#D3D3D3',
+        backgroundColor: '#EEEEEE',
         flexDirection: "column",
+        width:'7%',
+        height: 20,
+        textAlign:'center',
+        marginLeft: '10%',
+        marginRight: 5,
     },
+    
+    letra:{
+        fontSize: 15,
+    }
         
     
 })
