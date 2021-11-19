@@ -140,24 +140,21 @@ export default class Post extends Component{
        
 
     render(){
-        console.log(this.props.postData);
-        console.log(auth.currentUser);
-
         const {showAlert} = this.state;
-
         return(
-            <React.Fragment style={styles.postContainer}>
-                <View style={styles.alertContainer}>
-                { auth.currentUser.email === this.props.postData.data.owner ?
+            <React.Fragment>
+            { auth.currentUser.email === this.props.postData.data.owner ?
                 <TouchableOpacity style={styles.closeButtonContainer} onPress={()=>this.showAlert()}>
-                   <Text style={styles.alertButton} > X </Text>
+                <Text style={styles.alertButton}>X</Text>
                 </TouchableOpacity> : ''
-                }
-            
-                <AwesomeAlert show={showAlert} showProgress={false} title="Esta seguro desea eliminar su posteo?" closeOnTouchOutside={true}  closeOnHardwareBackPress={false}
-                    showCancelButton={true} showConfirmButton={true} cancelText="No, cancelar" confirmText="Si, elimina" confirmButtonColor="#DD6B55"
-                    onCancelPressed={() => { this.hideAlert();}}
-                    onConfirmPressed={() => {this.eliminoPosteo();}}/>
+            }
+                <View style={styles.alertContainer}>
+        
+                    <AwesomeAlert style={styles.alert} show={showAlert} showProgress={false} title="Esta seguro desea eliminar su posteo?" closeOnTouchOutside={true}  closeOnHardwareBackPress={false}
+                        showCancelButton={true} showConfirmButton={true} cancelText="No, cancelar" confirmText="Si, elimina" confirmButtonColor="#DD6B55"
+                        onCancelPressed={() => { this.hideAlert();}}
+                        onConfirmPressed={() => {this.eliminoPosteo();}}/>
+                   
                 </View>
 
             <Image style={styles.photo} source={this.props.postData.data.photo} resizeMode='cover'/>
@@ -232,13 +229,14 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         margin: '10em',
-        marginVertical: 0
+        marginVertical: 0,
     },
     alertContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff',
+        zIndex: 999,
     },
     alertButton: {
         margin: 5,
@@ -251,7 +249,8 @@ const styles = StyleSheet.create({
     photo:{
         width:'100%',
         height: 400,
-        marginBottom:5
+        marginBottom:5,
+        position: 'relative',
     },
 
     rowLikes:{
