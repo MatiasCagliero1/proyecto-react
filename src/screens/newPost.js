@@ -82,11 +82,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+
     preview: {
         width: 300,
         height: 400,
         marginBottom: 20,
     },
+
     input: {
         width: 300,
         height: 44,
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         textAlign: 'center',
     },
+
     button: {
         backgroundColor: '#00ADB5',
         padding: 10,
@@ -104,6 +107,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width:'50%',
     }, 
+    
     textButton: {
         color: '#fff',
         textAlign: 'center',

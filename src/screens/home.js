@@ -59,25 +59,32 @@ export default class Home extends Component{
 
     render(){
         return(
-            <View style={styles.fondo}>
             <React.Fragment>
             {
                 this.state.loaded === false ?
                 <ActivityIndicator> </ActivityIndicator>:
-                <View>
+                <View style={styles.container}>
                     <Buscador filtrarPublicaciones={(texto)=> this.filtrarPublicaciones(texto)} verTodo={()=>this.verTodo()}/>
                     <Text style={styles.title}>Últimos Posteos</Text>
-                    <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
+                    <FlatList style={styles.list} data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
                 </View>
             }
             </React.Fragment>
-            </View>
         )
     }
 }
 
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        textAlign: 'center',
+        width: '80%',
+        marginLeft: '10%',
+        marginRight: '10%',
+    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -86,7 +93,10 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 10,
     },
-    fondo: {
-        backgroundColor:'#000'
+
+    list: {
+        width: '100%',
+        height: '100%',
     }
+
 })
