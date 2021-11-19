@@ -86,7 +86,7 @@ class MyCamera extends Component {
 
     render(){
         return(
-            <React.Fragment>
+            <React.Fragment style={styles.container} >
             { this.state.activity ? 
             <ActivityIndicator> </ActivityIndicator> : ''}
                 {
@@ -95,20 +95,20 @@ class MyCamera extends Component {
                             <React.Fragment>
                                 <ImageBackground style = {styles.preview} source={{uri: this.state.foto}}> </ImageBackground>
                                 <View style = {styles.actionArea}> 
-                                    <TouchableOpacity style = {styles.aor} onPress= {(url)=> this.savePhoto(url)}> 
+                                    <TouchableOpacity style = {styles.button} onPress= {(url)=> this.savePhoto(url)}> 
                                         <Text>Publicar</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style = {styles.aor} onPress = {()=> this.clear()}> 
+                                    <TouchableOpacity style = {styles.but} onPress = {()=> this.clear()}> 
                                         <Text>Intentar denuevo</Text>
                                     </TouchableOpacity>
                                 </View>
                             </React.Fragment> :
-                            <React.Fragment>
+                            <React.Fragment >
                                 <Camera style={styles.camaraBody} type={Camera.Constants.Type.back} ref ={ (reference) => this.camera = reference }/> 
                                 <TouchableOpacity style= {styles.button} onPress = {() => this.takePicture()}> 
                                      <Text> Capturar imagen </Text> 
                                 </TouchableOpacity>
-                             </React.Fragment>  : 
+                            </React.Fragment>  : 
                     <Text> No hay permiso para dar la camara </Text>
                 }
             </React.Fragment>
@@ -118,25 +118,37 @@ class MyCamera extends Component {
 }
 export default MyCamera;
 const styles = StyleSheet.create({
+    container:{
+        justifyContent: 'center',
         
+    },
     camaraBody:{
-    marginLeft:100,
-    marginRight:100,
-    marginTop:50,
-    marginBottom:25,
+        width:'80%',
+        marginTop:50,
+        marginBottom:25,
     },
 
     button:{
         textAlign: 'center',
-        backgroundColor:'#28a745',
+        backgroundColor:'#700B97',
         paddingVertical: 12,
         paddingHorizontal: 10,
-        borderRadius:4, 
+        borderRadius:6, 
         marginTop:8,
         marginBottom: 30,
-        marginLeft:120,
-        marginRight:120,
+        width:'50%'
     },
+    but:{
+        textAlign: 'center',
+        backgroundColor:'#BC8CF2',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderRadius:6, 
+        marginTop:8,
+        marginBottom: 30,
+        width:'50%'
+    },
+
     preview:{
         flex:7
     

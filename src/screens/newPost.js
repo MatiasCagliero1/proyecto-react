@@ -1,6 +1,6 @@
 //Importar Componentes de React
 import React, {Component} from "react";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native';
 import { auth, db } from "../firebase/config";
 import MyCamera from '../components/Camara'
 
@@ -46,7 +46,7 @@ export default class newPost extends Component{
     render(){
         //console.log(this.props.login);
         return(
-            <React.Fragment>
+            <React.Fragment style = {styles.container}>
                 {
                     this.state.showCamera ? 
                     <MyCamera imageUpload= {(url) => this.imageUpload(url)}/> 
@@ -54,7 +54,8 @@ export default class newPost extends Component{
                     :
 
                     <View style={styles.formContainer}>
-                        <Text>Nuevo Post</Text>
+                       
+                        <ImageBackground style = {styles.preview} source={this.state.url}></ImageBackground>
                         <TextInput
                             style={styles.input}
                             onChangeText={(text)=>this.setState({textoPost: text})}
@@ -74,9 +75,16 @@ export default class newPost extends Component{
 }
 
 const styles = StyleSheet.create({
+
+
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+        width:'50%'
+    },
+    preview:{
+        height: 400
+    
     },
     input:{
         height:100,
