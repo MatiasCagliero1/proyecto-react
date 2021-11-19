@@ -46,7 +46,7 @@ export default class newPost extends Component{
     render(){
         //console.log(this.props.login);
         return(
-            <React.Fragment style = {styles.container}>
+            <React.Fragment>
                 {
                     this.state.showCamera ? 
                     <MyCamera imageUpload= {(url) => this.imageUpload(url)}/> 

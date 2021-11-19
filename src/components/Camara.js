@@ -86,9 +86,10 @@ class MyCamera extends Component {
 
     render(){
         return(
-            <React.Fragment style={styles.container} >
-            { this.state.activity ? 
-            <ActivityIndicator> </ActivityIndicator> : ''}
+            <View style={styles.container} >
+                <React.Fragment>
+                { this.state.activity ? 
+                    <ActivityIndicator> </ActivityIndicator> : ''}
                 {
                     this.state.permisos ?
                         this.state.foto ? 
@@ -111,7 +112,8 @@ class MyCamera extends Component {
                             </React.Fragment>  : 
                     <Text> No hay permiso para dar la camara </Text>
                 }
-            </React.Fragment>
+                </React.Fragment>
+            </View>
         )
     }
 
@@ -120,7 +122,7 @@ export default MyCamera;
 const styles = StyleSheet.create({
     container:{
         justifyContent: 'center',
-        
+        backgroundColor: '#000',
     },
     camaraBody:{
         width:'80%',
