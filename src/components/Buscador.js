@@ -45,20 +45,19 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         flexDirection: "column",
         backgroundColor:'#ffffff',
-        textAlign:'center',
         fontSize:20,
-        marginLeft: '10%',
+        
         marginBottom:5,
+        textAlign:'center'
     },
     buttonContainer:{
         display: 'flex',
         flexDirection:'row',
         width: '50%',
     },
-    
     button:{
         height:20,
-        width:'50%',
+        width:'30%',
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
@@ -66,13 +65,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#EEEEEE',
         height: 20,
         textAlign:'center',
-        marginLeft: '10%',
-        marginRight: 5,
+        marginLeft: '13%',
+        
     },
-    
     letra:{
         fontSize: 15,
     }
-        
-    
 })

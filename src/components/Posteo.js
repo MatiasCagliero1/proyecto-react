@@ -161,13 +161,14 @@ export default class Post extends Component{
             <Image style={styles.photo} source={this.props.postData.data.photo} resizeMode='cover'/>
             
             <View style={styles.rowLikes}>
+                <TouchableOpacity onPress={()=>this.like()}>
+                <Image style={styles.Icons} source={this.state.iconoLike}></Image>
+                </TouchableOpacity>
                 <View style={styles.row}>
                     <Text style={styles.black}>Likes: </Text>
                     <Text style={styles.capitalize}>{this.state.likes}</Text>
                 </View>
-                <TouchableOpacity onPress={()=>this.like()}>
-                <Image style={styles.Icons} source={this.state.iconoLike}></Image>
-                </TouchableOpacity>
+                
             </View>
 
             <View style={styles.row}>
@@ -268,15 +269,12 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 10,
     },
 
-    rowLikes:{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 5
-    },
+    
     Icons:{
         width: "20px",
         height:"20px",
+        marginTop: 5,
+        marginBottom: 2,
 
     },
 

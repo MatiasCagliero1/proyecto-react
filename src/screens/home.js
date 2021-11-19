@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         marginTop: 20,
         marginBottom: 10,
+        textDecorationLine:'underline',
     },
 
     list: {
