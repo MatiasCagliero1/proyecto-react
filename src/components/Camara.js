@@ -86,7 +86,6 @@ class MyCamera extends Component {
 
     render(){
         return(
-            <View style={styles.container} >
                 <React.Fragment>
                 { this.state.activity ? 
                     <ActivityIndicator> </ActivityIndicator> : ''}
@@ -94,79 +93,58 @@ class MyCamera extends Component {
                     this.state.permisos ?
                         this.state.foto ? 
                             <React.Fragment>
-                                <ImageBackground style = {styles.preview} source={{uri: this.state.foto}}> </ImageBackground>
+                                <ImageBackground style = {styles.imagen} source={{uri: this.state.foto}}> </ImageBackground>
                                 <View style = {styles.actionArea}> 
                                     <TouchableOpacity style = {styles.button} onPress= {(url)=> this.savePhoto(url)}> 
-                                        <Text>Publicar</Text>
+                                        <Text style={styles.textButton}>Publicar</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style = {styles.but} onPress = {()=> this.clear()}> 
-                                        <Text>Intentar denuevo</Text>
+                                        <Text style={styles.textButton}>Intentar denuevo</Text>
                                     </TouchableOpacity>
                                 </View>
                             </React.Fragment> :
                             <React.Fragment >
-                                <Camera style={styles.camaraBody} type={Camera.Constants.Type.back} ref ={ (reference) => this.camera = reference }/> 
+                                <Camera style={styles.preview} type={Camera.Constants.Type.back} ref ={ (reference) => this.camera = reference }/> 
                                 <TouchableOpacity style= {styles.button} onPress = {() => this.takePicture()}> 
-                                     <Text> Capturar imagen </Text> 
+                                     <Text style={styles.textButton}> Capturar imagen </Text> 
                                 </TouchableOpacity>
                             </React.Fragment>  : 
                     <Text> No hay permiso para dar la camara </Text>
                 }
                 </React.Fragment>
-            </View>
         )
     }
 
 }
 export default MyCamera;
 const styles = StyleSheet.create({
-    container:{
-        justifyContent: 'center',
-        backgroundColor: '#000',
+    preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        width: '100%',
     },
-    camaraBody:{
-        width:'80%',
-        marginTop:50,
-        marginBottom:25,
+    capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        alignSelf: 'center',
+        margin: 20
     },
-
-    button:{
+    button: {
+        backgroundColor: '#00ADB5',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
+    },
+    textButton: {
+        color: '#fff',
         textAlign: 'center',
-        backgroundColor:'#700B97',
-        paddingVertical: 12,
-        paddingHorizontal: 10,
-        borderRadius:6, 
-        marginTop:8,
-        marginBottom: 30,
-        width:'50%'
+        fontWeight: 'bold',
     },
-    but:{
-        textAlign: 'center',
-        backgroundColor:'#BC8CF2',
-        paddingVertical: 12,
-        paddingHorizontal: 10,
-        borderRadius:6, 
-        marginTop:8,
-        marginBottom: 30,
-        width:'50%'
-    },
-
-    preview:{
-        flex:7
-    
-    },
-    actionArea:{
-        flex: 2
-    },
-    aor:{
-        
-        height:20,
-        borderWidth:1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        backgroundColor: '#D3D3D3',
-        flexDirection: "column",
+    imagen: {
+        with:'100%',
+        flex: 1,
     }
 })
 

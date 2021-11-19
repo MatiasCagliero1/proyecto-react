@@ -1,6 +1,6 @@
 //Importar Componentes de React
 import React, {Component} from "react";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native';
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import { auth, db } from "../firebase/config";
 import MyCamera from '../components/Camara'
 
@@ -53,9 +53,9 @@ export default class newPost extends Component{
 
                     :
 
-                    <View style={styles.formContainer}>
+                    <View style={styles.container}>
                        
-                        <ImageBackground style = {styles.preview} source={this.state.url}></ImageBackground>
+                        <Image style = {styles.preview} source={this.state.url}></Image>
                         <TextInput
                             style={styles.input}
                             onChangeText={(text)=>this.setState({textoPost: text})}
@@ -76,38 +76,38 @@ export default class newPost extends Component{
 
 const styles = StyleSheet.create({
 
-
-    formContainer:{
-        paddingHorizontal:10,
-        marginTop: 20,
-        width:'50%'
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    preview:{
-        height: 400
-    
+    preview: {
+        width: 300,
+        height: 400,
+        marginBottom: 20,
     },
-    input:{
-        height:100,
-        paddingVertical:15,
-        paddingHorizontal: 10,
-        borderWidth:1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical:10,
-    },
-    button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+    input: {
+        width: 300,
+        height: 44,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#00ADB5',
+        marginBottom: 10,
+        borderRadius: 5,
         textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745'
     },
-    textButton:{
-        color: '#fff'
-    }
-
+    button: {
+        backgroundColor: '#00ADB5',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
+        width:'50%',
+    }, 
+    textButton: {
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+   
 })

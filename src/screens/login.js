@@ -1,6 +1,6 @@
 //Importar Componentes de React
 import React, {Component} from "react";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 //Importar Pantallas
 import Register from '../screens/register';
@@ -16,8 +16,9 @@ export default class Login extends Component{
 
     render(){
         return(
-            <View style={styles.formContainer}>
-                <Text>Iniciar Sesión</Text>
+            <View style={styles.container}>
+                <Text style={styles.title}>Iniciar Sesión</Text>
+                <Image source={require('../../assets/login.png')} style={styles.Foto}/>
                 <Text  style={styles.mensajeError}>{this.props.mensajeError}</Text>
 
                 <TextInput
@@ -59,38 +60,44 @@ export default class Login extends Component{
 }
 
 const styles = StyleSheet.create({
-    formContainer:{
-        paddingHorizontal:10,
-        marginTop: 20,
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
     },
-    input:{
-        height:20,
-        paddingVertical:18,
-        paddingHorizontal: 10,
-        borderWidth:1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical:10,
-        marginBottom: 5,
+    title: {
+        fontSize: 20,
+        marginBottom: 20,
+        color: '#303841',
+        fontWeight: 'bold',
     },
-    buttonDisabled:{
-        textAlign: 'center',
-        backgroundColor:'grey',
-        paddingVertical: 12,
-        paddingHorizontal: 10,
-        borderRadius:4, 
-        marginTop:8,
+    Foto: {
+        width: 200,
+        height: 200,
+        marginBottom: 20,
+    },
+    input: {
+        width: 300,
+        height: 44,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#00ADB5',
         marginBottom: 10,
+        borderRadius: 5,
     },
-    button:{
-        textAlign: 'center',
-        backgroundColor:'#28a745',
-        paddingVertical: 12,
-        paddingHorizontal: 10,
-        borderRadius:4, 
-        marginTop:8,
-        marginBottom: 10,
+    buttonDisabled: {
+        backgroundColor: '#00ADB5',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
+        opacity: 0.5,
+    },
+    button: {
+        backgroundColor: '#00ADB5',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
     },
 
     textButton:{
