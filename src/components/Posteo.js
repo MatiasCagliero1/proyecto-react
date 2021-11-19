@@ -142,7 +142,8 @@ export default class Post extends Component{
     render(){
         const {showAlert} = this.state;
         return(
-            <React.Fragment>
+            <React.Fragment >
+            <View style={styles.posteo}>
             { auth.currentUser.email === this.props.postData.data.owner ?
                 <TouchableOpacity style={styles.closeButtonContainer} onPress={()=>this.showAlert()}>
                 <Text style={styles.alertButton}>X</Text>
@@ -216,6 +217,7 @@ export default class Post extends Component{
             </Modal>
             :<Text></Text>
             }
+            </View>
             </React.Fragment>
         )
     }
@@ -230,6 +232,17 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         margin: '10em',
         marginVertical: 0,
+    },
+    posteo:{
+        width: '65%',
+        padding:10,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        backgroundColor:'#BC8CF2',
+        justifyContent: 'center',
+        marginBottom:10,
+        borderRadius:6,
     },
     alertContainer: {
         flex: 1,

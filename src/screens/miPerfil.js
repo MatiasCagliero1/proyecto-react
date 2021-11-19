@@ -40,16 +40,21 @@ export default class Profile extends Component{
             { 
                 this.state.loaded === false ?
                 <ActivityIndicator> </ActivityIndicator>:
-                <View>
+                <React.Fragment>
+                    < View style={styles.bloque}>
                     <Text style={styles.title}> {auth.currentUser.displayName} </Text>
                     <Text style={styles.subtitle}> {auth.currentUser.email} </Text>
-                    <Text style={styles.subtitle}> Ultimo Inicio de Sesion: {auth.currentUser.metadata.lastSignInTime} </Text>
-                    <Text style={styles.subtitle}> Cantidad de posteos: {this.state.posts.length} </Text>
+                    <Text style={styles.ultimaConexion}> Ultima conexion: {auth.currentUser.metadata.lastSignInTime} </Text>
+                    </View>
+                    <Text style={styles.numeroDP}> Usted cuenta con {this.state.posts.length} posteos publicados </Text>
+                    <View >
                     <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
+                    </View>
                     <TouchableOpacity style={styles.button} onPress={()=>this.props.logout()}>
                         <Text style={styles.textButton}>Cerrar Sesion</Text>    
                     </TouchableOpacity>
-                </View>
+                    
+                </React.Fragment>
             }
             </React.Fragment>
         )
@@ -57,19 +62,40 @@ export default class Profile extends Component{
 }
 
 const styles = StyleSheet.create({
+    bloque:{
+        width:'30%',
+        borderWidth:1,
+        borderColor: '#000',
+        borderStyle: 'solid',
+    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
         textTransform: 'capitalize',
-        marginTop: 20,
+        paddingTop:20,
     },
     subtitle:{
+        fontSize: 12,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 10,
+    },
+    ultimaConexion:{
         fontSize: 10,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 10,
+        marginBottom:20,
+
     },
+    numeroDP:{
+        marginTop: 20,
+        marginBottom: 5,
+
+    },
+    
+    
 
     button:{
         textAlign: 'center',
@@ -79,8 +105,14 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         marginTop:8,
         marginBottom: 10,
+        width:800,
+        justifyContent:'center',
     },
     textButton:{
         color: '#fff'
+    },
+    messi:{
+        marginBottom: 100000,
+
     }
 })
