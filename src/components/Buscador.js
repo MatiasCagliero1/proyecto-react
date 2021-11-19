@@ -21,10 +21,10 @@ class Buscador extends Component {
                 /> 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style= {styles.button} onPress={()=>this.props.filtrarPublicaciones(this.state.search)}>        
-                    <Text style= {styles.letra}> Buscar</Text>
+                    <Text style= {styles.letra}>Buscar Usuario</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style= {styles.button} onPress={()=>this.props.verTodo()}>
-                    <Text style= {styles.letra}> Menu</Text>
+                    <Text style= {styles.letra}>Eliminar Filtros</Text>
                 </TouchableOpacity>
             </View>
             </React.Fragment>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         paddingHorizontal:10,
         marginTop: 20,
         height:30,
-        width:'80%',
+        width:'100%',
         borderWidth:1,
         borderRadius:6,
         borderColor: '#ccc',
@@ -53,20 +53,19 @@ const styles = StyleSheet.create({
     buttonContainer:{
         display: 'flex',
         flexDirection:'row',
-        width: '50%',
+        justifyContent: "space-between",
+        width: '100%',
     },
     button:{
-        height:20,
-        width:'30%',
+        display: "flex",
+        justifyContent:"center",
+        width:'40%',
+        height: 35,
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
         borderRadius: 6,
         backgroundColor: '#EEEEEE',
-        height: 20,
-        textAlign:'center',
-        marginLeft: '13%',
-        
     },
     letra:{
         fontSize: 15,

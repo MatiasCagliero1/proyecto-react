@@ -98,7 +98,7 @@ class MyCamera extends Component {
                                     <TouchableOpacity style = {styles.button} onPress= {(url)=> this.savePhoto(url)}> 
                                         <Text style={styles.textButton}>Publicar</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style = {styles.but} onPress = {()=> this.clear()}> 
+                                    <TouchableOpacity style = {styles.buttonNone} onPress = {()=> this.clear()}> 
                                         <Text style={styles.textButton}>Intentar denuevo</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -133,6 +133,12 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#00ADB5',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
+    },
+    buttonNone: {
+        backgroundColor: 'red',
         padding: 10,
         margin: 10,
         borderRadius: 5,
