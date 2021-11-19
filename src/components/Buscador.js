@@ -13,18 +13,20 @@ class Buscador extends Component {
     render(){
         return(
             <React.Fragment>
-            <TextInput
-                style= {styles.buscador}
-                onChangeText= {(text)=>this.setState({search : text})}
-                placeholder='Buscar...'
-                keyboardType= 'default'
-            /> 
-            <TouchableOpacity style= {styles.button} onPress={()=>this.props.filtrarPublicaciones(this.state.search)}>        
-                <Text> Buscar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style= {styles.button} onPress={()=>this.props.verTodo()}>
-                <Text> Menu</Text>
-            </TouchableOpacity>
+                <TextInput
+                    style= {styles.buscador}
+                    onChangeText= {(text)=>this.setState({search : text})}
+                    placeholder='Buscar...'
+                    keyboardType= 'default'
+                /> 
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style= {styles.button} onPress={()=>this.props.filtrarPublicaciones(this.state.search)}>        
+                    <Text style= {styles.letra}> Buscar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style= {styles.button} onPress={()=>this.props.verTodo()}>
+                    <Text style= {styles.letra}> Menu</Text>
+                </TouchableOpacity>
+            </View>
             </React.Fragment>
         );
     }
@@ -35,25 +37,42 @@ const styles = StyleSheet.create({
     buscador:{
         paddingHorizontal:10,
         marginTop: 20,
-        height:40,
-        width:'30%',
+        height:30,
+        width:'80%',
         borderWidth:1,
         borderRadius:6,
         borderColor: '#ccc',
         borderStyle: 'solid',
         flexDirection: "column",
-        backgroundColor:'#ffffff'
+        backgroundColor:'#ffffff',
+        textAlign:'center',
+        fontSize:20,
+        marginLeft: '10%',
+        marginBottom:5,
+    },
+    buttonContainer:{
+        display: 'flex',
+        flexDirection:'row',
+        width: '50%',
     },
     
     button:{
         height:20,
+        width:'50%',
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
         borderRadius: 6,
-        backgroundColor: '#D3D3D3',
-        flexDirection: "column",
+        backgroundColor: '#EEEEEE',
+        height: 20,
+        textAlign:'center',
+        marginLeft: '10%',
+        marginRight: 5,
     },
+    
+    letra:{
+        fontSize: 15,
+    }
         
     
 })

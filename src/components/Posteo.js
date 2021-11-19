@@ -18,7 +18,7 @@ export default class Post extends Component{
            myLike:false,
            showModal:false,
            comment:'',
-           iconoLike: 'LIKE',
+           iconoLike: "https://img.icons8.com/material-outlined/24/000000/hearts.png",
            showAlert: false
         }
     }
@@ -33,11 +33,11 @@ export default class Post extends Component{
       
       if (this.state.myLike == false) {
         this.setState({
-            iconoLike:'LIKE'
+            iconoLike:"https://img.icons8.com/material-outlined/24/000000/hearts.png"
         })
       }else{
         this.setState({
-            iconoLike:'QUITAR LIKE'
+            iconoLike:"https://img.icons8.com/fluency/48/000000/like.png"
         })
       }
     }
@@ -55,7 +55,7 @@ export default class Post extends Component{
                 this.setState({
                     likes:this.props.postData.data.likes.length,
                     myLike:true,
-                    iconoLike: 'QUITAR LIKE'
+                    iconoLike: "https://img.icons8.com/fluency/48/000000/like.png"
                 })
         })
         .catch(e=>console.log(e));
@@ -69,7 +69,7 @@ export default class Post extends Component{
                 this.setState({
                     likes:this.props.postData.data.likes.length,
                     myLike:false,
-                    iconoLike: 'LIKE'
+                    iconoLike: "https://img.icons8.com/material-outlined/24/000000/hearts.png"
                 })
             })
             .catch(e=>console.log(e));
@@ -142,8 +142,8 @@ export default class Post extends Component{
     render(){
         const {showAlert} = this.state;
         return(
-            <React.Fragment >
-            <View style={styles.posteo}>
+            
+            <View style={styles.container}>
             { auth.currentUser.email === this.props.postData.data.owner ?
                 <TouchableOpacity style={styles.closeButtonContainer} onPress={()=>this.showAlert()}>
                 <Text style={styles.alertButton}>X</Text>
@@ -166,7 +166,7 @@ export default class Post extends Component{
                     <Text style={styles.capitalize}>{this.state.likes}</Text>
                 </View>
                 <TouchableOpacity onPress={()=>this.like()}>
-                    <Text>{/* {icons.favorite} */}{this.state.iconoLike}</Text>
+                <Image style={styles.Icons} source={this.state.iconoLike}></Image>
                 </TouchableOpacity>
             </View>
 
@@ -218,31 +218,31 @@ export default class Post extends Component{
             :<Text></Text>
             }
             </View>
-            </React.Fragment>
         )
     }
 
 }
 
 const styles = StyleSheet.create({
-    postContainer:{
-        paddingVertical:5,
-        marginBottom: 15,
-        display: 'flex',
-        flexDirection: 'column',
-        margin: '10em',
-        marginVertical: 0,
-    },
-    posteo:{
+   
+    container:{
+        flex: 1,
+        display: "flex", 
+        backgroundColor:'#D3E0EA',
         width: '65%',
         padding:10,
+        borderRadius: 10,
         borderWidth:1,
         borderColor: '#ccc',
         borderStyle: 'solid',
-        backgroundColor:'#BC8CF2',
         justifyContent: 'center',
         marginBottom:10,
         borderRadius:6,
+        marginLeft: '17%',
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
     },
     alertContainer: {
         flex: 1,
@@ -264,6 +264,8 @@ const styles = StyleSheet.create({
         height: 400,
         marginBottom:5,
         position: 'relative',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
     },
 
     rowLikes:{
@@ -271,7 +273,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 5
-     },
+    },
+    Icons:{
+        width: "20px",
+        height:"20px",
+
+    },
 
     row:{
        display: 'flex',

@@ -59,6 +59,7 @@ export default class Home extends Component{
 
     render(){
         return(
+            <View style={styles.fondo}>
             <React.Fragment>
             {
                 this.state.loaded === false ?
@@ -70,6 +71,7 @@ export default class Home extends Component{
                 </View>
             }
             </React.Fragment>
+            </View>
         )
     }
 }
@@ -97,6 +99,10 @@ const styles = StyleSheet.create({
     list: {
         width: '100%',
         height: '100%',
+    },
+
+    fondo: {
+        backgroundColor:'#ffffff'
     }
 
 })

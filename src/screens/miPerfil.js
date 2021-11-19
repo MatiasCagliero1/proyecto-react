@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor: '#000',
         borderStyle: 'solid',
+        marginLeft:'35%'
     },
     title: {
         fontSize: 20,
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     numeroDP:{
         marginTop: 20,
         marginBottom: 5,
+        marginLeft:'17%'
 
     },
     
@@ -107,6 +109,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         width:800,
         justifyContent:'center',
+        marginLeft:'17%'
     },
     textButton:{
         color: '#fff'
