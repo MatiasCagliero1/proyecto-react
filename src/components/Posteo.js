@@ -160,15 +160,14 @@ export default class Post extends Component{
 
             <Image style={styles.photo} source={this.props.postData.data.photo} resizeMode='cover'/>
             
-            <View style={styles.rowLikes}>
-                <TouchableOpacity onPress={()=>this.like()}>
-                <Image style={styles.Icons} source={this.state.iconoLike}></Image>
+            <View style={styles.icons}>
+                <TouchableOpacity style={styles.row} onPress={()=>this.like()}>
+                    <Text>{this.state.likes}</Text>
+                    <Image style={styles.Icons} source={this.state.iconoLike}></Image>
                 </TouchableOpacity>
-                <View style={styles.row}>
-                    <Text style={styles.black}>Likes: </Text>
-                    <Text style={styles.capitalize}>{this.state.likes}</Text>
-                </View>
-                
+                <TouchableOpacity style={styles.row}  onPress={()=>this.showAndCloseModal()}>
+                    <Image style={styles.Icons} source={{uri: "https://img.icons8.com/material-outlined/24/000000/speech-bubble.png"}}></Image>
+                </TouchableOpacity>   
             </View>
 
             <View style={styles.row}>
@@ -177,9 +176,7 @@ export default class Post extends Component{
             </View>
 
             {/* ABRIR Y CERRAR MODAL */}
-            <TouchableOpacity onPress={()=>this.showAndCloseModal()}>
-                <Text>Ver comentarios</Text>
-            </TouchableOpacity>
+            
 
             {/* MODAL DE COMENTARIOS */}
             {  this.state.showModal ? 
@@ -269,6 +266,12 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 10,
     },
 
+    icons:{
+        flexDirection: 'row', 
+        width: "100%",
+        justifyContent: "left",
+        margin: 5,
+    },
     
     Icons:{
         width: "20px",

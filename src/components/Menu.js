@@ -106,7 +106,7 @@ export default class Menu extends Component {
                 <Drawer.Navigator>
                     <Drawer.Screen name="Home" component={() => <Home/>}/>
                     <Drawer.Screen name="Nuevo Post" component={ (drawerProps)=> <NewPost drawerProps={drawerProps}/>}/>
-                    <Drawer.Screen name="Mi Perfil" component={()=> <Profile userData={this.state.userData} logout={()=>this.logout()} />}/>
+                    <Drawer.Screen name="Mi Perfil" component={(drawerProps)=> <Profile userData={this.state.userData} drawerProps={drawerProps} logout={()=>this.logout()} />}/>
                 </Drawer.Navigator>
             }
             </NavigationContainer>
