@@ -49,7 +49,7 @@ export default class Profile extends Component{
                         <Text style={styles.ultimaConexion}> Ultima conexion: {auth.currentUser.metadata.lastSignInTime} </Text>
                         <Text style={styles.numeroDP}> Usted cuenta con {this.state.posts.length} posteos publicados </Text>
                     </View>
-                    <Text style={styles.TP}> Tus Publicaciones </Text>
+                    <Text style={styles.title}>Tus Publicaciones</Text>
                     <View >
                         <FlatList data = {this.state.posts} keyExtractor = { post => post.id} renderItem= {({item})=><Post postData={item} />}/>
                     </View>
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textTransform: 'capitalize',
         paddingTop:20,
+        marginBottom:30,
     },
     subtitle:{
         fontSize: 12,
@@ -147,20 +148,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius:4, 
         marginTop:8,
-        marginBottom: 10,
+        marginBottom: 69,
         width:'30%',
         marginLeft:'35%'
     },
 
     textButton:{
         color: '#fff'
-    },
-    TP:{
-        textAlign:'center',
-        fontSize:20,
-        fontWeight: 'bold',
-        textDecorationLine: 'underline',
-        marginBottom:30,
     },
     fondo:{
         backgroundColor:"#ffffff",
