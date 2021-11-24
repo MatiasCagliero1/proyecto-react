@@ -90,7 +90,6 @@ export default class Post extends Component{
     }
 
     publicarComentario(){
-
         //  Datos del comentario.
         let oneComment = {
             author: auth.currentUser.email,
@@ -100,20 +99,17 @@ export default class Post extends Component{
         
         //  Actualizar comentario en la base. Puntualmente en este documento.
         //  Saber cual es el post que queremos actualizar
-        
         db.collection('Posts').doc(this.props.postData.id).update({
             comments: firebase.firestore.FieldValue.arrayUnion(oneComment)
         })
 
         .then(()=>{
             //  Cambiar un estado para limpiar el form 
-            console.log('Comentario guardado');
             this.setState({
                 comment: '',
             })
         })
         .catch(e => console.log(e))
-        
     }
     
     eliminoPosteo(){
@@ -141,6 +137,7 @@ export default class Post extends Component{
 
     render(){
         const {showAlert} = this.state;
+        
         return(
             
             <View style={styles.container}>
@@ -162,11 +159,15 @@ export default class Post extends Component{
             
             <View style={styles.icons}>
                 <TouchableOpacity style={styles.row} onPress={()=>this.like()}>
-                    <Text>{this.state.likes}</Text>
                     <Image style={styles.Icons} source={this.state.iconoLike}></Image>
+                    <Text style={styles.centrarTexto}>{this.state.likes}</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity style={styles.row}  onPress={()=>this.showAndCloseModal()}>
                     <Image style={styles.Icons} source={{uri: "https://img.icons8.com/material-outlined/24/000000/speech-bubble.png"}}></Image>
+                    <Text style={styles.centrarTexto}>{(this.props.postData.data.comments!=undefined) ? this.props.postData.data.comments.length: '0'}</Text>
+
+               
                 </TouchableOpacity>   
             </View>
 
@@ -279,6 +280,12 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 2,
 
+    },
+    centrarTexto:{
+        display: 'flex',
+        justifyContent: "center",
+        alignItems: "center",
+        marginHorizontal: 4,
     },
 
     row:{
