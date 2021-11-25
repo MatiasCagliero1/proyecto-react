@@ -41,7 +41,7 @@ export default class Menu extends Component {
         )
     }
 
-    errorDeSesion(error, email, pass){
+    errorDeSesion(error, email, pass, userName){
         let mensajeError = ''
         switch (error.code) {
             case "auth/invalid-email":
@@ -58,6 +58,7 @@ export default class Menu extends Component {
         this.setState({
             estadoError: mensajeError,
             mailPrevio: email,
+            userPrevio: userName ,
             passwordPrevia: pass,
         })
     }
@@ -82,7 +83,7 @@ export default class Menu extends Component {
                 displayName: userName
             })
         })
-        .catch(error=>this.errorDeSesion(error,email,pass))
+        .catch(error=>this.errorDeSesion(error,email,pass,userName))
     }
 
     logout(){
@@ -97,7 +98,7 @@ export default class Menu extends Component {
             { this.state.loggedIn === false ?
                 <Drawer.Navigator>
                     <Drawer.Screen name="Iniciar Sesión" component={ (drawerProps)=> <Login drawerProps={drawerProps} login={(email,pass)=>this.login(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia}/>}/>
-                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass, userName)=>this.register(email, pass, userName)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia}/>}/>
+                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass, userName)=>this.register(email, pass, userName)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoUser={this.state.userPrevio} textoPassword={this.state.passwordPrevia}/>}/>
                 </Drawer.Navigator>
                 :
                 <Drawer.Navigator>

@@ -7,8 +7,8 @@ export default class Register extends Component{
         super(props)
         this.state={
             email: this.props.textoMail || '',
+            userName: this.props.textoUser || '',
             password: this.props.textoPassword || '',
-            userName: '',
         }
     }
     
@@ -27,6 +27,7 @@ export default class Register extends Component{
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({userName: text})}
+                    value={this.state.userName}
                     placeholder='user name'
                     keyboardType='default'/>
                 <TextInput
