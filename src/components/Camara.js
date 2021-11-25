@@ -60,6 +60,7 @@ class MyCamera extends Component {
         .then( res => res.blob())
         .then( image => {
             //Guardo imagen en el storage
+
             //Darle un nombre a la imagen
             let ref = storage.ref(`photo/${Date.now()}.jpg`)
             ref.put(image)
@@ -77,9 +78,6 @@ class MyCamera extends Component {
                     .catch(e => console.log(e))
                 })
                 .catch(e => console.log(e))
-            //Subir un archivo al storage
-
-
         })
         .catch(e => console.log(e))
     }
