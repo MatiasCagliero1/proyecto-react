@@ -75,14 +75,12 @@ export default class Menu extends Component {
     }
 
     register(email, pass, userName){
-        console.log(userName)
         // Metodo para regitrar un nuevo usuario 
         auth.createUserWithEmailAndPassword(email, pass)
-        .then((response )=>{console.log(response)
+        .then((response )=>{
             response.user.updateProfile({
                 displayName: userName
             })
-            console.log(userName)
         })
         .catch(error=>this.errorDeSesion(error,email,pass))
     }
