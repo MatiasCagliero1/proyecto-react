@@ -56,17 +56,18 @@ class MyCamera extends Component {
             activity: true,
         })
 
-        fetch(this.state.foto)
-        .then( res => res.blob())
+        fetch(this.state.foto) //Obtengo la imagen de su ubicacion temporal
+        .then( res => res.blob()) //Cambio el formato a uno nativo de JS
         .then( image => {
-            //Guardo imagen en el storage
 
-            //Darle un nombre a la imagen
-            let ref = storage.ref(`photo/${Date.now()}.jpg`)
+            let ref = storage.ref(`photo/${Date.now()}.jpg`)  //Le doy un nombre a la imagen
+
+            //Guardo imagen en el storage
             ref.put(image)
                 .then( () => {
-                    ref.getDownloadURL()
+                    ref.getDownloadURL() //Entrega la url publica de acceso a la imagen
                     .then( url => {
+                        
                         //Paso por props la URL unica al formulario de NuevoPosteo
                         this.props.imageUpload(url)
 
