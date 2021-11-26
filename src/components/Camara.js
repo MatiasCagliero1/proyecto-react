@@ -120,7 +120,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        width: '100%',
+        width: '50%',
+        marginHorizontal: 'auto',
     },
     capture: {
         flex: 0,
@@ -147,8 +148,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     imagen: {
-        with:'100%',
+        width: '96%',
+        marginHorizontal: 'auto',
         flex: 1,
-    }
+    },
+    actionArea: {
+        width: '100%',
+    },
 })
 

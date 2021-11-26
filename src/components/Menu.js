@@ -42,7 +42,6 @@ export default class Menu extends Component {
     }
 
     errorDeSesion(error, email, pass){
-        console.log(error);
         let mensajeError = ''
         switch (error.code) {
             case "auth/invalid-email":
@@ -76,14 +75,14 @@ export default class Menu extends Component {
     }
 
     register(email, pass, userName){
+        console.log(userName)
         // Metodo para regitrar un nuevo usuario 
         auth.createUserWithEmailAndPassword(email, pass)
-        .then(( response )=>
-        { console.log('Registrado Correctamente');
+        .then((response )=>{console.log(response)
             response.user.updateProfile({
                 displayName: userName
             })
-        
+            console.log(userName)
         })
         .catch(error=>this.errorDeSesion(error,email,pass))
     }
@@ -99,8 +98,8 @@ export default class Menu extends Component {
             <NavigationContainer>
             { this.state.loggedIn === false ?
                 <Drawer.Navigator>
-                    <Drawer.Screen name="Iniciar Sesión" component={ (drawerProps)=> <Login drawerProps={drawerProps} login={(email,pass)=>this.login(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia} />}/>
-                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass, userName)=>this.register(email, pass, userName)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia}  />}/>
+                    <Drawer.Screen name="Iniciar Sesión" component={ (drawerProps)=> <Login drawerProps={drawerProps} login={(email,pass)=>this.login(email, pass)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia}/>}/>
+                    <Drawer.Screen name="Registro" component={ (drawerProps)=> <Register drawerProps={drawerProps} register={(email, pass, userName)=>this.register(email, pass, userName)} mensajeError={this.state.estadoError} textoMail={this.state.mailPrevio} textoPassword={this.state.passwordPrevia}/>}/>
                 </Drawer.Navigator>
                 :
                 <Drawer.Navigator>
