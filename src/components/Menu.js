@@ -53,7 +53,6 @@ export default class Menu extends Component {
             default:
              mensajeError = 'Los datos ingresados no son correctos'
                 break;
-        
         }
         this.setState({
             estadoError: mensajeError,
@@ -80,7 +79,7 @@ export default class Menu extends Component {
         auth.createUserWithEmailAndPassword(email, pass)
         .then((response )=>{
             response.user.updateProfile({
-                displayName: userName
+                displayName: userName,
             })
         })
         .catch(error=>this.errorDeSesion(error,email,pass,userName))
